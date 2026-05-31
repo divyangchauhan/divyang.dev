@@ -117,10 +117,14 @@ function AssureCard() {
   )
 }
 
-function SecondaryCard({ id, status, title, role, period, description, stack, linkText }) {
+function SecondaryCard({ id, status, title, role, period, description, stack, linkHref, linkLabel, linkText }) {
   return (
     <div className="project-card secondary" id={id}>
-      <span className={`project-status ${status}`}>{status === 'building' ? 'Building' : 'Shipped'}</span>
+      <span className={`project-status ${status}`}>
+        {status === 'completed' ? (
+          <><span className="status-check" aria-hidden="true">✓</span>Completed</>
+        ) : 'Building'}
+      </span>
       <div className="project-meta">
         <span className="project-title">{title}</span>
         <span className="project-role">{role}</span>
@@ -133,12 +137,24 @@ function SecondaryCard({ id, status, title, role, period, description, stack, li
         ))}
       </div>
       <div className="project-links" style={{ marginTop: '1.1rem' }}>
-        <span
-          className="project-link"
-          style={{ cursor: 'default', pointerEvents: 'none', fontStyle: 'italic', color: 'var(--text-muted)' }}
-        >
-          {linkText}
-        </span>
+        {linkHref ? (
+          <a
+            className="project-link"
+            href={linkHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={linkLabel}
+          >
+            {linkText} <span className="arrow-ext" aria-hidden="true">↗</span>
+          </a>
+        ) : (
+          <span
+            className="project-link"
+            style={{ cursor: 'default', pointerEvents: 'none', fontStyle: 'italic', color: 'var(--text-muted)' }}
+          >
+            {linkText}
+          </span>
+        )}
       </div>
     </div>
   )
@@ -155,6 +171,19 @@ export default function Projects() {
           <AssureCard />
 
           <SecondaryCard
+            id="tarpan"
+            status="completed"
+            title="Tarpan"
+            role="Solo · Open Source"
+            period="2025 – present"
+            description="A SaaS that helps families handle the administrative aftermath of a death. Upload a death certificate and a Python Lambda processes it through the Claude API to extract the legal data; a NestJS backend orchestrates the workflow while a React dashboard tracks notifications to fifteen institutions — Social Security, banks, the DMV, and more. Built end-to-end on AWS CDK as a complete, deployable codebase."
+            stack={['Python Lambda', 'NestJS', 'React', 'AWS CDK', 'Claude API']}
+            linkHref="https://github.com/divyangchauhan/Tarpan"
+            linkLabel="Tarpan on GitHub (opens in new tab)"
+            linkText="github.com/divyangchauhan/Tarpan"
+          />
+
+          <SecondaryCard
             id="resumeforge"
             status="building"
             title="ResumeForge"
@@ -162,17 +191,6 @@ export default function Projects() {
             period="2024 – present"
             description="An AI-powered resume intelligence tool that helps job seekers tailor their resume for specific roles. Analyzes job descriptions, scores resume fit, and suggests targeted edits — built because job hunting deserved better tooling."
             stack={['Next.js', 'OpenAI API', 'PostgreSQL', 'Stripe']}
-            linkText="Link coming soon"
-          />
-
-          <SecondaryCard
-            id="image-resize"
-            status="building"
-            title="Image Resize Web App"
-            role="Solo · Side Project"
-            period="2024 – present"
-            description="A fast, privacy-first image resizing tool that processes everything in the browser — no uploads, no server, no data leaving the device. Built as a clean utility to scratch a real itch."
-            stack={['React', 'Canvas API', 'WebAssembly']}
             linkText="Link coming soon"
           />
         </div>

@@ -11,10 +11,10 @@ export default function Hero() {
           <em>event-driven architectures</em>, <em>serverless infrastructure</em>,
           and APIs that hold up under real workloads.
           Currently shipping blockchain infrastructure; on the side
-          building <em>ResumeForge</em>, a resume intelligence tool
+          I'm building <em>ResumeForge</em>, a resume intelligence tool
           because job hunting deserved better tooling.
-          Looking for my next role at a startup where the engineering
-          problems are still being figured out.
+          Drawn to startups where the engineering problems are still
+          being figured out.
         </p>
         <div className="hero-ctas">
           <a className="btn-primary" href="#projects">View Projects</a>

@@ -326,10 +326,17 @@ section:last-of-type { border-bottom: none; }
   background: rgba(240,131,58,.07);
 }
 
-.project-status.shipped {
-  color: #6bcf8f;
-  border-color: rgba(107,207,143,.3);
-  background: rgba(107,207,143,.06);
+.project-status.completed {
+  color: #111010;
+  border-color: var(--accent);
+  background: var(--accent);
+  font-weight: 500;
+}
+
+.project-status.completed .status-check {
+  font-size: .62rem;
+  margin-right: .3rem;
+  opacity: .85;
 }
 
 .project-card.secondary .project-description {
