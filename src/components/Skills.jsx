@@ -1,49 +1,39 @@
-const SKILLS = [
-  {
-    category: 'Languages',
-    items: ['TypeScript', 'JavaScript', 'Python', 'SQL', 'OutSystems'],
+import SectionHeading from './SectionHeading.jsx'
+import { SKILLS } from '../data.js'
+
+const styles = {
+  section: { marginTop: '28px' },
+  row: {
+    display: 'grid',
+    gridTemplateColumns: '230px 1fr',
+    gap: '20px',
+    padding: '13px 0',
+    borderBottom: '1px solid #141C24',
+    fontSize: '13px',
   },
-  {
-    category: 'Frameworks',
-    items: ['NestJS', 'Django', 'Django REST', 'Express', 'Angular', 'React', 'Next.js', 'GraphQL', 'CASL.js', 'TypeORM'],
+  rowLast: {
+    display: 'grid',
+    gridTemplateColumns: '230px 1fr',
+    gap: '20px',
+    padding: '13px 0',
+    fontSize: '13px',
   },
-  {
-    category: 'Databases',
-    items: ['PostgreSQL', 'MongoDB', 'MySQL'],
-  },
-  {
-    category: 'Infrastructure',
-    items: ['AWS Lambda', 'AWS ECS', 'S3', 'RDS', 'CloudFront', 'Cognito', 'Docker', 'Terraform'],
-  },
-  {
-    category: 'Tools',
-    items: ['Git', 'CI/CD', 'Apache Kafka', 'Celery', 'Microservices', 'REST APIs', 'Event-Driven Arch', 'Cypress'],
-  },
-  {
-    category: 'Web3',
-    items: ['Ethers.js', 'Viem', 'The Graph', 'Multi-chain'],
-  },
-]
+  key: { color: '#71818D' },
+  value: { color: '#A7B6C0', lineHeight: 1.7 },
+}
 
 export default function Skills() {
   return (
-    <section id="skills" aria-labelledby="skills-heading">
-      <div className="container">
-        <p className="section-label">03 / Skills</p>
-        <h2 id="skills-heading" className="sr-only">Skills</h2>
-        <div className="skills-grid" role="list">
-          {SKILLS.map(({ category, items }) => (
-            <div className="skill-row" role="listitem" key={category}>
-              <span className="skill-category">{category}</span>
-              <div className="skill-items">
-                {items.map((tag) => (
-                  <span className="skill-tag" key={tag}>{tag}</span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    <>
+      <SectionHeading id="skills" label="03 · Skills" />
+      <section style={styles.section}>
+        {SKILLS.map((row, i) => (
+          <div key={row.key} style={i < SKILLS.length - 1 ? styles.row : styles.rowLast}>
+            <span style={styles.key}>{row.key}</span>
+            <span style={styles.value}>{row.value}</span>
+          </div>
+        ))}
+      </section>
+    </>
   )
 }
