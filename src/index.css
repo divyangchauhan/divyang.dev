@@ -102,49 +102,98 @@ body {
   border-color: #f2b441 !important;
 }
 
-/* responsive — the prototype is a fixed desktop mockup; these keep it intact
-   on desktop while preventing overflow / cramping on tablet & mobile. */
-@media (max-width: 1080px) {
+/* ===== Responsive: mobile/tablet — desktop (>860px) is untouched ===== */
+@media (max-width: 860px) {
+  .pf-pad {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  .dc-navlinks {
+    gap: 18px !important;
+    font-size: 12px !important;
+  }
+  .pf-brand-tag {
+    display: none !important;
+  }
   .dc-hero {
     grid-template-columns: 1fr !important;
+    gap: 34px !important;
+    padding-top: 46px !important;
+    padding-bottom: 54px !important;
     min-height: 0 !important;
   }
-  .dc-about-grid,
-  .dc-contact-grid {
+  .pf-h1 {
+    font-size: 54px !important;
+  }
+  .pf-term {
+    height: auto !important;
+  }
+  .dc-about-grid {
     grid-template-columns: 1fr !important;
-  }
-  .dc-diagram-grid {
-    grid-template-columns: 1fr !important;
-  }
-  .dc-diagram-detail {
-    border-left: none !important;
-    padding-left: 0 !important;
-    min-height: 0 !important;
-  }
-  .dc-diagram-canvas {
-    width: 100% !important;
-    max-width: 760px;
-    overflow-x: auto;
-  }
-  .dc-skills,
-  .dc-techstack {
-    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 30px !important;
   }
   .dc-metrics {
     grid-template-columns: repeat(3, 1fr) !important;
   }
-}
-
-@media (max-width: 720px) {
+  .dc-diagram-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+  .dc-diagram-scroll {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+  }
+  .dc-diagram-detail {
+    border-left: none !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding-left: 0 !important;
+    padding-top: 22px !important;
+    min-height: 0 !important;
+  }
+  .dc-techstack {
+    grid-template-columns: 1fr 1fr !important;
+  }
   .dc-sidecards {
     grid-template-columns: 1fr !important;
   }
-  .dc-skills,
+  .dc-skills {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .dc-contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 34px !important;
+  }
+  .pf-contact-card {
+    padding: 38px 28px !important;
+  }
+  .pf-glow {
+    display: none !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .pf-pad {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+  .pf-navsec {
+    display: none !important;
+  }
+  .dc-navlinks {
+    gap: 14px !important;
+  }
+  .pf-h1 {
+    font-size: 42px !important;
+  }
+  .dc-metrics {
+    grid-template-columns: 1fr 1fr !important;
+  }
   .dc-techstack {
     grid-template-columns: 1fr !important;
   }
-  .dc-metrics {
-    grid-template-columns: repeat(2, 1fr) !important;
+  .dc-skills {
+    grid-template-columns: 1fr !important;
   }
 }
 

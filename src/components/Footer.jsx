@@ -17,6 +17,7 @@ export default function Footer() {
   const domain = getDomain()
   return (
     <footer
+      className="pf-pad"
       style={{
         position: 'relative',
         zIndex: 1,

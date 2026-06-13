@@ -3,6 +3,7 @@ import { mono } from '../theme'
 export default function Nav() {
   return (
     <nav
+      className="pf-pad"
       style={{
         position: 'sticky',
         top: 0,
@@ -38,6 +39,7 @@ export default function Nav() {
           DC
         </span>
         <span
+          className="pf-brand-tag"
           style={{
             fontFamily: mono,
             fontSize: 12,
@@ -49,14 +51,14 @@ export default function Nav() {
           backend engineer
         </span>
       </a>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 30, fontFamily: mono, fontSize: 13 }}>
+      <div className="dc-navlinks" style={{ display: 'flex', alignItems: 'center', gap: 30, fontFamily: mono, fontSize: 13 }}>
         <a className="dc-link" href="#projects" style={{ color: '#aab2c0', textDecoration: 'none' }}>
           Work
         </a>
-        <a className="dc-link" href="#about" style={{ color: '#aab2c0', textDecoration: 'none' }}>
+        <a className="dc-link pf-navsec" href="#about" style={{ color: '#aab2c0', textDecoration: 'none' }}>
           About
         </a>
-        <a className="dc-link" href="#skills" style={{ color: '#aab2c0', textDecoration: 'none' }}>
+        <a className="dc-link pf-navsec" href="#skills" style={{ color: '#aab2c0', textDecoration: 'none' }}>
           Skills
         </a>
         <a

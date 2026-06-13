@@ -16,6 +16,7 @@ export default function About() {
   return (
     <section
       id="about"
+      className="pf-pad"
       style={{
         position: 'relative',
         zIndex: 1,

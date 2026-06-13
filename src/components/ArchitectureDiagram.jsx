@@ -145,10 +145,8 @@ export default function ArchitectureDiagram() {
         style={{ display: 'grid', gridTemplateColumns: '760px 1fr', gap: 24, alignItems: 'start' }}
       >
         {/* diagram canvas */}
-        <div
-          className="dc-diagram-canvas"
-          style={{ position: 'relative', width: 760, height: 440, flexShrink: 0 }}
-        >
+        <div className="dc-diagram-scroll">
+        <div style={{ position: 'relative', width: 760, height: 440, flexShrink: 0 }}>
           <svg
             viewBox="0 0 760 440"
             style={{
@@ -248,6 +246,7 @@ export default function ArchitectureDiagram() {
           >
             EVENTS · DATA
           </div>
+        </div>
         </div>
 
         {/* detail panel */}

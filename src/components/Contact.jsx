@@ -47,6 +47,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
+      className="pf-pad"
       style={{
         position: 'relative',
         zIndex: 1,
@@ -57,6 +58,7 @@ export default function Contact() {
       }}
     >
       <div
+        className="pf-contact-card"
         style={{
           ...reveal(),
           border: '1px solid rgba(255,255,255,.1)',
@@ -68,6 +70,7 @@ export default function Contact() {
         }}
       >
         <div
+          className="pf-glow"
           style={{
             position: 'absolute',
             top: '-30%',

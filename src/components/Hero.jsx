@@ -24,7 +24,7 @@ export default function Hero() {
         alignItems: 'center',
         scrollMarginTop: 84,
       }}
-      className="dc-hero"
+      className="dc-hero pf-pad"
     >
       <div style={reveal()}>
         <div
@@ -51,6 +51,7 @@ export default function Hero() {
           DISTRIBUTED SYSTEMS · SCALABLE APIS
         </div>
         <h1
+          className="pf-h1"
           style={{
             fontFamily: sans,
             fontWeight: 700,
@@ -125,6 +126,7 @@ export default function Hero() {
 
       {/* hero whoami terminal */}
       <div
+        className="pf-term"
         style={{
           ...reveal(0.12),
           position: 'relative',
