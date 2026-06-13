@@ -1,33 +1,57 @@
-import Header from './components/Header.jsx'
-import Hero from './components/Hero.jsx'
-import About from './components/About.jsx'
-import Projects from './components/Projects.jsx'
-import Skills from './components/Skills.jsx'
-import Contact from './components/Contact.jsx'
-import Footer from './components/Footer.jsx'
-
-const styles = {
-  page: {
-    minHeight: '100vh',
-    background: '#0B0F13',
-    color: '#B9C7D1',
-    fontFamily: "'IBM Plex Mono', monospace",
-  },
-  container: { maxWidth: '1000px', margin: '0 auto', padding: '0 32px' },
-}
+import { sans } from './theme'
+import Nav from './components/Nav'
+import Hero from './components/Hero'
+import About from './components/About'
+import Projects from './components/Projects'
+import Skills from './components/Skills'
+import Contact from './components/Contact'
+import Footer from './components/Footer'
 
 export default function App() {
   return (
-    <div style={styles.page}>
-      <Header />
-      <div style={styles.container}>
-        <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <Contact />
-        <Footer />
-      </div>
+    <div
+      id="dc-portfolio"
+      style={{
+        background: '#0a0c10',
+        color: '#e6e9ef',
+        fontFamily: sans,
+        minHeight: '100vh',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      {/* ambient blueprint grid */}
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          pointerEvents: 'none',
+          zIndex: 0,
+          backgroundImage:
+            'linear-gradient(rgba(130,150,180,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(130,150,180,.045) 1px,transparent 1px)',
+          backgroundSize: '42px 42px',
+        }}
+      />
+      <div
+        style={{
+          position: 'fixed',
+          top: '-10%',
+          right: '-5%',
+          width: '55%',
+          height: '60%',
+          pointerEvents: 'none',
+          zIndex: 0,
+          background: 'radial-gradient(circle,rgba(242,180,65,.07),transparent 62%)',
+        }}
+      />
+
+      <Nav />
+      <Hero />
+      <About />
+      <Projects />
+      <Skills />
+      <Contact />
+      <Footer />
     </div>
   )
 }

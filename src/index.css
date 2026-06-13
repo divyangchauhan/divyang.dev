@@ -1,85 +1,159 @@
-/* Direction B — Systems Log */
-
-html,
-body {
-  margin: 0;
-  padding: 0;
-  background: #0b0f13;
+* {
+  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+body {
+  margin: 0;
+  background: #0a0c10;
 }
 
-@keyframes blink {
+::selection {
+  background: rgba(242, 180, 65, 0.28);
+  color: #fff;
+}
+
+#dc-portfolio ::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+#dc-portfolio ::-webkit-scrollbar-track {
+  background: #0a0c10;
+}
+#dc-portfolio ::-webkit-scrollbar-thumb {
+  background: #232935;
+  border-radius: 6px;
+  border: 3px solid #0a0c10;
+}
+
+@keyframes pf-flow {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+@keyframes pf-blink {
   0%,
-  49% {
+  100% {
     opacity: 1;
   }
-  50%,
+  50% {
+    opacity: 0.25;
+  }
+}
+@keyframes pf-pulse {
+  0%,
   100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+@keyframes pf-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pf-rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pf-riseT {
+  from {
+    transform: translateY(16px);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes pf-caret {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
     opacity: 0;
   }
 }
 
-/* The terminal cursor that trails the hero name */
-.b-cursor {
-  display: inline-block;
-  width: 0.5em;
-  height: 0.85em;
-  background: #4ade80;
-  margin-left: 12px;
-  vertical-align: -0.04em;
-  animation: blink 1.1s step-end infinite;
+/* hover helpers (the design medium used a non-standard style-hover attribute) */
+.dc-link:hover {
+  color: #f2b441 !important;
+}
+.dc-btn-fill:hover {
+  background: #f6c45f !important;
+}
+.dc-btn-outline:hover {
+  border-color: #f2b441 !important;
+  color: #f2b441 !important;
+}
+.dc-row:hover {
+  border-color: #f2b441 !important;
 }
 
-/* Hover transitions — replicated from the prototype's style-hover hints */
-.b-logo {
-  transition: color 0.15s;
-}
-.b-logo:hover {
-  color: #e6edf2;
-}
-
-.b-navlink {
-  transition: color 0.15s;
-}
-.b-navlink:hover {
-  color: #4ade80;
-}
-
-.b-btn-primary {
-  transition: all 0.15s;
-}
-.b-btn-primary:hover {
-  background: #6bea9b;
-  border-color: #6bea9b;
-}
-
-.b-btn-secondary {
-  transition: all 0.15s;
-}
-.b-btn-secondary:hover {
-  border-color: #4ade80;
-  color: #4ade80;
-}
-
-.b-underline-link {
-  transition: color 0.15s;
-}
-.b-underline-link:hover {
-  text-decoration: underline;
+/* responsive — the prototype is a fixed desktop mockup; these keep it intact
+   on desktop while preventing overflow / cramping on tablet & mobile. */
+@media (max-width: 1080px) {
+  .dc-hero {
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+  }
+  .dc-about-grid,
+  .dc-contact-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .dc-diagram-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .dc-diagram-detail {
+    border-left: none !important;
+    padding-left: 0 !important;
+    min-height: 0 !important;
+  }
+  .dc-diagram-canvas {
+    width: 100% !important;
+    max-width: 760px;
+    overflow-x: auto;
+  }
+  .dc-skills,
+  .dc-techstack {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .dc-metrics {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
 }
 
-.b-contact-link {
-  transition: color 0.15s;
+@media (max-width: 720px) {
+  .dc-sidecards {
+    grid-template-columns: 1fr !important;
+  }
+  .dc-skills,
+  .dc-techstack {
+    grid-template-columns: 1fr !important;
+  }
+  .dc-metrics {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 }
-.b-contact-link:hover {
-  color: #4ade80;
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

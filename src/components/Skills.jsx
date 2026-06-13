@@ -1,39 +1,113 @@
-import SectionHeading from './SectionHeading.jsx'
-import { SKILLS } from '../data.js'
+import { mono, reveal } from '../theme'
+import SectionLabel from './SectionLabel'
 
-const styles = {
-  section: { marginTop: '28px' },
-  row: {
-    display: 'grid',
-    gridTemplateColumns: '230px 1fr',
-    gap: '20px',
-    padding: '13px 0',
-    borderBottom: '1px solid #141C24',
-    fontSize: '13px',
+const groups = [
+  {
+    title: 'Languages',
+    items: ['TypeScript', 'JavaScript', 'Python', 'SQL', 'OutSystems'],
   },
-  rowLast: {
-    display: 'grid',
-    gridTemplateColumns: '230px 1fr',
-    gap: '20px',
-    padding: '13px 0',
-    fontSize: '13px',
+  {
+    title: 'Frameworks & Libraries',
+    items: [
+      'NestJS',
+      'Django',
+      'Django REST',
+      'Express',
+      'Angular',
+      'React',
+      'Next.js',
+      'GraphQL',
+      'CASL.js',
+      'TypeORM',
+    ],
   },
-  key: { color: '#71818D' },
-  value: { color: '#A7B6C0', lineHeight: 1.7 },
-}
+  {
+    title: 'Databases',
+    items: ['PostgreSQL', 'MongoDB', 'MySQL'],
+  },
+  {
+    title: 'Infrastructure & Cloud',
+    items: ['AWS Lambda', 'AWS ECS', 'S3', 'RDS', 'CloudFront', 'Cognito', 'Docker', 'Terraform'],
+  },
+  {
+    title: 'Tools & Practices',
+    items: [
+      'Git',
+      'CI/CD',
+      'Apache Kafka',
+      'Celery',
+      'Microservices',
+      'REST APIs',
+      'Event-Driven Architecture',
+      'Cypress',
+    ],
+  },
+  {
+    title: 'Web3',
+    items: ['Ethers.js', 'Viem', 'The Graph', 'Multi-chain Integration'],
+  },
+]
 
 export default function Skills() {
   return (
-    <>
-      <SectionHeading id="skills" label="03 · Skills" />
-      <section style={styles.section}>
-        {SKILLS.map((row, i) => (
-          <div key={row.key} style={i < SKILLS.length - 1 ? styles.row : styles.rowLast}>
-            <span style={styles.key}>{row.key}</span>
-            <span style={styles.value}>{row.value}</span>
+    <section
+      id="skills"
+      style={{
+        position: 'relative',
+        zIndex: 1,
+        maxWidth: 1180,
+        margin: '0 auto',
+        padding: '70px 40px 40px',
+        scrollMarginTop: 84,
+      }}
+    >
+      <SectionLabel label="// SKILLS" />
+      <div
+        className="dc-skills"
+        style={{ ...reveal(), display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 16 }}
+      >
+        {groups.map((g) => (
+          <div
+            key={g.title}
+            style={{
+              border: '1px solid rgba(255,255,255,.08)',
+              borderRadius: 13,
+              background: 'rgba(14,17,22,.45)',
+              padding: '20px 22px',
+            }}
+          >
+            <div
+              style={{
+                fontFamily: mono,
+                fontSize: 11,
+                letterSpacing: '.12em',
+                textTransform: 'uppercase',
+                color: '#f2b441',
+                marginBottom: 14,
+              }}
+            >
+              {g.title}
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              {g.items.map((i) => (
+                <span
+                  key={i}
+                  style={{
+                    fontFamily: mono,
+                    fontSize: 12.5,
+                    color: '#cdd3dd',
+                    border: '1px solid rgba(255,255,255,.12)',
+                    padding: '6px 11px',
+                    borderRadius: 7,
+                  }}
+                >
+                  {i}
+                </span>
+              ))}
+            </div>
           </div>
         ))}
-      </section>
-    </>
+      </div>
+    </section>
   )
 }
