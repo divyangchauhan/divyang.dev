@@ -70,6 +70,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
+      className="pf-pad"
       style={{
         position: 'relative',
         zIndex: 1,
@@ -102,6 +103,7 @@ export default function Projects() {
           }}
         >
           <div
+            className="pf-glow"
             style={{
               position: 'absolute',
               top: '-30%',

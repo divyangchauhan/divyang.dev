@@ -52,6 +52,7 @@ export default function Skills() {
   return (
     <section
       id="skills"
+      className="pf-pad"
       style={{
         position: 'relative',
         zIndex: 1,
