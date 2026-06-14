@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { mono } from '../theme'
 
 export default function Nav() {
@@ -61,6 +62,9 @@ export default function Nav() {
         <a className="dc-link pf-navsec" href="#skills" style={{ color: '#aab2c0', textDecoration: 'none' }}>
           Skills
         </a>
+        <Link className="dc-link pf-navsec" to="/resume" style={{ color: '#aab2c0', textDecoration: 'none' }}>
+          Résumé
+        </Link>
         <a
           className="dc-btn-fill"
           href="#contact"

@@ -197,6 +197,42 @@ body {
   }
 }
 
+/* ===== Resume page animations ===== */
+@keyframes rz-riseT {
+  from { transform: translateY(16px); }
+  to { transform: none; }
+}
+@keyframes rz-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+/* Resume scrollbar */
+#dc-resume ::-webkit-scrollbar { width: 11px; height: 11px; }
+#dc-resume ::-webkit-scrollbar-track { background: #0a0c10; }
+#dc-resume ::-webkit-scrollbar-thumb { background: #232935; border-radius: 6px; border: 3px solid #0a0c10; }
+
+/* Resume responsive */
+@media (max-width: 860px) {
+  .rz-pad { padding-left: 24px !important; padding-right: 24px !important; }
+  .rz-navlinks { gap: 18px !important; font-size: 12px !important; }
+  .rz-brand-tag { display: none !important; }
+  .rz-head { grid-template-columns: 1fr !important; gap: 30px !important; padding-top: 46px !important; padding-bottom: 30px !important; }
+  .rz-name { font-size: 48px !important; }
+  .rz-head-actions { justify-content: flex-start !important; }
+  .rz-exp-row { grid-template-columns: 1fr !important; gap: 12px !important; }
+  .rz-exp-meta { padding-left: 26px !important; }
+  .rz-edu-grid { grid-template-columns: 1fr !important; }
+  .rz-skill-row { grid-template-columns: 1fr !important; gap: 8px !important; }
+  .pf-glow { display: none !important; }
+}
+@media (max-width: 560px) {
+  .rz-pad { padding-left: 18px !important; padding-right: 18px !important; }
+  .rz-navsec { display: none !important; }
+  .rz-name { font-size: 38px !important; }
+  .rz-contactline { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
