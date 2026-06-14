@@ -62,7 +62,7 @@ export default function Nav() {
         <a className="dc-link pf-navsec" href="#skills" style={{ color: '#aab2c0', textDecoration: 'none' }}>
           Skills
         </a>
-        <Link className="dc-link pf-navsec" to="/resume" style={{ color: '#aab2c0', textDecoration: 'none' }}>
+        <Link className="dc-link" to="/resume" style={{ color: '#aab2c0', textDecoration: 'none' }}>
           Résumé
         </Link>
         <a

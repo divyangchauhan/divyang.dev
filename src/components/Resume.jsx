@@ -58,7 +58,7 @@ export default function Resume() {
           <span className="rz-brand-tag" style={{ fontFamily: mono, fontSize: 12, letterSpacing: '.16em', textTransform: 'uppercase', color: color.dim }}>backend engineer</span>
         </Link>
         <div className="rz-navlinks" style={{ display: 'flex', alignItems: 'center', gap: 30, fontFamily: mono, fontSize: 13 }}>
-          <Link className="dc-link rz-navsec" to="/" style={{ color: '#aab2c0', textDecoration: 'none' }}>← Home</Link>
+          <Link className="dc-link" to="/" style={{ color: '#aab2c0', textDecoration: 'none' }}>← Home</Link>
           <a
             className="dc-btn-fill"
             href="/assets/Divyang-Chauhan-Resume.pdf"
