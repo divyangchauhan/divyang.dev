@@ -48,7 +48,7 @@ export default function Hero() {
               animation: 'pf-blink 1.8s ease-in-out infinite',
             }}
           />
-          DISTRIBUTED SYSTEMS · SCALABLE APIS
+          BACKEND · SECURITY · WEB3
         </div>
         <h1
           className="pf-h1"
@@ -76,17 +76,13 @@ export default function Hero() {
             maxWidth: 470,
           }}
         >
-          Backend engineer specializing in distributed systems, scalable APIs, and getting things
-          shipped.
+          Backend engineer who builds systems that hold up under pressure.
         </p>
         <p style={{ fontSize: 16, lineHeight: 1.76, color: '#c6ccd6', margin: '0 0 34px', maxWidth: 520 }}>
-          I build the backend systems that keep products running —{' '}
-          <strong style={{ color: '#f2b441', fontWeight: 600 }}>event-driven architectures</strong>,{' '}
-          <strong style={{ color: '#f2b441', fontWeight: 600 }}>serverless infrastructure</strong>, and
-          APIs that hold up under real workloads. Recently shipped blockchain infrastructure at Kleros;
-          I'm also building <strong style={{ color: '#f2b441', fontWeight: 600 }}>ResumeForge</strong>, a
-          resume intelligence tool because job hunting deserved better tooling. Drawn to startups where
-          the engineering problems are still being figured out.
+          I take products from prototype to production — fast, and owning the parts that are easy to
+          get wrong. I gravitate toward{' '}
+          <strong style={{ color: '#f2b441', fontWeight: 600 }}>early-stage teams</strong> where the
+          hard problems aren't solved yet.
         </p>
         <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap' }}>
           <a
@@ -134,7 +130,7 @@ export default function Hero() {
           borderRadius: 14,
           background: '#0b0e12',
           overflow: 'hidden',
-          height: 540,
+          alignSelf: 'center',
           boxShadow: '0 30px 60px -34px rgba(0,0,0,.85)',
         }}
       >
@@ -168,16 +164,12 @@ export default function Hero() {
         <div style={{ padding: '26px 26px', fontFamily: mono, fontSize: 14.5, lineHeight: 2.05 }}>
           {promptLine('whoami')}
           <div style={{ color: '#cdd3dd', paddingLeft: 2 }}>divyang_chauhan</div>
-          <div style={{ marginTop: 13 }}>{promptLine('cat role.txt')}</div>
-          <div style={{ color: '#f2b441' }}>Backend Engineer</div>
+          <div style={{ marginTop: 13 }}>{promptLine('years --backend')}</div>
+          <div style={{ color: '#cdd3dd' }}>5+ · founding engineer ×2</div>
+          <div style={{ marginTop: 13 }}>{promptLine('built')}</div>
+          <div style={{ color: '#cdd3dd' }}>multi-tenant SaaS · EVM event pipelines · serverless ETL</div>
           <div style={{ marginTop: 13 }}>{promptLine('stack --top')}</div>
           <div style={{ color: '#cdd3dd' }}>TypeScript · Python · NestJS · AWS · Kafka</div>
-          <div style={{ marginTop: 13 }}>{promptLine('focus')}</div>
-          <div style={{ color: '#cdd3dd' }}>event-driven · serverless · scalable APIs</div>
-          <div style={{ marginTop: 13 }}>{promptLine('status')}</div>
-          <div style={{ color: '#cdd3dd' }}>
-            <span style={{ color: '#4ad07f' }}>●</span> open to early-stage startups
-          </div>
           <div style={{ marginTop: 13 }}>
             <span style={{ color: '#4ad07f' }}>➜</span> <span style={{ color: '#6c7585' }}>~</span>{' '}
             <span
