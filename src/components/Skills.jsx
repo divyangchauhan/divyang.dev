@@ -4,22 +4,11 @@ import SectionLabel from './SectionLabel'
 const groups = [
   {
     title: 'Languages',
-    items: ['TypeScript', 'JavaScript', 'Python', 'SQL', 'OutSystems'],
+    items: ['TypeScript', 'JavaScript', 'Python'],
   },
   {
     title: 'Frameworks & Libraries',
-    items: [
-      'NestJS',
-      'Django',
-      'Django REST',
-      'Express',
-      'Angular',
-      'React',
-      'Next.js',
-      'GraphQL',
-      'CASL.js',
-      'TypeORM',
-    ],
+    items: ['NestJS', 'Django REST', 'React', 'Next.js', 'GraphQL', 'TypeORM'],
   },
   {
     title: 'Databases',
@@ -27,24 +16,20 @@ const groups = [
   },
   {
     title: 'Infrastructure & Cloud',
-    items: ['AWS Lambda', 'AWS ECS', 'S3', 'RDS', 'CloudFront', 'Cognito', 'Docker', 'Terraform'],
+    items: ['AWS Lambda', 'S3', 'RDS', 'CloudFront', 'Cognito', 'Docker', 'Terraform'],
   },
   {
     title: 'Tools & Practices',
     items: [
-      'Git',
-      'CI/CD',
-      'Apache Kafka',
-      'Celery',
-      'Microservices',
       'REST APIs',
+      'Apache Kafka',
       'Event-Driven Architecture',
-      'Cypress',
+      'Multi-tenant Architecture',
     ],
   },
   {
-    title: 'Web3',
-    items: ['Ethers.js', 'Viem', 'The Graph', 'Multi-chain Integration'],
+    title: 'Web3 & Security',
+    items: ['Solidity', 'Viem', 'Smart Contract Auditing', 'Penetration Testing'],
   },
 ]
 

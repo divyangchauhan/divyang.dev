@@ -33,18 +33,16 @@ export default function About() {
       >
         <div style={reveal()}>
           <p style={{ fontSize: 19, lineHeight: 1.7, color: '#d4d9e1', margin: '0 0 26px' }}>
-            I was a founding engineer at NST Cyber, where I built two products from zero — cutting
-            infrastructure costs by{' '}
-            <strong style={{ color: '#f2b441', fontWeight: 600 }}>$200K/year</strong> on the flagship
-            platform. At Kleros, I built the integration layer between EVM chains and backend services.
+            The throughline in my work is a security mindset applied to backend engineering. A
+            background in penetration testing taught me to look at a system the way someone trying to
+            break it would — where data leaks, where access control bends, where assumptions quietly
+            stop holding. That instinct shapes the architecture decisions I make early — the ones that
+            are cheap to get right up front and brutally expensive to fix later.
           </p>
           <p style={{ fontSize: 16.5, lineHeight: 1.75, color: '#aeb5c0', margin: 0 }}>
-            Beyond the day-to-day, I'm genuinely excited about AI — not just as a buzzword but as a
-            practical lever. I use AI tools heavily in my own workflow, I'm constantly turning over
-            ideas for where AI can make real products more useful, and that curiosity feeds directly
-            into the SaaS products I build. I recently open-sourced{' '}
-            <strong style={{ color: '#e6e9ef', fontWeight: 600, fontFamily: mono }}>Tarpan</strong>, an
-            end-to-end SaaS built on an LLM-powered document pipeline.
+            Beyond that, I'm genuinely excited about AI as a practical lever. I use AI tools heavily in
+            my own workflow, and I'm constantly turning over ideas for where AI can make real products
+            more useful.
           </p>
         </div>
         <div

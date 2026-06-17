@@ -2,6 +2,8 @@ import { mono, sans, reveal } from '../theme'
 import SectionLabel from './SectionLabel'
 import CountUp from './CountUp'
 import ArchitectureDiagram from './ArchitectureDiagram'
+import Collapsible from './Collapsible'
+import Kleros from './Kleros'
 
 const Tag = ({ children, fontSize = 12, padding = '5px 10px' }) => (
   <span
@@ -20,11 +22,9 @@ const Tag = ({ children, fontSize = 12, padding = '5px 10px' }) => (
 
 const metrics = [
   { to: 200, prefix: '$', suffix: 'K', label: 'Infra cost saved / yr', flagship: true, delay: 0 },
-  { to: 90, suffix: '%', label: 'Less system downtime', delay: 0.05 },
   { to: 80, suffix: '%', label: 'Faster deploys via IaC', delay: 0.1 },
   { to: 40, prefix: '+', suffix: '%', label: 'Revenue from tenancy model', delay: 0.15 },
-  { to: 0, label: 'Critical vulns shipped', delay: 0.2 },
-  { to: 9, label: 'Team members led', delay: 0.25 },
+  { to: 9, label: 'Team members led', delay: 0.2 },
 ]
 
 const techStack = [
@@ -80,7 +80,7 @@ export default function Projects() {
         scrollMarginTop: 84,
       }}
     >
-      <SectionLabel label="// SELECTED WORK" meta="03 PROJECTS" marginBottom={40} />
+      <SectionLabel label="// SELECTED WORK" meta="04 PROJECTS" marginBottom={40} />
 
       {/* ===== FLAGSHIP: NST CYBER ASSURE ===== */}
       <article
@@ -224,7 +224,7 @@ export default function Projects() {
             className="dc-metrics"
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(6,1fr)',
+              gridTemplateColumns: 'repeat(4,1fr)',
               gap: 14,
               marginBottom: 40,
             }}
@@ -234,20 +234,9 @@ export default function Projects() {
             ))}
           </div>
 
-          {/* context: v1 -> v2 */}
-          <div style={{ ...reveal(), marginBottom: 40 }}>
-            <div
-              style={{
-                fontFamily: mono,
-                fontSize: 11,
-                letterSpacing: '.18em',
-                textTransform: 'uppercase',
-                color: '#8a93a3',
-                marginBottom: 16,
-              }}
-            >
-              // The rebuild
-            </div>
+          {/* context: v1 -> v2 (collapsible) */}
+          <div style={{ ...reveal(), marginBottom: 24 }}>
+            <Collapsible label="The rebuild story">
             <p style={{ fontSize: 15.5, lineHeight: 1.74, color: '#b6bdc8', margin: '0 0 24px', maxWidth: 880 }}>
               A third-party studio was contracted to build Assure over 6 months. Their delivery was
               buggy and unusable. I was brought in, rebuilt it from scratch in OutSystems in 3 months
@@ -318,6 +307,7 @@ export default function Projects() {
                 </div>
               </div>
             </div>
+            </Collapsible>
           </div>
 
           {/* interactive architecture diagram */}
@@ -325,20 +315,9 @@ export default function Projects() {
             <ArchitectureDiagram />
           </div>
 
-          {/* tech stack */}
+          {/* tech stack (collapsible) */}
           <div style={{ ...reveal(), marginBottom: 38 }}>
-            <div
-              style={{
-                fontFamily: mono,
-                fontSize: 11,
-                letterSpacing: '.18em',
-                textTransform: 'uppercase',
-                color: '#8a93a3',
-                marginBottom: 18,
-              }}
-            >
-              // Tech stack
-            </div>
+            <Collapsible label="Tech stack">
             <div
               className="dc-techstack"
               style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 14 }}
@@ -373,6 +352,7 @@ export default function Projects() {
                 </div>
               ))}
             </div>
+            </Collapsible>
           </div>
 
           {/* security record */}
@@ -412,6 +392,9 @@ export default function Projects() {
         </div>
       </article>
 
+      {/* ===== KLEROS ===== */}
+      <Kleros />
+
       {/* ===== Tarpan + ResumeForge ===== */}
       <div className="dc-sidecards" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
         <article
@@ -425,7 +408,7 @@ export default function Projects() {
             flexDirection: 'column',
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, marginBottom: 18 }}>
             <div style={{ display: 'flex', gap: 8 }}>
               <span
                 style={{
@@ -453,7 +436,7 @@ export default function Projects() {
                 Open source
               </span>
             </div>
-            <span style={{ fontFamily: mono, fontSize: 12, color: '#6c7585' }}>2026 – present</span>
+            <span style={{ fontFamily: mono, fontSize: 12, color: '#6c7585', marginLeft: 'auto', paddingLeft: 12 }}>2026 – present</span>
           </div>
           <h3
             style={{
@@ -513,7 +496,7 @@ export default function Projects() {
             flexDirection: 'column',
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8, marginBottom: 18 }}>
             <div style={{ display: 'flex', gap: 8 }}>
               <span
                 style={{
@@ -552,7 +535,7 @@ export default function Projects() {
                 Side project
               </span>
             </div>
-            <span style={{ fontFamily: mono, fontSize: 12, color: '#6c7585' }}>2024 – present</span>
+            <span style={{ fontFamily: mono, fontSize: 12, color: '#6c7585', marginLeft: 'auto', paddingLeft: 12 }}>2026 – present</span>
           </div>
           <h3
             style={{

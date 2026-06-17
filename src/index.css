@@ -157,6 +157,9 @@ body {
   .dc-sidecards {
     grid-template-columns: 1fr !important;
   }
+  .dc-kl-grid {
+    grid-template-columns: 1fr !important;
+  }
   .dc-skills {
     grid-template-columns: 1fr 1fr !important;
   }
