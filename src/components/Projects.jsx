@@ -556,25 +556,30 @@ export default function Projects() {
             built because job hunting deserved better tooling.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7, marginBottom: 20 }}>
-            {['Next.js', 'Claude API', 'PostgreSQL', 'Stripe'].map((t) => (
+            {['Next.js', 'Claude API', 'PostgreSQL'].map((t) => (
               <Tag key={t} fontSize={11.5} padding="5px 9px">
                 {t}
               </Tag>
             ))}
           </div>
-          <span
+          <a
+            className="dc-btn-outline"
+            href="https://resume-forge-lemon.vercel.app/"
+            target="_blank"
+            rel="noopener"
             style={{
               alignSelf: 'flex-start',
               fontFamily: mono,
               fontSize: 12.5,
-              color: '#6c7585',
-              border: '1px solid rgba(255,255,255,.1)',
+              color: '#e6e9ef',
+              border: '1px solid rgba(255,255,255,.2)',
               padding: '9px 15px',
               borderRadius: 7,
+              textDecoration: 'none',
             }}
           >
-            Link coming soon
-          </span>
+            resume-forge-lemon.vercel.app ↗
+          </a>
         </article>
       </div>
     </section>
