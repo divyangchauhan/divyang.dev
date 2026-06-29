@@ -3,7 +3,7 @@ import SectionLabel from './SectionLabel'
 
 const building = [
   {
-    name: 'ResumeForge',
+    name: 'ClinchCV',
     desc: 'An AI-powered resume intelligence tool that helps job seekers tailor their resume for specific roles.',
   },
   {

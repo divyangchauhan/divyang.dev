@@ -395,7 +395,7 @@ export default function Projects() {
       {/* ===== KLEROS ===== */}
       <Kleros />
 
-      {/* ===== Tarpan + ResumeForge ===== */}
+      {/* ===== Tarpan + ClinchCV ===== */}
       <div className="dc-sidecards" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
         <article
           style={{
@@ -547,7 +547,7 @@ export default function Projects() {
               letterSpacing: '-.01em',
             }}
           >
-            ResumeForge
+            ClinchCV
           </h3>
           <div style={{ fontFamily: mono, fontSize: 12.5, color: '#9aa3b2', marginBottom: 16 }}>Solo</div>
           <p style={{ fontSize: 14.5, lineHeight: 1.68, color: '#b6bdc8', margin: '0 0 20px', flex: 1 }}>
@@ -564,7 +564,7 @@ export default function Projects() {
           </div>
           <a
             className="dc-btn-outline"
-            href="https://resume-forge-lemon.vercel.app/"
+            href="https://clinchcv.com/"
             target="_blank"
             rel="noopener"
             style={{
@@ -578,7 +578,7 @@ export default function Projects() {
               textDecoration: 'none',
             }}
           >
-            resume-forge-lemon.vercel.app ↗
+            clinchcv.com ↗
           </a>
         </article>
       </div>
