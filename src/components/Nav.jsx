@@ -49,7 +49,7 @@ export default function Nav() {
             color: '#8a93a3',
           }}
         >
-          backend engineer
+          full stack engineer
         </span>
       </a>
       <div className="dc-navlinks" style={{ display: 'flex', alignItems: 'center', gap: 30, fontFamily: mono, fontSize: 13 }}>

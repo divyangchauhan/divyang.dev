@@ -55,7 +55,7 @@ export default function Resume() {
       >
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}>
           <span style={{ display: 'inline-grid', placeItems: 'center', width: 32, height: 32, border: '1px solid #f2b441', color: color.amber, borderRadius: 7, fontFamily: mono, fontWeight: 600, fontSize: 13 }}>DC</span>
-          <span className="rz-brand-tag" style={{ fontFamily: mono, fontSize: 12, letterSpacing: '.16em', textTransform: 'uppercase', color: color.dim }}>backend engineer</span>
+          <span className="rz-brand-tag" style={{ fontFamily: mono, fontSize: 12, letterSpacing: '.16em', textTransform: 'uppercase', color: color.dim }}>full stack engineer</span>
         </Link>
         <div className="rz-navlinks" style={{ display: 'flex', alignItems: 'center', gap: 30, fontFamily: mono, fontSize: 13 }}>
           <Link className="dc-link" to="/" style={{ color: '#aab2c0', textDecoration: 'none' }}>← Home</Link>
@@ -73,17 +73,16 @@ export default function Resume() {
       {/* HEADER */}
       <header
         className="rz-head rz-pad"
-        style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: '1fr auto', gap: 40, alignItems: 'end', maxWidth: 980, margin: '0 auto', padding: '64px 40px 36px' }}
+        style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: '1fr auto', gap: 40, alignItems: 'end', maxWidth: 980, margin: '0 auto', padding: '64px 40px 14px' }}
       >
         <div data-reveal>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: mono, fontSize: 12, letterSpacing: '.2em', color: color.amber, marginBottom: 22 }}>
             <span style={{ width: 7, height: 7, borderRadius: '50%', background: color.amber, animation: 'rz-blink 1.8s ease-in-out infinite' }} />
             RÉSUMÉ
           </div>
-          <h1 className="rz-name" style={{ fontFamily: sans, fontWeight: 700, fontSize: 62, lineHeight: 1.0, letterSpacing: '-.025em', margin: '0 0 8px', color: color.heading }}>
+          <h1 className="rz-name" style={{ fontFamily: sans, fontWeight: 700, fontSize: 62, lineHeight: 1.0, letterSpacing: '-.025em', margin: '0 0 22px', color: color.heading }}>
             Divyang Chauhan
           </h1>
-          <div style={{ fontFamily: mono, fontSize: 15, color: color.muted, marginBottom: 22 }}>Backend Engineer · Distributed Systems</div>
           <div className="rz-contactline" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 14, fontFamily: mono, fontSize: 13 }}>
             <a className="dc-link" href="mailto:divyang@divyang.dev" style={{ color: '#cdd3dd', textDecoration: 'none' }}>divyang@divyang.dev</a>
             <span style={{ color: '#3a4150' }}>·</span>
@@ -98,7 +97,7 @@ export default function Resume() {
       <section className="rz-pad" style={{ position: 'relative', zIndex: 1, maxWidth: 980, margin: '0 auto', padding: '20px 40px 8px' }}>
         <div data-reveal style={{ border: '1px solid rgba(255,255,255,.08)', borderRadius: 14, background: 'rgba(14,17,22,.5)', padding: '26px 30px' }}>
           <p style={{ fontSize: 17, lineHeight: 1.72, color: '#d4d9e1', margin: 0 }}>
-            Backend engineer with 5+ years building distributed systems and blockchain infrastructure. Led a 9-person team building a bank-grade security platform under ISO 27001 at NST Cyber, and worked on EVM event-ingestion, notifications and bot infrastructure at Kleros. Strong end-to-end ownership backed by a security background <strong style={{ color: color.amber, fontWeight: 600 }}>(OSCP)</strong>.
+            Senior Full Stack engineer with 5+ years building multi-tenant platforms, event-driven systems, and EVM infrastructure. Led a 9-person team to ship a vulnerability-triage and threat-surface-management platform for banks at NST Cyber. Led a backend service split and architected multi-chain event-ingestion systems at Kleros. <strong style={{ color: color.amber, fontWeight: 600 }}>OSCP certified</strong>.
           </p>
         </div>
       </section>
@@ -116,12 +115,12 @@ export default function Resume() {
           </div>
           <div style={{ borderLeft: '1px solid rgba(255,255,255,.1)', paddingLeft: 26, position: 'relative' }}>
             <span style={{ position: 'absolute', left: -5, top: 6, width: 9, height: 9, borderRadius: '50%', background: color.amber }} />
-            <div style={{ fontFamily: mono, fontSize: 14.5, color: color.text, fontWeight: 500, marginBottom: 16 }}>Backend Engineer</div>
+            <div style={{ fontFamily: mono, fontSize: 14.5, color: color.text, fontWeight: 500, marginBottom: 16 }}>Full Stack Engineer</div>
             <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 13 }}>
-              <BulletItem>Split a monolithic app to resolve a scaling conflict between bots and APIs. Initiated the architectural discussion, led monorepo setup and the full split with production data migration preserving user state.</BulletItem>
-              <BulletItem>Found 4 medium-severity issues in the Kleros v2 arbitration contract during security reviews using manual analysis, formal verification (Halmos), and stateful fuzzing (Echidna).</BulletItem>
-              <BulletItem>Built Kleros v1's multi-network automation bot (dispute progression, juror staking, with transaction simulation to prevent reverts, batched calls to cut gas) and the full-lifecycle juror notification system.</BulletItem>
-              <BulletItem>Architected a NestJS-based blockchain event ingestion service for EVM chains, with runtime-configurable chains and contracts; emits events for async downstream processing.</BulletItem>
+              <BulletItem>Split a monolithic NestJS backend into separate API and bot services after surfacing conflicting scaling needs. Set up the monorepo and production data migration preserving user data.</BulletItem>
+              <BulletItem>Implemented Kleros v1's multi-network automation bot for dispute progression and juror staking; used viem for transaction simulation and batched calls to reduce gas usage.</BulletItem>
+              <BulletItem>Architected a NestJS EVM event ingestion service currently running on 3 production chains, with runtime-configurable chain and contract definitions; emits events for async downstream processing.</BulletItem>
+              <BulletItem>Found 4 medium-severity issues in the Kleros v2 arbitration contract through manual analysis. Applied Halmos formal verification and Echidna stateful fuzzing during the review.</BulletItem>
             </ul>
           </div>
         </article>
@@ -140,21 +139,22 @@ export default function Resume() {
               <div style={{ fontFamily: mono, fontSize: 12, color: color.faint }}>Jan 2023 – Feb 2024</div>
             </div>
             <ul style={{ margin: '0 0 24px', padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 13 }}>
-              <BulletItem>Led a team of 9 building a vulnerability triage and threat intelligence platform for banks under ISO 27001 compliance.</BulletItem>
-              <BulletItem>Owned design and development of Assure v2 — chose the stack, learned it while building, wrote ~70% of backend code, shipped in 6 months. Replaced a $200K/year low-code platform that couldn't support 3-level tenancy, data residency, isolation modes, or white-labeling.</BulletItem>
-              <BulletItem>Initiated and developed Terraform IaC from scratch covering the full serverless stack (Lambda, VPC/NAT, S3, CloudFront, CloudFront Functions), replacing a manual ~2-hour deploy with a repeatable 10–15-minute one.</BulletItem>
-              <BulletItem>Replaced auto-triggering on S3 uploads with explicit Kafka-message triggers for the Tigress-Assure ingestion Lambda; deployed MSK on AWS to unblock production rollout.</BulletItem>
-              <BulletItem>Created a database connection-pool library for the Assure v2 backend, simplifying queries and connections across logical and physical databases and eliminating connection overhead and slow API responses.</BulletItem>
+              <BulletItem>Led a cross-functional team of 9 building Assure v2, a multi-tenant vulnerability-triage and threat-surface management platform for multinational banks.</BulletItem>
+              <BulletItem>Owned design and development of Assure v2; selected TypeScript, NestJS, Angular, and Terraform, wrote ~70% of backend code, shipped in 6 months.</BulletItem>
+              <BulletItem>Moved the product off OutSystems, eliminating ~$200K/year in platform costs while enabling 3-level tenancy, data residency, isolation modes, and white-labeling.</BulletItem>
+              <BulletItem>Architected Assure v2's authorization model using CASL.js: 5-role hierarchical RBAC plus ABAC (Attribute-Based Access Control), tenant isolation, and per-user project access.</BulletItem>
+              <BulletItem>Wrote Terraform for Assure v2's core AWS infrastructure, reducing deploys from ~2 hours to 10–15 minutes; introduced Cypress E2E tests, reducing full regression from hours to under 30 minutes.</BulletItem>
+              <BulletItem>Designed and implemented a multi-database connection-pool utility for Assure v2, reusing connections across logical tenant databases and physical country-level databases to eliminate per-request connection setup.</BulletItem>
             </ul>
             <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
               <div style={{ fontFamily: mono, fontSize: 14.5, color: color.text, fontWeight: 500 }}>Software Engineer</div>
               <div style={{ fontFamily: mono, fontSize: 12, color: color.faint }}>Mar 2021 – Jan 2023</div>
             </div>
             <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 13 }}>
-              <BulletItem>Built Assure v1 in OutSystems in ~3 months, writing ~70% of production code (frontend and backend). Ran in production until platform limits triggered the v2 rebuild.</BulletItem>
-              <BulletItem>Developed the Tigress backend in Django REST Framework. Owned 100% of the database design, authored most of the core API, and designed a serializer abstraction adopted across most endpoints that reduced duplication.</BulletItem>
-              <BulletItem>Resolved a distributed-task bottleneck in the Tigress scanning engine by restructuring Celery dispatch for cross-instance execution, reducing scan time and compute/memory footprint.</BulletItem>
-              <BulletItem>Created an asset discovery and vulnerability scanning tool in Bash with client-ready reports; its structure later informed the tool-orchestration design of the Tigress scanning engine.</BulletItem>
+              <BulletItem>Built and took Assure v1 to production in OutSystems in ~3 months, writing most of the production code; the product later outgrew OutSystems tenancy and data-residency limits, triggering the v2 rebuild.</BulletItem>
+              <BulletItem>Developed Tigress's Django REST Framework backend from scratch; owned database design, authored most of the core APIs, and created a serializer abstraction adopted across most endpoints.</BulletItem>
+              <BulletItem>Resolved distributed-task bottleneck in Tigress scanning engine by restructuring Celery dispatch for cross-instance execution, reducing scan time by 50%.</BulletItem>
+              <BulletItem>Created an internal asset-discovery and vulnerability-scanning tool in Bash that chained security tools and generated client-ready reports. Tool's orchestration model later informed Tigress's scanning-engine design.</BulletItem>
             </ul>
           </div>
         </article>
