@@ -48,7 +48,7 @@ export default function Hero() {
               animation: 'pf-blink 1.8s ease-in-out infinite',
             }}
           />
-          BACKEND · SECURITY · WEB3
+          FULL STACK · SECURITY · WEB3
         </div>
         <h1
           className="pf-h1"
@@ -76,7 +76,7 @@ export default function Hero() {
             maxWidth: 470,
           }}
         >
-          Backend engineer who builds systems that hold up under pressure.
+          Full Stack engineer who builds systems that hold up under pressure.
         </p>
         <p style={{ fontSize: 16, lineHeight: 1.76, color: '#c6ccd6', margin: '0 0 34px', maxWidth: 520 }}>
           I take products from prototype to production — fast, and owning the parts that are easy to
@@ -164,7 +164,7 @@ export default function Hero() {
         <div style={{ padding: '26px 26px', fontFamily: mono, fontSize: 14.5, lineHeight: 2.05 }}>
           {promptLine('whoami')}
           <div style={{ color: '#cdd3dd', paddingLeft: 2 }}>divyang_chauhan</div>
-          <div style={{ marginTop: 13 }}>{promptLine('years --backend')}</div>
+          <div style={{ marginTop: 13 }}>{promptLine('years --fullstack')}</div>
           <div style={{ color: '#cdd3dd' }}>5+ · founding engineer ×2</div>
           <div style={{ marginTop: 13 }}>{promptLine('built')}</div>
           <div style={{ color: '#cdd3dd' }}>multi-tenant SaaS · EVM event pipelines · serverless ETL</div>

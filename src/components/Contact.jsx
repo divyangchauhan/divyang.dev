@@ -117,7 +117,7 @@ export default function Contact() {
               Let's build something that holds up.
             </h2>
             <p style={{ fontSize: 16.5, lineHeight: 1.7, color: '#c6ccd6', margin: 0, maxWidth: 480 }}>
-              If you're building something interesting and need a backend engineer who can move fast
+              If you're building something interesting and need a full stack engineer who can move fast
               and own large parts of the stack — let's talk.
             </p>
           </div>

@@ -120,7 +120,7 @@ export default function Kleros() {
                 color: '#9aa3b2',
               }}
             >
-              <span style={{ color: '#cdd3dd' }}>Backend Engineer</span>
+              <span style={{ color: '#cdd3dd' }}>Full Stack Engineer</span>
               <span>·</span>
               <span>Kleros</span>
               <span>·</span>

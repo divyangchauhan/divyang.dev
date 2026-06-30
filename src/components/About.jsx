@@ -33,7 +33,7 @@ export default function About() {
       >
         <div style={reveal()}>
           <p style={{ fontSize: 19, lineHeight: 1.7, color: '#d4d9e1', margin: '0 0 26px' }}>
-            The throughline in my work is a security mindset applied to backend engineering. A
+            The throughline in my work is a security mindset applied to full stack engineering. A
             background in penetration testing taught me to look at a system the way someone trying to
             break it would — where data leaks, where access control bends, where assumptions quietly
             stop holding. That instinct shapes the architecture decisions I make early — the ones that

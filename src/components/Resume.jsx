@@ -55,7 +55,7 @@ export default function Resume() {
       >
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}>
           <span style={{ display: 'inline-grid', placeItems: 'center', width: 32, height: 32, border: '1px solid #f2b441', color: color.amber, borderRadius: 7, fontFamily: mono, fontWeight: 600, fontSize: 13 }}>DC</span>
-          <span className="rz-brand-tag" style={{ fontFamily: mono, fontSize: 12, letterSpacing: '.16em', textTransform: 'uppercase', color: color.dim }}>backend engineer</span>
+          <span className="rz-brand-tag" style={{ fontFamily: mono, fontSize: 12, letterSpacing: '.16em', textTransform: 'uppercase', color: color.dim }}>full stack engineer</span>
         </Link>
         <div className="rz-navlinks" style={{ display: 'flex', alignItems: 'center', gap: 30, fontFamily: mono, fontSize: 13 }}>
           <Link className="dc-link" to="/" style={{ color: '#aab2c0', textDecoration: 'none' }}>← Home</Link>
@@ -97,7 +97,7 @@ export default function Resume() {
       <section className="rz-pad" style={{ position: 'relative', zIndex: 1, maxWidth: 980, margin: '0 auto', padding: '20px 40px 8px' }}>
         <div data-reveal style={{ border: '1px solid rgba(255,255,255,.08)', borderRadius: 14, background: 'rgba(14,17,22,.5)', padding: '26px 30px' }}>
           <p style={{ fontSize: 17, lineHeight: 1.72, color: '#d4d9e1', margin: 0 }}>
-            Senior Backend engineer with 5+ years building multi-tenant platforms, event-driven systems, and EVM infrastructure. Led a 9-person team to ship a vulnerability-triage and threat-surface-management platform for banks at NST Cyber. Led a backend service split and architected multi-chain event-ingestion systems at Kleros. <strong style={{ color: color.amber, fontWeight: 600 }}>OSCP certified</strong>.
+            Senior Full Stack engineer with 5+ years building multi-tenant platforms, event-driven systems, and EVM infrastructure. Led a 9-person team to ship a vulnerability-triage and threat-surface-management platform for banks at NST Cyber. Led a backend service split and architected multi-chain event-ingestion systems at Kleros. <strong style={{ color: color.amber, fontWeight: 600 }}>OSCP certified</strong>.
           </p>
         </div>
       </section>
@@ -115,7 +115,7 @@ export default function Resume() {
           </div>
           <div style={{ borderLeft: '1px solid rgba(255,255,255,.1)', paddingLeft: 26, position: 'relative' }}>
             <span style={{ position: 'absolute', left: -5, top: 6, width: 9, height: 9, borderRadius: '50%', background: color.amber }} />
-            <div style={{ fontFamily: mono, fontSize: 14.5, color: color.text, fontWeight: 500, marginBottom: 16 }}>Backend Engineer</div>
+            <div style={{ fontFamily: mono, fontSize: 14.5, color: color.text, fontWeight: 500, marginBottom: 16 }}>Full Stack Engineer</div>
             <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 13 }}>
               <BulletItem>Split a monolithic NestJS backend into separate API and bot services after surfacing conflicting scaling needs. Set up the monorepo and production data migration preserving user data.</BulletItem>
               <BulletItem>Implemented Kleros v1's multi-network automation bot for dispute progression and juror staking; used viem for transaction simulation and batched calls to reduce gas usage.</BulletItem>
