@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { sans } from './theme'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
@@ -7,7 +8,45 @@ import Skills from './components/Skills'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 
+function scrollToHash() {
+  const hash = window.location.hash.slice(1)
+
+  if (!hash) {
+    return
+  }
+
+  let targetId = hash
+
+  try {
+    targetId = decodeURIComponent(hash)
+  } catch {
+    targetId = hash
+  }
+
+  const target = document.getElementById(targetId)
+
+  if (target) {
+    target.scrollIntoView({ block: 'start' })
+  }
+}
+
 export default function App() {
+  useEffect(() => {
+    let frameId
+    const scroll = () => {
+      window.cancelAnimationFrame(frameId)
+      frameId = window.requestAnimationFrame(scrollToHash)
+    }
+
+    scroll()
+    window.addEventListener('hashchange', scroll)
+
+    return () => {
+      window.cancelAnimationFrame(frameId)
+      window.removeEventListener('hashchange', scroll)
+    }
+  }, [])
+
   return (
     <div
       id="dc-portfolio"
