@@ -8,6 +8,8 @@ import Skills from './components/Skills'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 
+const hashSectionTopGap = 32
+
 function scrollToHash() {
   const hash = window.location.hash.slice(1)
 
@@ -26,7 +28,16 @@ function scrollToHash() {
   const target = document.getElementById(targetId)
 
   if (target) {
-    target.scrollIntoView({ block: 'start' })
+    if (targetId === 'top') {
+      window.scrollTo({ top: 0, left: 0 })
+      return
+    }
+
+    const targetTop = target.getBoundingClientRect().top + window.scrollY
+    const targetPaddingTop = parseFloat(window.getComputedStyle(target).paddingTop) || 0
+    const top = Math.max(targetTop + targetPaddingTop - hashSectionTopGap, 0)
+
+    window.scrollTo({ top, left: 0 })
   }
 }
 
