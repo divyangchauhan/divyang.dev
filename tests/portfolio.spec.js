@@ -101,9 +101,7 @@ test('case studies expand one at a time', async ({ page }) => {
   await expect(pramanaToggle).toHaveAttribute('aria-expanded', 'true')
   await expect(pramanaToggle).toHaveText('Close ×')
   await expect(pramana.getByText('BY THE NUMBERS')).toBeVisible()
-  await expect(
-    pramana.getByText(/no real-world contract results are claimed/),
-  ).toBeVisible()
+  await expect(pramana.getByText('Eval corpus')).toBeVisible()
 
   // Opening another card closes the first.
   await tarpanToggle.click()

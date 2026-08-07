@@ -57,8 +57,6 @@ export const projects = [
         ['Unit tests', '19 offline files'],
         ['Scale', '~5.2K LOC · 43 commits'],
       ],
-      caveat:
-        'All evidence is synthetic fixtures with committed reference exploits — no real-world contract results are claimed.',
       link: {
         href: 'https://github.com/divyangchauhan/Pramana',
         label: '→ github.com/divyangchauhan/Pramana',
@@ -101,8 +99,6 @@ export const projects = [
         ['Commits', '193 · Apr–Aug 2026'],
         ['Tests', '649 · 62 files · CI'],
       ],
-      caveat:
-        'Anthropic is the only provider — no Pramana-style neutrality here. The AI features work but aren’t evaluated for output quality; the evidence is shipping discipline, not model reliability.',
     },
   },
   {
@@ -143,8 +139,6 @@ export const projects = [
         ['Tests', '241 · CI both langs'],
         ['Commits', '200 · Mar–Jun 2026'],
       ],
-      caveat:
-        'Generates letters for the user to send — nothing is dispatched to institutions. No OCR (Claude Vision handles scans). Never deployed; the architecture is the evidence.',
       link: {
         href: 'https://github.com/divyangchauhan/Tarpan',
         label: '→ github.com/divyangchauhan/Tarpan',
@@ -187,8 +181,6 @@ export const projects = [
         ['Model', 'whisper tiny.en +'],
         ['Commits', '94 · from Jun 2026'],
       ],
-      caveat:
-        'No model was trained, fine-tuned, or evaluated. The AI here is a dependency, not something built or measured.',
       link: {
         href: 'https://github.com/divyangchauhan/Shruti',
         label: '→ github.com/divyangchauhan/Shruti',

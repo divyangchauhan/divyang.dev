@@ -9,7 +9,6 @@ export const color = {
   surfaceAlt: '#fafbfe',
   tint: '#eef0fb',
   chip: '#f8f9fd',
-  note: '#f4f5fa',
   ink: '#15171f',
   body: '#454b5c',
   bodyAlt: '#3a3f4d',
@@ -33,13 +32,3 @@ export const kicker = (tracking = '.14em') => ({
   color: color.faint,
   marginBottom: 8,
 })
-
-// Caveat block: what a project deliberately does not claim.
-export const caveat = {
-  fontSize: 13,
-  lineHeight: 1.55,
-  color: '#6b7080',
-  background: color.note,
-  borderLeft: `2px solid ${color.ruleAccent}`,
-  padding: '10px 14px',
-}

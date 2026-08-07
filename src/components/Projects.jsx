@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { caveat, color, kicker, mono } from '../theme'
+import { color, kicker, mono } from '../theme'
 import { filters, projects } from '../data/projects'
 
 const filterBase = {
@@ -79,13 +79,11 @@ function CaseStudy({ study }) {
             </div>
           ))}
         </div>
-        <div style={caveat}>{study.caveat}</div>
         {study.link ? (
           <a
             href={study.link.href}
             style={{
               display: 'inline-block',
-              marginTop: 16,
               fontFamily: mono,
               fontSize: 13,
               fontWeight: 600,
