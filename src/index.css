@@ -142,6 +142,15 @@ button:focus-visible {
   margin-bottom: 0;
 }
 
+/* A repo URL or an email address is a single unbreakable token, and a grid
+ * track sized `1fr` floors at its content's min-content width — so at 320px
+ * those tokens set the page's minimum width and scroll it sideways. `anywhere`
+ * rather than `break-word`: only `anywhere` lowers the intrinsic minimum. */
+.bp-case a,
+.bp-contact a {
+  overflow-wrap: anywhere;
+}
+
 .bp-card {
   padding: 28px 32px;
 }
