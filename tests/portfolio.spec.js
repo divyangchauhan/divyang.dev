@@ -9,15 +9,9 @@ const viewports = [
   { name: 'mobile-320', width: 320, height: 720 },
 ]
 
-// Google Fonts is stubbed out so a slow CDN can't make layout assertions flaky.
-async function stubFonts(page) {
-  await page.route('https://fonts.googleapis.com/**', (route) =>
-    route.fulfill({ status: 200, contentType: 'text/css', body: '' }),
-  )
-}
-
+// IBM Plex is bundled from @fontsource, so there is no font CDN to stub out or
+// to make these assertions flaky. `fonts are self-hosted` guards that.
 async function loadPortfolio(page) {
-  await stubFonts(page)
   await page.goto('/', { waitUntil: 'domcontentloaded' })
   await page.locator('#work').waitFor()
 }
@@ -236,6 +230,70 @@ test('icons, manifest, and crawler files are served and consistent', async ({
   expect(robots).toContain('Sitemap: https://www.divyang.dev/sitemap.xml')
 })
 
+test('fonts are self-hosted, with no request to a font CDN', async ({
+  page,
+}) => {
+  const thirdParty = []
+  page.on('request', (request) => {
+    if (/fonts\.(googleapis|gstatic)\.com/.test(request.url())) {
+      thirdParty.push(request.url())
+    }
+  })
+
+  await loadPortfolio(page)
+  await page.evaluate(() => document.fonts.ready)
+
+  expect(thirdParty).toEqual([])
+
+  // Every weight the design uses has to have actually loaded, or the page
+  // silently falls back to system-ui and the whole layout shifts. This list is
+  // the contract with the imports in src/main.jsx — the app sets only 600 and
+  // 700, and inherits 400 for body copy.
+  const missing = await page.evaluate(() =>
+    [
+      '400 16px "IBM Plex Sans"',
+      '600 16px "IBM Plex Sans"',
+      '700 16px "IBM Plex Sans"',
+      '400 16px "IBM Plex Mono"',
+      '600 16px "IBM Plex Mono"',
+    ].filter((face) => !document.fonts.check(face)),
+  )
+  expect(missing).toEqual([])
+
+  // The woff2 files must be served from this origin, not merely declared.
+  const faces = await page.evaluate(() =>
+    [...document.fonts].map((font) => font.family),
+  )
+  expect(new Set(faces)).toEqual(new Set(['IBM Plex Sans', 'IBM Plex Mono']))
+})
+
+test('the social card matches the dimensions its meta tags declare', async ({
+  page,
+}) => {
+  await loadPortfolio(page)
+
+  const response = await page.request.get('/og-image.png')
+  expect(response.headers()['content-type']).toBe('image/png')
+
+  // Width and height live in the PNG's IHDR chunk, bytes 16-23.
+  const bytes = await response.body()
+  const width = bytes.readUInt32BE(16)
+  const height = bytes.readUInt32BE(20)
+
+  await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute(
+    'content',
+    String(width),
+  )
+  await expect(
+    page.locator('meta[property="og:image:height"]'),
+  ).toHaveAttribute('content', String(height))
+  expect({ width, height }).toEqual({ width: 1200, height: 630 })
+
+  // The card this replaced was 679 KB of the previous design. Keep it small
+  // enough that a scraper on a slow fetch budget still gets it.
+  expect(bytes.length).toBeLessThan(250 * 1024)
+})
+
 // The nav is sticky, so a raw anchor jump parks the section heading underneath
 // it. Landings have to clear the nav at every width, including the narrow ones
 // where the links wrap and the nav grows taller.
@@ -277,7 +335,6 @@ for (const viewport of [
 test('résumé route renders, links back, and strips chrome for print', async ({
   page,
 }) => {
-  await stubFonts(page)
   await page.setViewportSize({ width: 1280, height: 900 })
   await page.goto('/', { waitUntil: 'domcontentloaded' })
 
