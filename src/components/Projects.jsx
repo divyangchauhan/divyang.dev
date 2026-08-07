@@ -38,19 +38,6 @@ const toggleStyle = {
   cursor: 'pointer',
 }
 
-const statusTone = {
-  live: {
-    color: color.live,
-    background: color.liveBg,
-    border: `1px solid ${color.liveRule}`,
-  },
-  neutral: {
-    color: color.faint,
-    background: color.neutral,
-    border: `1px solid ${color.rule}`,
-  },
-}
-
 function CaseStudy({ study }) {
   return (
     <div
@@ -113,7 +100,7 @@ function CaseStudy({ study }) {
 }
 
 function ProjectCard({ project, open, onToggle }) {
-  const { featured, status } = project
+  const { featured } = project
 
   return (
     <article
@@ -178,22 +165,6 @@ function ProjectCard({ project, open, onToggle }) {
               style={{ fontFamily: mono, fontSize: 12, color: color.faint }}
             >
               {project.meta}
-            </span>
-          ) : null}
-          {status ? (
-            <span
-              style={{
-                ...statusTone[status.tone],
-                fontFamily: mono,
-                fontSize: 11,
-                padding: '3px 8px',
-                borderRadius: 20,
-                // The row is baseline-aligned for the title and its mono
-                // subtitle; the pill is a block, so centre it on the title.
-                alignSelf: 'center',
-              }}
-            >
-              {status.label}
             </span>
           ) : null}
         </div>

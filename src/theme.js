@@ -10,7 +10,6 @@ export const color = {
   tint: '#eef0fb',
   chip: '#f8f9fd',
   note: '#f4f5fa',
-  neutral: '#f1f2f7',
   ink: '#15171f',
   body: '#454b5c',
   bodyAlt: '#3a3f4d',
@@ -24,9 +23,6 @@ export const color = {
   ruleStrong: '#d6dae8',
   ruleAccent: '#c3c9e6',
   ruleDashed: '#c9cee0',
-  live: '#0f8a5f',
-  liveBg: '#e7f7ef',
-  liveRule: '#b6e6d0',
 }
 
 // The small uppercase mono kicker that opens every section and panel column.
