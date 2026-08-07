@@ -246,7 +246,7 @@ export default function Projects() {
         }}
       >
         <div>
-          <div style={kicker()}>FEATURED_WORK[{projects.length}]</div>
+          <div style={kicker()}>FEATURED_PROJECT[{projects.length}]</div>
           <h2
             style={{
               fontSize: 30,

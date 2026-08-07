@@ -31,7 +31,7 @@ export default function Nav() {
       </a>
       <div className="bp-navlinks">
         <a href="#work" style={link}>
-          work
+          project
         </a>
         <a href="#skills" style={link}>
           skills
