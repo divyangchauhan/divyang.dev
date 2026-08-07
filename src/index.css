@@ -18,8 +18,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* The résumé sheet sits on a slightly deeper ground than the portfolio. */
-body.bp-resume-page {
+/* The résumé sheet sits on a slightly deeper ground than the portfolio. The
+ * route paints it by being present, rather than by an effect toggling a class
+ * on <body>, so the colour is already correct in the server-rendered HTML
+ * instead of flashing the lighter ground on first paint. */
+body:has(.bp-resume-page) {
   background: #e9ebf2;
 }
 
@@ -206,7 +209,7 @@ button:focus-visible {
     margin: 0.5in;
   }
   body,
-  body.bp-resume-page {
+  body:has(.bp-resume-page) {
     background: #fff !important;
   }
   .bp-no-print {

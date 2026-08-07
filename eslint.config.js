@@ -6,7 +6,7 @@ import jsxA11y from 'eslint-plugin-jsx-a11y'
 import prettier from 'eslint-config-prettier'
 
 export default [
-  { ignores: ['dist/**', 'playwright-report/**', 'test-results/**'] },
+  { ignores: ['.next/**', 'playwright-report/**', 'test-results/**'] },
 
   // Browser source.
   {
@@ -32,9 +32,9 @@ export default [
     },
   },
 
-  // Playwright specs and the Vite config run in Node.
+  // Playwright specs, build config, and the generator scripts run in Node.
   {
-    files: ['tests/**/*.js', '*.config.js', 'vite.config.js'],
+    files: ['tests/**/*.js', '*.config.js', '*.config.mjs', 'scripts/**/*.mjs'],
     ...js.configs.recommended,
     languageOptions: {
       ecmaVersion: 2022,

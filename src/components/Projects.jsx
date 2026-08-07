@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import { color, kicker, mono } from '../theme'
 import { filters, projects } from '../data/projects'

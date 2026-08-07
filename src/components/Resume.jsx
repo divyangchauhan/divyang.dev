@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { color, mono } from '../theme'
 
 const contactLinks = [
@@ -109,14 +108,11 @@ const education = [
 ]
 
 export default function Resume() {
-  useEffect(() => {
-    document.body.classList.add('bp-resume-page')
-
-    return () => document.body.classList.remove('bp-resume-page')
-  }, [])
-
   return (
-    <div style={{ color: color.ink, padding: '28px 20px 60px' }}>
+    <div
+      className="bp-resume-page"
+      style={{ color: color.ink, padding: '28px 20px 60px' }}
+    >
       <div
         className="bp-no-print"
         style={{
@@ -130,7 +126,7 @@ export default function Resume() {
         }}
       >
         <Link
-          to="/"
+          href="/"
           style={{ fontFamily: mono, fontSize: 13, color: color.muted }}
         >
           ← back to site

@@ -165,7 +165,7 @@ test('copy, anchors, outbound links, and metadata are correct', async ({
   )
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    'https://www.divyang.dev/',
+    'https://www.divyang.dev',
   )
 
   await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute(
@@ -222,12 +222,75 @@ test('icons, manifest, and crawler files are served and consistent', async ({
 
   // Sitemap and robots have to agree with the routes the app actually serves.
   const sitemap = await (await page.request.get('/sitemap.xml')).text()
-  expect(sitemap).toContain('<loc>https://www.divyang.dev/</loc>')
+  expect(sitemap).toContain('<loc>https://www.divyang.dev</loc>')
   expect(sitemap).toContain('<loc>https://www.divyang.dev/resume</loc>')
   expect(sitemap).toMatch(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/)
 
   const robots = await (await page.request.get('/robots.txt')).text()
   expect(robots).toContain('Sitemap: https://www.divyang.dev/sitemap.xml')
+})
+
+// Social scrapers and crawlers do not run JavaScript, so everything below is
+// asserted against the raw HTML the server sends — not the hydrated DOM. As an
+// SPA this could not pass: every route returned the same index.html.
+test('each route serves its own metadata in the raw HTML', async ({
+  request,
+}) => {
+  const head = async (path) => {
+    const html = await (await request.get(path)).text()
+    const meta = {}
+    for (const [, key, value] of html.matchAll(
+      /<meta (?:property|name)="((?:og|twitter):[a-z:_]+)" content="([^"]*)"/g,
+    )) {
+      meta[key] ??= value
+    }
+    return {
+      title: html.match(/<title>([^<]*)<\/title>/)?.[1],
+      canonical: html.match(/<link rel="canonical" href="([^"]*)"/)?.[1],
+      meta,
+    }
+  }
+
+  const home = await head('/')
+  const resume = await head('/resume')
+
+  expect(home.title).toBe('Divyang Chauhan — Applied AI Engineer')
+  expect(home.canonical).toBe('https://www.divyang.dev')
+  expect(home.meta['og:url']).toBe('https://www.divyang.dev')
+
+  // The bug this migration fixes: /resume used to serve the homepage's title
+  // and claim the homepage as its canonical, while sitemap.xml submitted it as
+  // its own URL — a self-contradiction that drops it from the index.
+  expect(resume.title).toBe('Résumé — Divyang Chauhan')
+  expect(resume.canonical).toBe('https://www.divyang.dev/resume')
+  expect(resume.meta['og:url']).toBe('https://www.divyang.dev/resume')
+  expect(resume.meta['og:title']).toBe('Résumé — Divyang Chauhan')
+  expect(resume.meta['og:description']).not.toBe(home.meta['og:description'])
+
+  // Next merges metadata shallowly, so a page that declares its own openGraph
+  // or twitter object silently drops the site-wide card image unless it spreads
+  // it back in. Both routes must still carry a full large-summary card.
+  for (const [name, route] of [
+    ['home', home],
+    ['resume', resume],
+  ]) {
+    expect(route.meta['og:image'], name).toBe(
+      'https://www.divyang.dev/og-image.png',
+    )
+    expect(route.meta['og:image:width'], name).toBe('1200')
+    expect(route.meta['og:image:height'], name).toBe('630')
+    expect(route.meta['og:site_name'], name).toBe('Divyang Chauhan')
+    expect(route.meta['twitter:card'], name).toBe('summary_large_image')
+    expect(route.meta['twitter:image'], name).toBe(
+      'https://www.divyang.dev/og-image.png',
+    )
+  }
+
+  // The résumé body has to be in the HTML too, not just its metadata — it is
+  // the page a recruiter is most likely to be sent a link to.
+  const resumeHtml = await (await request.get('/resume')).text()
+  expect(resumeHtml).toContain('PROFESSIONAL EXPERIENCE')
+  expect(resumeHtml).toContain('Kleros, Remote')
 })
 
 test('fonts are self-hosted, with no request to a font CDN', async ({
