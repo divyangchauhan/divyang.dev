@@ -103,7 +103,10 @@ export default function Contact() {
           >
             <Link
               to="/resume"
-              style={{ ...rowStyle, borderBottom: `1px solid ${color.ruleSoft}` }}
+              style={{
+                ...rowStyle,
+                borderBottom: `1px solid ${color.ruleSoft}`,
+              }}
             >
               <span style={{ fontWeight: 600 }}>Résumé</span>
               <span style={{ ...valueStyle, color: color.accent }}>

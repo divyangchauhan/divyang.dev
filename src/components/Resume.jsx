@@ -129,12 +129,17 @@ export default function Resume() {
           gap: 16,
         }}
       >
-        <Link to="/" style={{ fontFamily: mono, fontSize: 13, color: color.muted }}>
+        <Link
+          to="/"
+          style={{ fontFamily: mono, fontSize: 13, color: color.muted }}
+        >
           ← back to site
         </Link>
-        <button
-          type="button"
-          onClick={() => window.print()}
+        {/* The maintained PDF, rather than window.print() — a recruiter gets the
+            typeset original instead of whatever their print dialog produces. */}
+        <a
+          href="/assets/Divyang-Chauhan-Resume.pdf"
+          download
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -144,13 +149,12 @@ export default function Resume() {
             fontWeight: 600,
             fontSize: 14,
             padding: '11px 20px',
-            border: 'none',
             borderRadius: 8,
-            cursor: 'pointer',
+            textDecoration: 'none',
           }}
         >
           ↓ Download PDF
-        </button>
+        </a>
       </div>
 
       <article className="bp-sheet">
@@ -183,7 +187,10 @@ export default function Resume() {
             }}
           >
             {contactLinks.map(({ label, href }, index) => (
-              <span key={label} style={{ display: 'inline-flex', gap: '6px 10px' }}>
+              <span
+                key={label}
+                style={{ display: 'inline-flex', gap: '6px 10px' }}
+              >
                 <a href={href}>{label}</a>
                 {index < contactLinks.length - 1 ? (
                   <span style={{ color: color.ruleAccent }}>•</span>
@@ -232,7 +239,9 @@ export default function Resume() {
               gap: 16,
             }}
           >
-            <span style={{ fontSize: 16, fontWeight: 700 }}>Kleros, Remote</span>
+            <span style={{ fontSize: 16, fontWeight: 700 }}>
+              Kleros, Remote
+            </span>
             <span style={dateStyle}>Feb 2024 – May 2026</span>
           </div>
           <div

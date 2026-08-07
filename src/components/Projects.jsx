@@ -49,13 +49,17 @@ function CaseStudy({ study }) {
       }}
     >
       <div>
-        <div style={{ ...kicker('.12em'), color: color.accent, marginBottom: 12 }}>
+        <div
+          style={{ ...kicker('.12em'), color: color.accent, marginBottom: 12 }}
+        >
           {study.heading}
         </div>
         <div className="bp-prose">{study.body}</div>
       </div>
       <div>
-        <div style={{ ...kicker('.12em'), color: color.accent, marginBottom: 12 }}>
+        <div
+          style={{ ...kicker('.12em'), color: color.accent, marginBottom: 12 }}
+        >
           {study.asideHeading}
         </div>
         {study.stack ? (

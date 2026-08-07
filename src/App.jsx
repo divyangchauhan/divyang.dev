@@ -15,7 +15,7 @@ function scrollToHash() {
     return
   }
 
-  let targetId = hash
+  let targetId
 
   try {
     targetId = decodeURIComponent(hash)
@@ -32,7 +32,8 @@ function scrollToHash() {
     }
 
     const targetTop = target.getBoundingClientRect().top + window.scrollY
-    const targetPaddingTop = parseFloat(window.getComputedStyle(target).paddingTop) || 0
+    const targetPaddingTop =
+      parseFloat(window.getComputedStyle(target).paddingTop) || 0
     const top = Math.max(targetTop + targetPaddingTop - hashSectionTopGap, 0)
 
     window.scrollTo({ top, left: 0 })

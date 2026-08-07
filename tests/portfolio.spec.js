@@ -174,15 +174,66 @@ test('copy, anchors, outbound links, and metadata are correct', async ({
     'https://www.divyang.dev/',
   )
 
-  for (const icon of [
+  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute(
+    'content',
+    '#f6f7fb',
+  )
+})
+
+test('icons, manifest, and crawler files are served and consistent', async ({
+  page,
+}) => {
+  await loadPortfolio(page)
+
+  // Every icon the head and the manifest promise must actually exist —
+  // regenerating the mark has broken these before.
+  const assets = [
     '/favicon.svg',
     '/favicon-32.png',
     '/favicon.ico',
     '/apple-touch-icon.png',
-  ]) {
-    const response = await page.request.get(icon)
-    expect(response.status(), icon).toBe(200)
+    '/icon-192.png',
+    '/icon-512.png',
+    '/icon-maskable-512.png',
+    '/site.webmanifest',
+    '/robots.txt',
+    '/sitemap.xml',
+    '/og-image.png',
+    '/assets/Divyang-Chauhan-Resume.pdf',
+  ]
+
+  for (const asset of assets) {
+    const response = await page.request.get(asset)
+    expect(response.status(), asset).toBe(200)
   }
+
+  // The favicon must carry its letter as a <path>: a favicon cannot fetch a
+  // webfont, so a <text> element would render in a different face per platform.
+  const favicon = await (await page.request.get('/favicon.svg')).text()
+  // Comments are stripped first — favicon.svg documents this very rule, and the
+  // note itself mentions <text>.
+  const faviconMarkup = favicon.replace(/<!--[\s\S]*?-->/g, '')
+  expect(faviconMarkup).toContain('<path')
+  expect(faviconMarkup).not.toContain('<text')
+
+  const manifest = await (await page.request.get('/site.webmanifest')).json()
+  expect(manifest.start_url).toBe('/')
+  expect(manifest.theme_color).toBe('#f6f7fb')
+  expect(manifest.icons.some((icon) => icon.purpose === 'maskable')).toBe(true)
+
+  for (const icon of manifest.icons) {
+    const response = await page.request.get(icon.src)
+    expect(response.status(), icon.src).toBe(200)
+  }
+
+  // Sitemap and robots have to agree with the routes the app actually serves.
+  const sitemap = await (await page.request.get('/sitemap.xml')).text()
+  expect(sitemap).toContain('<loc>https://www.divyang.dev/</loc>')
+  expect(sitemap).toContain('<loc>https://www.divyang.dev/resume</loc>')
+  expect(sitemap).toMatch(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/)
+
+  const robots = await (await page.request.get('/robots.txt')).text()
+  expect(robots).toContain('Sitemap: https://www.divyang.dev/sitemap.xml')
 })
 
 test('résumé route renders, links back, and strips chrome for print', async ({
@@ -199,6 +250,17 @@ test('résumé route renders, links back, and strips chrome for print', async ({
   ).toBeVisible()
   await expect(page.getByText('PROFESSIONAL EXPERIENCE')).toBeVisible()
   await expect(page.getByText('Kleros, Remote')).toBeVisible()
+
+  // "Download PDF" serves the maintained file, not a window.print() dialog.
+  const download = page.getByRole('link', { name: '↓ Download PDF' })
+  await expect(download).toHaveAttribute(
+    'href',
+    '/assets/Divyang-Chauhan-Resume.pdf',
+  )
+  await expect(download).toHaveAttribute('download', '')
+  expect(
+    (await page.request.get('/assets/Divyang-Chauhan-Resume.pdf')).status(),
+  ).toBe(200)
 
   const toolbar = page.locator('.bp-no-print')
   await expect(toolbar).toBeVisible()
