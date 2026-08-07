@@ -1,236 +1,361 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { mono, sans, color } from '../theme'
+import { color, mono } from '../theme'
 
-function SectionLabel({ children }) {
+const contactLinks = [
+  { label: 'divyang@divyang.dev', href: 'mailto:divyang@divyang.dev' },
+  { label: 'divyang.dev', href: 'https://divyang.dev' },
+  {
+    label: 'github.com/divyangchauhan',
+    href: 'https://github.com/divyangchauhan',
+  },
+  {
+    label: 'linkedin.com/in/divyangchauhan',
+    href: 'https://linkedin.com/in/divyangchauhan',
+  },
+]
+
+const listStyle = {
+  margin: '7px 0 0',
+  paddingLeft: 18,
+  fontSize: 14,
+  lineHeight: 1.55,
+  color: color.bodyAlt,
+}
+
+const dateStyle = {
+  fontFamily: mono,
+  fontSize: 12,
+  color: color.faint,
+  whiteSpace: 'nowrap',
+}
+
+function SectionLabel({ children, gap = 12 }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 30 }}>
-      <span style={{ fontFamily: mono, fontSize: 12, letterSpacing: '.22em', color: color.amber }}>
-        {children}
-      </span>
-      <span style={{ flex: 1, height: 1, background: 'linear-gradient(90deg,rgba(242,180,65,.35),transparent)' }} />
+    <div
+      style={{
+        fontFamily: mono,
+        fontSize: 11.5,
+        letterSpacing: '.14em',
+        color: color.accent,
+        borderBottom: `1px solid ${color.rule}`,
+        paddingBottom: 6,
+        margin: `24px 0 ${gap}px`,
+      }}
+    >
+      {children}
     </div>
   )
 }
 
-function SkillPill({ children }) {
+function Bullets({ items }) {
   return (
-    <span style={{ fontFamily: mono, fontSize: 12.5, color: '#cdd3dd', border: '1px solid rgba(255,255,255,.12)', padding: '6px 11px', borderRadius: 7 }}>
-      {children}
-    </span>
+    <ul style={listStyle}>
+      {items.map((item, index) => (
+        <li
+          key={item}
+          style={{ marginBottom: index === items.length - 1 ? 0 : 5 }}
+        >
+          {item}
+        </li>
+      ))}
+    </ul>
   )
 }
 
-function BulletItem({ children }) {
-  return (
-    <li style={{ display: 'flex', gap: 11, fontSize: 15, lineHeight: 1.62, color: '#c1c8d2' }}>
-      <span style={{ color: color.amber, flexShrink: 0 }}>▸</span>
-      <span>{children}</span>
-    </li>
-  )
-}
+const projects = [
+  {
+    title: 'Pramana: Multi-agent smart-contract vulnerability scanner',
+    bullets: [
+      'Built provider-neutral finder, verifier and reporter agents with context isolation and executable PoC verification',
+      'Built an eval harness covering 14 labeled vulnerabilities in 11 classes plus a patched negative control, with baselines, cost/latency tracking, CI and 294 offline tests',
+      'Benchmarked the finder/verifier core across Claude, GPT, and Kimi; best runs found 13/14 labeled bugs with 0 confirmed false positives on the patched control',
+    ],
+  },
+  {
+    title: 'ClinchCV: Full-stack AI resume analysis and job targeting',
+    bullets: [
+      'Built a full-stack AI product that parses resume PDFs and uses structured, rubric-based LLM evaluation to generate scoring, ATS checks, job-fit analysis, and contextual rewrites',
+      'Enforced structured outputs with schema validation, retry-on-invalid, and model fallback; handles multi-column and table-based PDF layouts',
+    ],
+  },
+]
+
+const skills = [
+  [
+    'AI Systems:',
+    'OpenAI, Anthropic, agent orchestration, tool calling, structured outputs, context isolation, evals',
+  ],
+  [
+    'Languages & Databases:',
+    'Python, TypeScript, JavaScript, Solidity, SQL, PostgreSQL, MySQL, MongoDB',
+  ],
+  [
+    'Frameworks:',
+    'Node.js, NestJS, Django REST Framework, Pydantic, GraphQL, React, Next.js, viem, Foundry, Slither',
+  ],
+  [
+    'Infrastructure & Messaging:',
+    'AWS, Docker, Terraform, Celery, Kafka, RabbitMQ',
+  ],
+]
+
+const education = [
+  ['Offensive Security Certified Professional, OffSec', '2017'],
+  [
+    'IIT Bombay, coursework in B.Tech Metallurgical Engineering & Materials Science',
+    '2016',
+  ],
+]
 
 export default function Resume() {
   useEffect(() => {
-    const els = document.querySelectorAll('[data-reveal]')
-    els.forEach((el) => {
-      const d = parseFloat(el.getAttribute('data-reveal-delay') || '0')
-      el.style.animation = `rz-riseT .7s cubic-bezier(.2,.7,.2,1) ${d}s both`
-    })
+    document.body.classList.add('bp-resume-page')
+
+    return () => document.body.classList.remove('bp-resume-page')
   }, [])
 
   return (
-    <div
-      id="dc-resume"
-      style={{ background: color.bg, color: color.text, fontFamily: sans, minHeight: '100vh', position: 'relative', overflow: 'hidden' }}
-    >
-      {/* ambient grid */}
-      <div style={{ position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 0, backgroundImage: 'linear-gradient(rgba(130,150,180,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(130,150,180,.045) 1px,transparent 1px)', backgroundSize: '42px 42px' }} />
-      <div style={{ position: 'fixed', top: '-10%', right: '-5%', width: '55%', height: '60%', pointerEvents: 'none', zIndex: 0, background: 'radial-gradient(circle,rgba(242,180,65,.07),transparent 62%)' }} />
-
-      {/* NAV */}
-      <nav
-        className="rz-pad"
-        style={{ position: 'sticky', top: 0, zIndex: 50, display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 40px', background: 'rgba(10,12,16,.72)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(255,255,255,.06)' }}
+    <div style={{ color: color.ink, padding: '28px 20px 60px' }}>
+      <div
+        className="bp-no-print"
+        style={{
+          width: 816,
+          maxWidth: '100%',
+          margin: '0 auto 20px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          gap: 16,
+        }}
       >
-        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}>
-          <span style={{ display: 'inline-grid', placeItems: 'center', width: 32, height: 32, border: '1px solid #f2b441', color: color.amber, borderRadius: 7, fontFamily: mono, fontWeight: 600, fontSize: 13 }}>DC</span>
-          <span className="rz-brand-tag" style={{ fontFamily: mono, fontSize: 12, letterSpacing: '.16em', textTransform: 'uppercase', color: color.dim }}>full stack engineer</span>
+        <Link to="/" style={{ fontFamily: mono, fontSize: 13, color: color.muted }}>
+          ← back to site
         </Link>
-        <div className="rz-navlinks" style={{ display: 'flex', alignItems: 'center', gap: 30, fontFamily: mono, fontSize: 13 }}>
-          <Link className="dc-link" to="/" style={{ color: '#aab2c0', textDecoration: 'none' }}>← Home</Link>
-          <a
-            className="dc-btn-fill"
-            href="/assets/Divyang-Chauhan-Resume.pdf"
-            download
-            style={{ color: '#0a0c10', background: color.amber, textDecoration: 'none', padding: '9px 16px', borderRadius: 7, fontWeight: 600 }}
-          >
-            Download PDF ↓
-          </a>
-        </div>
-      </nav>
+        <button
+          type="button"
+          onClick={() => window.print()}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            background: color.accent,
+            color: '#fff',
+            fontWeight: 600,
+            fontSize: 14,
+            padding: '11px 20px',
+            border: 'none',
+            borderRadius: 8,
+            cursor: 'pointer',
+          }}
+        >
+          ↓ Download PDF
+        </button>
+      </div>
 
-      {/* HEADER */}
-      <header
-        className="rz-head rz-pad"
-        style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: '1fr auto', gap: 40, alignItems: 'end', maxWidth: 980, margin: '0 auto', padding: '64px 40px 14px' }}
-      >
-        <div data-reveal>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontFamily: mono, fontSize: 12, letterSpacing: '.2em', color: color.amber, marginBottom: 22 }}>
-            <span style={{ width: 7, height: 7, borderRadius: '50%', background: color.amber, animation: 'rz-blink 1.8s ease-in-out infinite' }} />
-            RÉSUMÉ
-          </div>
-          <h1 className="rz-name" style={{ fontFamily: sans, fontWeight: 700, fontSize: 62, lineHeight: 1.0, letterSpacing: '-.025em', margin: '0 0 22px', color: color.heading }}>
+      <article className="bp-sheet">
+        <header
+          style={{
+            textAlign: 'center',
+            borderBottom: `2px solid ${color.ink}`,
+            paddingBottom: 16,
+          }}
+        >
+          <h1
+            style={{
+              fontSize: 34,
+              fontWeight: 700,
+              margin: '0 0 8px',
+              letterSpacing: '-.02em',
+            }}
+          >
             Divyang Chauhan
           </h1>
-          <div className="rz-contactline" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 14, fontFamily: mono, fontSize: 13 }}>
-            <a className="dc-link" href="mailto:divyang@divyang.dev" style={{ color: '#cdd3dd', textDecoration: 'none' }}>divyang@divyang.dev</a>
-            <span style={{ color: '#3a4150' }}>·</span>
-            <a className="dc-link" href="https://github.com/divyangchauhan" target="_blank" rel="noopener" style={{ color: '#cdd3dd', textDecoration: 'none' }}>github.com/divyangchauhan ↗</a>
-            <span style={{ color: '#3a4150' }}>·</span>
-            <a className="dc-link" href="https://www.linkedin.com/in/divyangchauhan" target="_blank" rel="noopener" style={{ color: '#cdd3dd', textDecoration: 'none' }}>linkedin.com/in/divyangchauhan ↗</a>
-          </div>
-        </div>
-      </header>
-
-      {/* SUMMARY */}
-      <section className="rz-pad" style={{ position: 'relative', zIndex: 1, maxWidth: 980, margin: '0 auto', padding: '20px 40px 8px' }}>
-        <div data-reveal style={{ border: '1px solid rgba(255,255,255,.08)', borderRadius: 14, background: 'rgba(14,17,22,.5)', padding: '26px 30px' }}>
-          <p style={{ fontSize: 17, lineHeight: 1.72, color: '#d4d9e1', margin: 0 }}>
-            Senior Full Stack engineer with 5+ years building multi-tenant platforms, event-driven systems, and EVM infrastructure. Led a 9-person team to ship a vulnerability-triage and threat-surface-management platform for banks at NST Cyber. Led a backend service split and architected multi-chain event-ingestion systems at Kleros. <strong style={{ color: color.amber, fontWeight: 600 }}>OSCP certified</strong>.
-          </p>
-        </div>
-      </section>
-
-      {/* EXPERIENCE */}
-      <section className="rz-pad" style={{ position: 'relative', zIndex: 1, maxWidth: 980, margin: '0 auto', padding: '46px 40px 10px' }}>
-        <div data-reveal><SectionLabel>// EXPERIENCE</SectionLabel></div>
-
-        {/* Kleros */}
-        <article data-reveal className="rz-exp-row" style={{ display: 'grid', gridTemplateColumns: '230px 1fr', gap: 30, marginBottom: 34 }}>
-          <div className="rz-exp-meta">
-            <div style={{ fontFamily: sans, fontWeight: 700, fontSize: 21, color: color.heading, marginBottom: 4 }}>Kleros</div>
-            <div style={{ fontFamily: mono, fontSize: 12.5, color: color.muted, marginBottom: 10 }}>Remote</div>
-            <div style={{ fontFamily: mono, fontSize: 12, color: color.amber }}>Feb 2024 – May 2026</div>
-          </div>
-          <div style={{ borderLeft: '1px solid rgba(255,255,255,.1)', paddingLeft: 26, position: 'relative' }}>
-            <span style={{ position: 'absolute', left: -5, top: 6, width: 9, height: 9, borderRadius: '50%', background: color.amber }} />
-            <div style={{ fontFamily: mono, fontSize: 14.5, color: color.text, fontWeight: 500, marginBottom: 16 }}>Full Stack Engineer</div>
-            <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 13 }}>
-              <BulletItem>Split a monolithic NestJS backend into separate API and bot services after surfacing conflicting scaling needs. Set up the monorepo and production data migration preserving user data.</BulletItem>
-              <BulletItem>Implemented Kleros v1's multi-network automation bot for dispute progression and juror staking; used viem for transaction simulation and batched calls to reduce gas usage.</BulletItem>
-              <BulletItem>Architected a NestJS EVM event ingestion service currently running on 3 production chains, with runtime-configurable chain and contract definitions; emits events for async downstream processing.</BulletItem>
-              <BulletItem>Found 4 medium-severity issues in the Kleros v2 arbitration contract through manual analysis. Applied Halmos formal verification and Echidna stateful fuzzing during the review.</BulletItem>
-            </ul>
-          </div>
-        </article>
-
-        {/* NST Cyber */}
-        <article data-reveal className="rz-exp-row" style={{ display: 'grid', gridTemplateColumns: '230px 1fr', gap: 30, marginBottom: 10 }}>
-          <div className="rz-exp-meta">
-            <div style={{ fontFamily: sans, fontWeight: 700, fontSize: 21, color: color.heading, marginBottom: 4 }}>NST Cyber</div>
-            <div style={{ fontFamily: mono, fontSize: 12.5, color: color.muted, marginBottom: 10 }}>Remote</div>
-            <div style={{ fontFamily: mono, fontSize: 12, color: color.amber }}>Mar 2021 – Feb 2024</div>
-          </div>
-          <div style={{ borderLeft: '1px solid rgba(255,255,255,.1)', paddingLeft: 26, position: 'relative' }}>
-            <span style={{ position: 'absolute', left: -5, top: 6, width: 9, height: 9, borderRadius: '50%', background: color.amber }} />
-            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
-              <div style={{ fontFamily: mono, fontSize: 14.5, color: color.text, fontWeight: 500 }}>Software Engineer · Team Lead</div>
-              <div style={{ fontFamily: mono, fontSize: 12, color: color.faint }}>Jan 2023 – Feb 2024</div>
-            </div>
-            <ul style={{ margin: '0 0 24px', padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 13 }}>
-              <BulletItem>Led a cross-functional team of 9 building Assure v2, a multi-tenant vulnerability-triage and threat-surface management platform for multinational banks.</BulletItem>
-              <BulletItem>Owned design and development of Assure v2; selected TypeScript, NestJS, Angular, and Terraform, wrote ~70% of backend code, shipped in 6 months.</BulletItem>
-              <BulletItem>Moved the product off OutSystems, eliminating ~$200K/year in platform costs while enabling 3-level tenancy, data residency, isolation modes, and white-labeling.</BulletItem>
-              <BulletItem>Architected Assure v2's authorization model using CASL.js: 5-role hierarchical RBAC plus ABAC (Attribute-Based Access Control), tenant isolation, and per-user project access.</BulletItem>
-              <BulletItem>Wrote Terraform for Assure v2's core AWS infrastructure, reducing deploys from ~2 hours to 10–15 minutes; introduced Cypress E2E tests, reducing full regression from hours to under 30 minutes.</BulletItem>
-              <BulletItem>Designed and implemented a multi-database connection-pool utility for Assure v2, reusing connections across logical tenant databases and physical country-level databases to eliminate per-request connection setup.</BulletItem>
-            </ul>
-            <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
-              <div style={{ fontFamily: mono, fontSize: 14.5, color: color.text, fontWeight: 500 }}>Software Engineer</div>
-              <div style={{ fontFamily: mono, fontSize: 12, color: color.faint }}>Mar 2021 – Jan 2023</div>
-            </div>
-            <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 13 }}>
-              <BulletItem>Built and took Assure v1 to production in OutSystems in ~3 months, writing most of the production code; the product later outgrew OutSystems tenancy and data-residency limits, triggering the v2 rebuild.</BulletItem>
-              <BulletItem>Developed Tigress's Django REST Framework backend from scratch; owned database design, authored most of the core APIs, and created a serializer abstraction adopted across most endpoints.</BulletItem>
-              <BulletItem>Resolved distributed-task bottleneck in Tigress scanning engine by restructuring Celery dispatch for cross-instance execution, reducing scan time by 50%.</BulletItem>
-              <BulletItem>Created an internal asset-discovery and vulnerability-scanning tool in Bash that chained security tools and generated client-ready reports. Tool's orchestration model later informed Tigress's scanning-engine design.</BulletItem>
-            </ul>
-          </div>
-        </article>
-      </section>
-
-      {/* EDUCATION & CERTIFICATES */}
-      <section className="rz-pad" style={{ position: 'relative', zIndex: 1, maxWidth: 980, margin: '0 auto', padding: '46px 40px 10px' }}>
-        <div data-reveal><SectionLabel>// EDUCATION &amp; CERTIFICATES</SectionLabel></div>
-        <div data-reveal className="rz-edu-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-          <div style={{ border: '1px solid rgba(242,180,65,.22)', borderRadius: 13, background: 'rgba(242,180,65,.04)', padding: '22px 24px' }}>
-            <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', color: color.amber, marginBottom: 12 }}>Certificate</div>
-            <div style={{ fontSize: 17, fontWeight: 600, color: color.heading, marginBottom: 6, lineHeight: 1.3 }}>Offensive Security Certified Professional (OSCP)</div>
-            <div style={{ fontFamily: mono, fontSize: 13, color: color.muted }}>OffSec · Feb 2017</div>
-          </div>
-          <div style={{ border: '1px solid rgba(255,255,255,.08)', borderRadius: 13, background: 'rgba(14,17,22,.5)', padding: '22px 24px' }}>
-            <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '.14em', textTransform: 'uppercase', color: color.dim, marginBottom: 12 }}>Education</div>
-            <div style={{ fontSize: 17, fontWeight: 600, color: color.heading, marginBottom: 6, lineHeight: 1.3 }}>IIT Bombay, India</div>
-            <div style={{ fontSize: 14, color: '#aeb5c0', lineHeight: 1.55, marginBottom: 6 }}>Coursework in Metallurgical Engineering &amp; Material Science</div>
-            <div style={{ fontFamily: mono, fontSize: 13, color: color.muted }}>Jul 2011 – Apr 2016</div>
-          </div>
-        </div>
-      </section>
-
-      {/* SKILLS */}
-      <section className="rz-pad" style={{ position: 'relative', zIndex: 1, maxWidth: 980, margin: '0 auto', padding: '46px 40px 20px' }}>
-        <div data-reveal><SectionLabel>// SKILLS</SectionLabel></div>
-        <div data-reveal style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-          <div className="rz-skill-row" style={{ display: 'grid', gridTemplateColumns: '230px 1fr', gap: 20, alignItems: 'start', border: '1px solid rgba(255,255,255,.08)', borderRadius: 13, background: 'rgba(14,17,22,.45)', padding: '20px 22px' }}>
-            <div style={{ fontFamily: mono, fontSize: 11.5, letterSpacing: '.1em', textTransform: 'uppercase', color: color.amber, paddingTop: 5 }}>Languages &amp; Databases</div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-              {['TypeScript', 'Python', 'JavaScript', 'Solidity', 'PostgreSQL', 'MongoDB', 'MySQL'].map(s => <SkillPill key={s}>{s}</SkillPill>)}
-            </div>
-          </div>
-          <div className="rz-skill-row" style={{ display: 'grid', gridTemplateColumns: '230px 1fr', gap: 20, alignItems: 'start', border: '1px solid rgba(255,255,255,.08)', borderRadius: 13, background: 'rgba(14,17,22,.45)', padding: '20px 22px' }}>
-            <div style={{ fontFamily: mono, fontSize: 11.5, letterSpacing: '.1em', textTransform: 'uppercase', color: color.amber, paddingTop: 5 }}>Frameworks</div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-              {['NestJS', 'Django REST Framework', 'Express', 'Angular', 'React', 'Next.js', 'GraphQL', 'Viem', 'Ethers.js'].map(s => <SkillPill key={s}>{s}</SkillPill>)}
-            </div>
-          </div>
-          <div className="rz-skill-row" style={{ display: 'grid', gridTemplateColumns: '230px 1fr', gap: 20, alignItems: 'start', border: '1px solid rgba(255,255,255,.08)', borderRadius: 13, background: 'rgba(14,17,22,.45)', padding: '20px 22px' }}>
-            <div style={{ fontFamily: mono, fontSize: 11.5, letterSpacing: '.1em', textTransform: 'uppercase', color: color.amber, paddingTop: 5 }}>Infrastructure &amp; Platform</div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-              {['AWS (Lambda · ECS · S3 · RDS)', 'Docker', 'Terraform', 'Kafka', 'Celery', 'OutSystems'].map(s => <SkillPill key={s}>{s}</SkillPill>)}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="rz-pad" style={{ position: 'relative', zIndex: 1, maxWidth: 980, margin: '0 auto', padding: '34px 40px 10px' }}>
-        <div data-reveal style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 18, border: '1px solid rgba(255,255,255,.1)', borderRadius: 16, background: 'linear-gradient(160deg,rgba(20,24,31,.8),rgba(10,12,16,.5))', padding: '26px 30px', position: 'relative', overflow: 'hidden' }}>
-          <div className="pf-glow" style={{ position: 'absolute', top: '-40%', right: '-4%', width: '40%', height: '180%', background: 'radial-gradient(circle,rgba(242,180,65,.1),transparent 64%)', pointerEvents: 'none' }} />
-          <div style={{ position: 'relative' }}>
-            <div style={{ fontSize: 18, fontWeight: 600, color: color.heading, marginBottom: 4 }}>Want a copy to keep?</div>
-            <div style={{ fontFamily: mono, fontSize: 13, color: color.muted }}>Grab the PDF version of this résumé.</div>
-          </div>
-          <a
-            className="dc-btn-fill"
-            href="/assets/Divyang-Chauhan-Resume.pdf"
-            download
-            style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', gap: 12, fontFamily: mono, fontSize: 13.5, fontWeight: 600, color: '#0a0c10', background: color.amber, padding: '14px 22px', borderRadius: 9, textDecoration: 'none' }}
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+              gap: '6px 10px',
+              fontFamily: mono,
+              fontSize: 12,
+              color: color.body,
+            }}
           >
-            <span style={{ display: 'inline-grid', placeItems: 'center', width: 18, height: 18, border: '1.6px solid #0a0c10', borderRadius: 5, fontSize: 11 }}>↓</span>
-            Download PDF
-          </a>
-        </div>
-      </section>
+            {contactLinks.map(({ label, href }, index) => (
+              <span key={label} style={{ display: 'inline-flex', gap: '6px 10px' }}>
+                <a href={href}>{label}</a>
+                {index < contactLinks.length - 1 ? (
+                  <span style={{ color: color.ruleAccent }}>•</span>
+                ) : null}
+              </span>
+            ))}
+          </div>
+        </header>
 
-      {/* FOOTER */}
-      <footer
-        className="rz-pad"
-        style={{ position: 'relative', zIndex: 1, maxWidth: 980, margin: '24px auto 0', padding: '30px 40px 50px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 14, borderTop: '1px solid rgba(255,255,255,.06)' }}
-      >
-        <div style={{ fontFamily: mono, fontSize: 12.5, color: color.faint }}>© 2026 Divyang Chauhan · divyang.dev</div>
-        <Link className="dc-link" to="/" style={{ fontFamily: mono, fontSize: 12.5, color: color.dim, textDecoration: 'none' }}>← Back to portfolio</Link>
-      </footer>
+        <SectionLabel>SUMMARY</SectionLabel>
+        <p
+          style={{
+            fontSize: 14,
+            lineHeight: 1.6,
+            color: color.bodyAlt,
+            margin: 0,
+          }}
+        >
+          Backend &amp; Applied AI Engineer with 5+ years building event-driven
+          services, distributed systems and multi-tenant platforms. Built
+          provider-neutral, tool-using agent systems with context isolation,
+          executable verification, and reproducible evals. Led a 9-person team
+          shipping security software for multinational banks. OSCP certified.
+        </p>
+
+        <SectionLabel gap={14}>PROJECTS</SectionLabel>
+        {projects.map(({ title, bullets }, index) => (
+          <div
+            className="bp-avoid-break"
+            key={title}
+            style={{ marginBottom: index === projects.length - 1 ? 0 : 16 }}
+          >
+            <div style={{ fontSize: 15.5, fontWeight: 700 }}>{title}</div>
+            <Bullets items={bullets} />
+          </div>
+        ))}
+
+        <SectionLabel gap={14}>PROFESSIONAL EXPERIENCE</SectionLabel>
+
+        <div className="bp-avoid-break" style={{ marginBottom: 18 }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'baseline',
+              gap: 16,
+            }}
+          >
+            <span style={{ fontSize: 16, fontWeight: 700 }}>Kleros, Remote</span>
+            <span style={dateStyle}>Feb 2024 – May 2026</span>
+          </div>
+          <div
+            style={{
+              fontSize: 14,
+              fontWeight: 600,
+              color: color.accent,
+              marginTop: 2,
+            }}
+          >
+            Backend Engineer
+          </div>
+          <Bullets
+            items={[
+              'Decomposed a monolithic NestJS backend into independently scalable API and automation services; established the monorepo and migrated 57K+ blockchain events across databases with ~1 minute of downtime',
+              'Architected a NestJS EVM event-ingestion service processing events across Ethereum, Gnosis, and Arbitrum for 23+ downstream consumers, including notification workflows serving 700+ active jurors',
+              'Built multi-network automation for dispute progression and juror staking; used transaction simulation and batched calls to improve execution reliability and reduce gas usage',
+            ]}
+          />
+        </div>
+
+        <div className="bp-avoid-break" style={{ marginBottom: 16 }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'baseline',
+              gap: 16,
+            }}
+          >
+            <span style={{ fontSize: 16, fontWeight: 700 }}>
+              NST Cyber, Remote
+            </span>
+            <span style={dateStyle}>Jan 2023 – Feb 2024</span>
+          </div>
+          <div
+            style={{
+              fontSize: 14,
+              fontWeight: 600,
+              color: color.accent,
+              marginTop: 2,
+            }}
+          >
+            Software Engineer Team Lead
+          </div>
+          <Bullets
+            items={[
+              'Led a cross-functional team of 9 building Assure v2, a multi-tenant vulnerability-triage and threat-surface management platform sold directly to multinational banks and white-labeled by cybersecurity resellers',
+              'Built an AI-assisted APT attribution workflow using the OpenAI API to map threat-surface to threat actors',
+              'Replatformed Assure from OutSystems, eliminating ~$200K/year in platform costs while enabling 3-level tenancy, data isolation modes, and white-labeling; authored ~70% of the backend and shipped in six months',
+              "Wrote Terraform for Assure v2's core AWS infrastructure, reducing deployment time from ~2 hours to 10–15 minutes; introduced Cypress E2E tests, reducing full regression from hours to under 30 minutes",
+            ]}
+          />
+        </div>
+
+        <div className="bp-avoid-break">
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'baseline',
+              gap: 16,
+            }}
+          >
+            <span
+              style={{ fontSize: 14, fontWeight: 600, color: color.accent }}
+            >
+              Software Engineer
+            </span>
+            <span style={dateStyle}>Mar 2021 – Jan 2023</span>
+          </div>
+          <Bullets
+            items={[
+              "Developed Tigress's Django REST Framework backend from scratch; designed a MySQL schema supporting 10M+ records and created a serializer abstraction that reduced new endpoint development time by 60%",
+              "Eliminated distributed-task bottleneck in Tigress's scanning engine by architecting cross-instance Celery dispatch, reducing scan time by 75% and scaling the platform from 10 to 100 daily scans without infrastructure changes",
+            ]}
+          />
+        </div>
+
+        <SectionLabel>CERTIFICATION &amp; EDUCATION</SectionLabel>
+        <div
+          className="bp-avoid-break"
+          style={{
+            display: 'grid',
+            gap: 6,
+            fontSize: 14,
+            lineHeight: 1.5,
+            color: color.bodyAlt,
+          }}
+        >
+          {education.map(([label, year]) => (
+            <div
+              key={label}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                gap: 16,
+              }}
+            >
+              <span>{label}</span>
+              <span style={dateStyle}>{year}</span>
+            </div>
+          ))}
+        </div>
+
+        <SectionLabel>SKILLS</SectionLabel>
+        <div
+          className="bp-avoid-break"
+          style={{
+            display: 'grid',
+            gap: 6,
+            fontSize: 14,
+            lineHeight: 1.55,
+            color: color.bodyAlt,
+          }}
+        >
+          {skills.map(([label, body]) => (
+            <div key={label}>
+              <strong style={{ color: color.ink }}>{label}</strong> {body}
+            </div>
+          ))}
+        </div>
+      </article>
     </div>
   )
 }

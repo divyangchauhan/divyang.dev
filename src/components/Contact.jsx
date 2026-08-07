@@ -1,150 +1,145 @@
-import { mono, sans, reveal } from '../theme'
+import { Link } from 'react-router-dom'
+import { color, kicker, mono } from '../theme'
 
-const ContactRow = ({ href, label, value, download, target, fill }) => (
-  <a
-    className={fill ? 'dc-btn-fill' : 'dc-row'}
-    href={href}
-    {...(download ? { download: true } : {})}
-    {...(target ? { target, rel: 'noopener' } : {})}
-    style={{
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      gap: 16,
-      textDecoration: 'none',
-      border: fill ? '1px solid #f2b441' : '1px solid rgba(255,255,255,.12)',
-      borderRadius: 11,
-      background: fill ? '#f2b441' : 'rgba(14,17,22,.5)',
-      padding: '15px 18px',
-    }}
-  >
-    <span
-      style={{
-        fontFamily: mono,
-        fontSize: 11,
-        letterSpacing: '.12em',
-        textTransform: 'uppercase',
-        color: fill ? '#0a0c10' : '#8a93a3',
-        fontWeight: fill ? 600 : 400,
-      }}
-    >
-      {label}
-    </span>
-    <span
-      style={{
-        fontFamily: mono,
-        fontSize: 13.5,
-        color: fill ? '#0a0c10' : '#e6e9ef',
-        fontWeight: fill ? 600 : 400,
-      }}
-    >
-      {value}
-    </span>
-  </a>
-)
+const rowStyle = {
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  gap: 16,
+  padding: '16px 0',
+  color: color.ink,
+}
+
+const valueStyle = { fontFamily: mono, fontSize: 12, color: color.faint }
+
+const links = [
+  {
+    label: 'GitHub',
+    value: 'github.com/divyangchauhan',
+    href: 'https://github.com/divyangchauhan',
+  },
+  {
+    label: 'LinkedIn',
+    value: '/in/divyangchauhan',
+    href: 'https://linkedin.com/in/divyangchauhan',
+  },
+  {
+    label: 'Twitter / X',
+    value: '@divyangjchauhan',
+    href: 'https://x.com/divyangjchauhan',
+  },
+]
 
 export default function Contact() {
   return (
     <section
       id="contact"
-      className="pf-pad"
-      style={{
-        position: 'relative',
-        zIndex: 1,
-        maxWidth: 1180,
-        margin: '0 auto',
-        padding: '80px 40px 50px',
-        scrollMarginTop: 84,
-      }}
+      className="bp-shell bp-pad"
+      style={{ padding: '64px 40px 88px' }}
     >
       <div
-        className="pf-contact-card"
         style={{
-          ...reveal(),
-          border: '1px solid rgba(255,255,255,.1)',
-          borderRadius: 22,
-          background: 'linear-gradient(160deg,rgba(20,24,31,.8),rgba(10,12,16,.5))',
-          padding: '54px 48px',
-          position: 'relative',
+          border: `1.5px solid ${color.accent}`,
+          borderRadius: 12,
+          background: color.surface,
           overflow: 'hidden',
         }}
       >
-        <div
-          className="pf-glow"
-          style={{
-            position: 'absolute',
-            top: '-30%',
-            right: '-6%',
-            width: '46%',
-            height: '170%',
-            background: 'radial-gradient(circle,rgba(242,180,65,.1),transparent 64%)',
-            pointerEvents: 'none',
-          }}
-        />
-        <div
-          className="dc-contact-grid"
-          style={{
-            position: 'relative',
-            display: 'grid',
-            gridTemplateColumns: '1.2fr 1fr',
-            gap: 48,
-            alignItems: 'center',
-          }}
-        >
-          <div>
-            <div
-              style={{
-                fontFamily: mono,
-                fontSize: 12,
-                letterSpacing: '.2em',
-                color: '#f2b441',
-                marginBottom: 22,
-              }}
-            >
-              // CONTACT
-            </div>
+        <div className="bp-contact">
+          <div
+            className="bp-contact-main"
+            style={{
+              padding: '44px 44px 40px',
+              borderRight: `1px solid ${color.rule}`,
+            }}
+          >
+            <div style={kicker()}>GET IN TOUCH</div>
             <h2
               style={{
-                fontFamily: sans,
+                fontSize: 'clamp(27px, 4.4vw, 34px)',
                 fontWeight: 700,
-                fontSize: 38,
-                lineHeight: 1.15,
+                margin: '0 0 16px',
                 letterSpacing: '-.02em',
-                margin: '0 0 20px',
-                color: '#f3f5f8',
               }}
             >
-              Let's build something that holds up.
+              Let&rsquo;s talk about the hard part.
             </h2>
-            <p style={{ fontSize: 16.5, lineHeight: 1.7, color: '#c6ccd6', margin: 0, maxWidth: 480 }}>
-              If you're building something interesting and need a full stack engineer who can move fast
-              and own large parts of the stack — let's talk.
+            <p
+              style={{
+                fontSize: 16,
+                lineHeight: 1.6,
+                color: color.body,
+                margin: '0 0 26px',
+                maxWidth: '44ch',
+              }}
+            >
+              Backend and applied-AI roles. Based in India — working remote.
+              Email is the fastest way to reach me.
             </p>
+            <a
+              href="mailto:divyang@divyang.dev"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 10,
+                background: color.accent,
+                color: '#fff',
+                fontWeight: 600,
+                fontSize: 17,
+                padding: '15px 26px',
+                borderRadius: 8,
+              }}
+            >
+              divyang@divyang.dev →
+            </a>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-            <ContactRow href="mailto:divyang@divyang.dev" label="Email" value="divyang@divyang.dev" />
-            <ContactRow
-              href="https://github.com/divyangchauhan"
-              target="_blank"
-              label="GitHub"
-              value="divyangchauhan ↗"
-            />
-            <ContactRow
-              href="https://www.linkedin.com/in/divyangchauhan"
-              target="_blank"
-              label="LinkedIn"
-              value="divyangchauhan ↗"
-            />
-            <ContactRow
-              href="/assets/Divyang-Chauhan-Resume.pdf"
-              download
-              label="Résumé"
-              value="Download PDF ↓"
-              fill
-            />
+          <div
+            style={{
+              padding: 44,
+              display: 'flex',
+              flexDirection: 'column',
+              background: color.surfaceAlt,
+            }}
+          >
+            <Link
+              to="/resume"
+              style={{ ...rowStyle, borderBottom: `1px solid ${color.ruleSoft}` }}
+            >
+              <span style={{ fontWeight: 600 }}>Résumé</span>
+              <span style={{ ...valueStyle, color: color.accent }}>
+                view + download →
+              </span>
+            </Link>
+            {links.map(({ label, value, href }, index) => (
+              <a
+                key={label}
+                href={href}
+                style={{
+                  ...rowStyle,
+                  borderBottom:
+                    index === links.length - 1
+                      ? 'none'
+                      : `1px solid ${color.ruleSoft}`,
+                }}
+              >
+                <span style={{ fontWeight: 600 }}>{label}</span>
+                <span style={valueStyle}>{value}</span>
+              </a>
+            ))}
           </div>
         </div>
       </div>
+      <p
+        style={{
+          fontFamily: mono,
+          fontSize: 12,
+          color: color.fainter,
+          textAlign: 'center',
+          margin: '32px 0 0',
+        }}
+      >
+        © 2026 Divyang Chauhan · built with precision, not buzzwords
+      </p>
     </section>
   )
 }
