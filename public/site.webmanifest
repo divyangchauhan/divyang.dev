@@ -1,0 +1,20 @@
+{
+  "name": "Divyang Chauhan — Applied AI Engineer",
+  "short_name": "Divyang Chauhan",
+  "description": "Applied AI engineer building tool-using agent systems with executable verification, reproducible evals, and production backend infrastructure.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f6f7fb",
+  "theme_color": "#f6f7fb",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

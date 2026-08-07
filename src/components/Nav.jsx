@@ -1,83 +1,67 @@
 import { Link } from 'react-router-dom'
-import { mono } from '../theme'
+import { color, mono } from '../theme'
+
+const link = { fontFamily: mono, fontSize: 13, color: color.muted }
 
 export default function Nav() {
   return (
     <nav
-      className="pf-pad"
+      className="bp-nav bp-pad"
       style={{
         position: 'sticky',
         top: 0,
-        zIndex: 50,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '16px 40px',
-        background: 'rgba(10,12,16,.72)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(255,255,255,.06)',
+        zIndex: 40,
+        padding: '18px 40px',
+        background: 'rgba(246,247,251,.9)',
+        backdropFilter: 'blur(8px)',
+        WebkitBackdropFilter: 'blur(8px)',
+        borderBottom: `1px solid ${color.rule}`,
       }}
     >
       <a
         href="#top"
-        style={{ display: 'flex', alignItems: 'center', gap: 12, textDecoration: 'none' }}
+        style={{
+          fontFamily: mono,
+          fontSize: 15,
+          fontWeight: 600,
+          color: color.ink,
+        }}
       >
-        <span
-          style={{
-            display: 'inline-grid',
-            placeItems: 'center',
-            width: 32,
-            height: 32,
-            border: '1px solid #f2b441',
-            color: '#f2b441',
-            borderRadius: 7,
-            fontFamily: mono,
-            fontWeight: 600,
-            fontSize: 13,
-          }}
-        >
-          DC
-        </span>
-        <span
-          className="pf-brand-tag"
-          style={{
-            fontFamily: mono,
-            fontSize: 12,
-            letterSpacing: '.16em',
-            textTransform: 'uppercase',
-            color: '#8a93a3',
-          }}
-        >
-          full stack engineer
-        </span>
+        divyang.dev<span style={{ color: color.accent }}>_</span>
       </a>
-      <div className="dc-navlinks" style={{ display: 'flex', alignItems: 'center', gap: 30, fontFamily: mono, fontSize: 13 }}>
-        <a className="dc-link" href="#projects" style={{ color: '#aab2c0', textDecoration: 'none' }}>
-          Work
+      <div className="bp-navlinks">
+        <a href="#work" style={link}>
+          projects
         </a>
-        <a className="dc-link pf-navsec" href="#about" style={{ color: '#aab2c0', textDecoration: 'none' }}>
-          About
+        <a href="#skills" style={link}>
+          skills
         </a>
-        <a className="dc-link pf-navsec" href="#skills" style={{ color: '#aab2c0', textDecoration: 'none' }}>
-          Skills
-        </a>
-        <Link className="dc-link" to="/resume" style={{ color: '#aab2c0', textDecoration: 'none' }}>
-          Résumé
+        <Link to="/resume" style={link}>
+          resume
         </Link>
         <a
-          className="dc-btn-fill"
           href="#contact"
           style={{
-            color: '#0a0c10',
-            background: '#f2b441',
-            textDecoration: 'none',
-            padding: '9px 16px',
-            borderRadius: 7,
-            fontWeight: 600,
+            ...link,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 7,
+            color: '#fff',
+            background: color.accent,
+            padding: '8px 14px',
+            borderRadius: 20,
           }}
         >
-          Get in Touch
+          <span
+            style={{
+              width: 6,
+              height: 6,
+              borderRadius: '50%',
+              background: '#7fe0b0',
+              display: 'inline-block',
+            }}
+          />
+          contact
         </a>
       </div>
     </nav>
