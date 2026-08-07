@@ -173,6 +173,16 @@ test('copy, anchors, outbound links, and metadata are correct', async ({
     'href',
     'https://www.divyang.dev/',
   )
+
+  for (const icon of [
+    '/favicon.svg',
+    '/favicon-32.png',
+    '/favicon.ico',
+    '/apple-touch-icon.png',
+  ]) {
+    const response = await page.request.get(icon)
+    expect(response.status(), icon).toBe(200)
+  }
 })
 
 test('résumé route renders, links back, and strips chrome for print', async ({
