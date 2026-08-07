@@ -116,7 +116,7 @@ export const projects = [
     tags: ['ai', 'distributed'],
     meta: 'distributed · TS + Python',
     summary:
-      'A four-component system that reads a death certificate and generates institution-specific notification letters as PDFs — for the user to send — across sixteen institution types, from Social Security and the IRS to streaming subscriptions. The best evidence of multi-service design under solo authorship.',
+      'Reads a death certificate and produces the notification letters an executor has to send — sixteen institution types, from Social Security and the IRS down to streaming subscriptions, each with its own required format and enclosures. Four services across an async queue boundary, with SSNs encrypted at the application layer before they ever reach storage.',
     caseStudy: {
       heading: 'THE ASYNC BOUNDARY',
       body: (
@@ -126,18 +126,18 @@ export const projects = [
             document bytes never pass through the API. The API records the case
             and drops an SQS job; a containerized Python Lambda reads the
             certificate — extracting text where it can, rasterizing and using
-            Claude Vision where it can&rsquo;t — calls the model with a forced
-            tool schema so the output shape is fixed, validates it with
-            Pydantic, and calls back. Generation runs the same way on a second
-            queue.
+            vision where it can&rsquo;t — calls the model with a forced tool
+            schema so the output shape is fixed, validates with Pydantic, and
+            calls back. Letter generation runs the same way on a second queue.
           </p>
           <p>
-            Both queue paths share one container image, because both need the
-            same heavy Python dependencies for image and PDF work — splitting
-            them would duplicate the container without buying isolation. Getting
-            that boundary right across TypeScript and Python is the substantial
-            part of the work. Social Security numbers get a further layer:
-            AES-256-GCM at the application level before they&rsquo;re written.
+            Both queue paths share one container image: they need the same heavy
+            Python dependencies for image and PDF work, so splitting them would
+            duplicate the container without buying isolation. Social Security
+            numbers carry a further layer — AES-256-GCM applied in the
+            application before anything is written, so the database never holds
+            them in the clear. Ten CDK stacks define the whole topology, with
+            241 tests running across both languages in CI.
           </p>
         </>
       ),
@@ -161,26 +161,23 @@ export const projects = [
     tags: ['ai', 'platform', 'shipped'],
     meta: 'platform · C# / .NET 8',
     summary:
-      'A Windows-native local dictation app: a global hotkey captures microphone audio, transcribes it locally through a bundled whisper.cpp build, and inserts the transcript into whatever window was focused before recording started. Systems engineering with a model as a dependency — not an ML credential, and honest about it.',
+      'Windows-native dictation that runs entirely on the machine. A global hotkey captures microphone audio, a bundled whisper.cpp build transcribes it with no network call, and the text lands in whichever window was focused before recording started. That last step is the hard one: inserting text reliably into arbitrary third-party applications, each with its own idea of how input arrives.',
     caseStudy: {
-      heading: 'THE HARD PART WASN’T THE AI',
+      heading: 'TEXT INSERTION',
       body: (
         <>
           <p>
-            Speech recognition is delegated to whisper.cpp and was comparatively
-            straightforward to wire in. The difficult problem is reliably
-            delivering transcribed text into an arbitrary third-party Windows
-            application: capture the window focused before recording started,
-            evaluate an insertion policy per target, choose among paste
-            shortcuts that differ by application class (terminals need different
-            key combinations), fall back from simulated keystrokes to clipboard
-            paste, and clear active modifier keys first because the default
-            hotkey collides with a Windows input-language shortcut.
+            Shruti records which window held focus before recording began, then
+            picks an insertion strategy for that target: simulated keystrokes
+            where they work, clipboard paste where they don&rsquo;t, and
+            different key combinations for terminals than for editors. Modifier
+            keys are cleared first, because the hotkey could overlap a Windows
+            shortcut and could swallow the input.
           </p>
           <p>
-            There&rsquo;s a committed application-compatibility matrix behind
-            it. That&rsquo;s where most of the platform code and nearly all the
-            manual QA effort sit.
+            A compatibility matrix is committed alongside the code and covers
+            the applications and strategies verified against it. Most of the
+            platform code and manual QA went there, not into transcription.
           </p>
         </>
       ),
