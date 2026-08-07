@@ -188,6 +188,9 @@ function ProjectCard({ project, open, onToggle }) {
                 fontSize: 11,
                 padding: '3px 8px',
                 borderRadius: 20,
+                // The row is baseline-aligned for the title and its mono
+                // subtitle; the pill is a block, so centre it on the title.
+                alignSelf: 'center',
               }}
             >
               {status.label}
