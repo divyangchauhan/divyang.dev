@@ -6,7 +6,9 @@ import Projects from './components/Projects'
 import Skills from './components/Skills'
 import Contact from './components/Contact'
 
-const hashSectionTopGap = 32
+// Breathing room between the sticky nav and the section heading, on the 28px
+// blueprint module the rest of the page is ruled to.
+const hashSectionTopGap = 28
 
 function scrollToHash() {
   const hash = window.location.hash.slice(1)
@@ -32,9 +34,16 @@ function scrollToHash() {
     }
 
     const targetTop = target.getBoundingClientRect().top + window.scrollY
+    // Land the heading, not the section's padding box, and clear the sticky
+    // nav — whose height changes when the links wrap, so measure it.
     const targetPaddingTop =
       parseFloat(window.getComputedStyle(target).paddingTop) || 0
-    const top = Math.max(targetTop + targetPaddingTop - hashSectionTopGap, 0)
+    const navHeight =
+      document.querySelector('.bp-nav')?.getBoundingClientRect().height ?? 0
+    const top = Math.max(
+      targetTop + targetPaddingTop - navHeight - hashSectionTopGap,
+      0,
+    )
 
     window.scrollTo({ top, left: 0 })
   }

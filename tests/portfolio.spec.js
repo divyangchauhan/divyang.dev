@@ -236,6 +236,44 @@ test('icons, manifest, and crawler files are served and consistent', async ({
   expect(robots).toContain('Sitemap: https://www.divyang.dev/sitemap.xml')
 })
 
+// The nav is sticky, so a raw anchor jump parks the section heading underneath
+// it. Landings have to clear the nav at every width, including the narrow ones
+// where the links wrap and the nav grows taller.
+for (const viewport of [
+  { name: 'desktop', width: 1280, height: 900 },
+  { name: 'mobile', width: 375, height: 812 },
+]) {
+  test(`${viewport.name} nav links land sections clear of the sticky nav`, async ({
+    page,
+  }) => {
+    await page.setViewportSize(viewport)
+
+    for (const [label, id] of [
+      ['projects', 'work'],
+      ['skills', 'skills'],
+    ]) {
+      await loadPortfolio(page)
+      await page.locator(`.bp-navlinks a[href="#${id}"]`).click()
+
+      await expect(async () => {
+        const gap = await page.evaluate((sectionId) => {
+          const navBottom = document
+            .querySelector('.bp-nav')
+            .getBoundingClientRect().bottom
+          const heading = document.querySelector(`#${sectionId} h2`)
+          // The kicker sits above the h2 and is the first thing clipped.
+          const kicker = heading.parentElement.firstElementChild
+          return kicker.getBoundingClientRect().top - navBottom
+        }, id)
+
+        // Below the nav, and not so far below that the section looks unanchored.
+        expect(gap, `${label} clearance`).toBeGreaterThanOrEqual(0)
+        expect(gap, `${label} clearance`).toBeLessThan(120)
+      }).toPass({ timeout: 5000 })
+    }
+  })
+}
+
 test('résumé route renders, links back, and strips chrome for print', async ({
   page,
 }) => {
