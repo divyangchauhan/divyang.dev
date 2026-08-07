@@ -76,20 +76,23 @@ export const projects = [
       body: (
         <>
           <p>
-            The strongest part is the test pyramid. GitHub Actions runs lint,
-            typecheck, Vitest and Playwright on every push and PR: 62 test
-            files, 649 tests, all passing on a fresh run. The browser suites
-            exercise real account signup, login, password reset, real PDF and
-            DOCX uploads, and correct rejection of an image-only PDF and a .txt
-            file — against real Supabase and R2.
+            Resume parsing is where most of the difficulty lives. Real resumes
+            arrive as multi-column layouts, tables, and scans, so extraction
+            falls back through several strategies and the pipeline rejects what
+            it can&rsquo;t read — an image-only PDF or a .txt file — instead of
+            passing garbage to the model. Every LLM call is a forced schema with
+            validation, retry-on-invalid, and provider fallback, so a malformed
+            response never reaches the UI.
           </p>
           <p>
-            The most interesting decision is a concurrency-safe quota. A
-            Postgres RPC locks both the user row and the resume row, makes
-            claiming idempotent for an already-unlocked resume, and increments
-            the counter in one transaction — so simultaneous requests
-            can&rsquo;t both pass, all AI features on one resume consume one
-            slot, and no caller can unlock another user&rsquo;s resume.
+            Paid quota is enforced in the database, not the application. A
+            single Postgres RPC locks the user and resume rows, treats an
+            already-unlocked resume as idempotent, and increments the counter in
+            one transaction — two simultaneous requests can&rsquo;t both
+            succeed, every AI feature on a resume draws from one slot, and no
+            caller can unlock a resume they don&rsquo;t own. CI runs lint,
+            typecheck, Vitest and Playwright on every push, with browser tests
+            hitting real Supabase and R2.
           </p>
         </>
       ),
