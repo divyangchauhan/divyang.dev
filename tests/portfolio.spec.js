@@ -140,6 +140,12 @@ test('copy, anchors, outbound links, and metadata are correct', async ({
     page.getByRole('link', { name: /github\.com\/divyangchauhan\/Pramana/ }),
   ).toHaveAttribute('href', 'https://github.com/divyangchauhan/Pramana')
 
+  // ClinchCV is closed source, so its case study links to the live product.
+  await page.locator('#work article').nth(1).getByRole('button').click()
+  await expect(
+    page.getByRole('link', { name: /clinchcv\.com/ }),
+  ).toHaveAttribute('href', 'https://clinchcv.com/')
+
   await expect(
     page.getByRole('link', { name: 'divyang@divyang.dev →' }),
   ).toHaveAttribute('href', 'mailto:divyang@divyang.dev')

@@ -99,6 +99,11 @@ export const projects = [
         ['Commits', '193 · Apr–Aug 2026'],
         ['Tests', '649 · 62 files · CI'],
       ],
+      // Closed source — the live product stands in for a repo link.
+      link: {
+        href: 'https://clinchcv.com/',
+        label: '→ clinchcv.com',
+      },
     },
   },
   {
