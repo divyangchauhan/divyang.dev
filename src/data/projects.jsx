@@ -69,7 +69,7 @@ export const projects = [
     id: 'clinchcv',
     name: 'ClinchCV',
     tags: ['ai', 'shipped'],
-    meta: 'SHIPPED · LIVE',
+    meta: 'shipped · live',
     summary:
       'AI resume analysis and job targeting — the one project deployed on a real domain. An authenticated Next.js app that ingests a resume, scores it against a fixed rubric, and drives ATS, job-fit, bullet-rewriting and cover-letter flows. Sold as shipping discipline: 649 tests across three layers in CI, with browser suites running against real infrastructure.',
     caseStudy: {
@@ -109,7 +109,7 @@ export const projects = [
     id: 'tarpan',
     name: 'Tarpan',
     tags: ['ai', 'distributed'],
-    meta: 'DISTRIBUTED · TS + PYTHON',
+    meta: 'distributed · TS + Python',
     summary:
       'A four-component system that reads a death certificate and generates institution-specific notification letters as PDFs — for the user to send — across sixteen institution types, from Social Security and the IRS to streaming subscriptions. The best evidence of multi-service design under solo authorship.',
     caseStudy: {
@@ -155,7 +155,7 @@ export const projects = [
     id: 'shruti',
     name: 'Shruti',
     tags: ['ai', 'platform', 'shipped'],
-    meta: 'PLATFORM · C# / .NET 8',
+    meta: 'platform · C# / .NET 8',
     summary:
       'A Windows-native local dictation app: a global hotkey captures microphone audio, transcribes it locally through a bundled whisper.cpp build, and inserts the transcript into whatever window was focused before recording started. Systems engineering with a model as a dependency — not an ML credential, and honest about it.',
     caseStudy: {
