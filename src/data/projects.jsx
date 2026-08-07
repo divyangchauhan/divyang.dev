@@ -70,7 +70,7 @@ export const projects = [
     tags: ['ai', 'shipped'],
     meta: 'shipped · live',
     summary:
-      'AI resume analysis and job targeting — the one project deployed on a real domain. An authenticated Next.js app that ingests a resume, scores it against a fixed rubric, and drives ATS, job-fit, bullet-rewriting and cover-letter flows. Sold as shipping discipline: 649 tests across three layers in CI, with browser suites running against real infrastructure.',
+      'A deployed Next.js app that turns a resume PDF into structured feedback: rubric-based scoring, ATS checks, job-fit analysis against a pasted description, bullet rewrites and cover letters. Every LLM response is schema-validated with retry-on-invalid and model fallback, and the whole thing is covered by 649 tests in CI that run against real infrastructure rather than mocks.',
     caseStudy: {
       heading: 'THE ENGINEERING STORY',
       body: (
