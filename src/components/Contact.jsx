@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { color, kicker, mono } from '../theme'
 
 const rowStyle = {
@@ -102,7 +102,7 @@ export default function Contact() {
             }}
           >
             <Link
-              to="/resume"
+              href="/resume"
               style={{
                 ...rowStyle,
                 borderBottom: `1px solid ${color.ruleSoft}`,

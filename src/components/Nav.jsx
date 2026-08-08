@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { color, mono } from '../theme'
 
 const link = { fontFamily: mono, fontSize: 13, color: color.muted }
@@ -36,7 +36,7 @@ export default function Nav() {
         <a href="#skills" style={link}>
           skills
         </a>
-        <Link to="/resume" style={link}>
+        <Link href="/resume" style={link}>
           resume
         </Link>
         <a

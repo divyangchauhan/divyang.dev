@@ -1,5 +1,5 @@
 node_modules/
-dist/
+.next/
 .vercel
 test-results/
 playwright-report/

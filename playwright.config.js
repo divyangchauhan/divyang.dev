@@ -17,8 +17,9 @@ export default defineConfig({
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {
     // Serve the production build rather than the dev server, so the suite
-    // exercises what actually ships — including the public/ asset set.
-    command: 'pnpm build && pnpm preview --host 127.0.0.1 --port 4173',
+    // exercises what actually ships — including the server-rendered metadata
+    // and the public/ asset set.
+    command: 'pnpm build && pnpm start --hostname 127.0.0.1 --port 4173',
     url: 'http://127.0.0.1:4173',
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

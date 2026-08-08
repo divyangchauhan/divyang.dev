@@ -1,4 +1,4 @@
-dist
+.next
 playwright-report
 test-results
 pnpm-lock.yaml

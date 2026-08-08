@@ -1,10 +1,6 @@
+'use client'
+
 import { useEffect } from 'react'
-import { color, sans } from './theme'
-import Nav from './components/Nav'
-import Hero from './components/Hero'
-import Projects from './components/Projects'
-import Skills from './components/Skills'
-import Contact from './components/Contact'
 
 // Breathing room between the sticky nav and the section heading, on the 28px
 // blueprint module the rest of the page is ruled to.
@@ -49,7 +45,10 @@ function scrollToHash() {
   }
 }
 
-export default function App() {
+// The markup is server-rendered, so the browser's own anchor jump does fire on
+// a deep link — but it lands flush under the sticky nav. This corrects it, and
+// handles every later hashchange.
+export default function HashScroll() {
   useEffect(() => {
     let frameId
     const scroll = () => {
@@ -66,26 +65,5 @@ export default function App() {
     }
   }, [])
 
-  return (
-    <div
-      id="dc-portfolio"
-      style={{
-        background: color.bg,
-        // blueprint grid: 28px ruling drawn straight onto the page ground
-        backgroundImage: `linear-gradient(${color.grid} 1px,transparent 1px),linear-gradient(90deg,${color.grid} 1px,transparent 1px)`,
-        backgroundSize: '28px 28px',
-        color: color.ink,
-        fontFamily: sans,
-        minHeight: '100vh',
-      }}
-    >
-      <Nav />
-      <Hero />
-      <main>
-        <Projects />
-        <Skills />
-        <Contact />
-      </main>
-    </div>
-  )
+  return null
 }
