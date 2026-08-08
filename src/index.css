@@ -56,6 +56,11 @@ button:focus-visible {
   * {
     transition-duration: 0.01ms !important;
   }
+  /* A blinking terminal cursor is decoration, and it never stops on its own —
+   * exactly the kind of motion this query exists to switch off. */
+  * {
+    animation: none !important;
+  }
 }
 
 /* ---------------------------------------------------------------- layout */
@@ -105,6 +110,48 @@ button:focus-visible {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+}
+
+/* Three columns sharing one bordered panel, divided rather than separated —
+ * so the dividers are drawn between cells instead of around them. */
+.bp-grid-3-flush {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.bp-grid-3-flush > * + * {
+  border-left: 1px solid #edeff6;
+}
+
+/* The 404 plate: oversized numeral beside the message. */
+.bp-404-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 44px;
+  align-items: start;
+}
+
+.bp-404-card {
+  padding: 52px 48px 44px;
+}
+
+/* The failed request, as one terminal row: an over-long path is clipped rather
+ * than allowed to push the "→ 404" verdict out of the box. Not inline, because
+ * an inline value would outrank the narrow-screen override below. */
+.bp-404-req {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@keyframes bp-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
 }
 
 .bp-grid-2 {
@@ -198,6 +245,30 @@ button:focus-visible {
   }
   .bp-sheet {
     padding: 28px 22px;
+  }
+  .bp-404-card {
+    padding: 34px 22px 30px;
+  }
+  /* Below this the numeral and the message cannot share a line without
+   * squeezing the message to a few words per row. */
+  .bp-404-head {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  /* Too narrow to clip the path and still leave the verdict visible, and the
+   * verdict is the point of the line — so wrap rather than truncate. */
+  .bp-404-req {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  /* These cells hold a line or two each, so they stay in three columns much
+   * further down than the denser grids above; their dividers turn with them. */
+  .bp-grid-3-flush {
+    grid-template-columns: 1fr;
+  }
+  .bp-grid-3-flush > * + * {
+    border-left: 0;
+    border-top: 1px solid #edeff6;
   }
 }
 

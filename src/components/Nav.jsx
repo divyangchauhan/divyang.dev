@@ -3,7 +3,10 @@ import { color, mono } from '../theme'
 
 const link = { fontFamily: mono, fontSize: 13, color: color.muted }
 
-export default function Nav() {
+// Every nav target except the résumé is a section of the home page, so the
+// links are bare fragments there. From any other route a bare `#work` points at
+// nothing on the current document — `hashBase="/"` sends them home first.
+export default function Nav({ hashBase = '' }) {
   return (
     <nav
       className="bp-nav bp-pad"
@@ -19,7 +22,7 @@ export default function Nav() {
       }}
     >
       <a
-        href="#top"
+        href={`${hashBase}#top`}
         style={{
           fontFamily: mono,
           fontSize: 15,
@@ -30,17 +33,17 @@ export default function Nav() {
         divyang.dev<span style={{ color: color.accent }}>_</span>
       </a>
       <div className="bp-navlinks">
-        <a href="#work" style={link}>
+        <a href={`${hashBase}#work`} style={link}>
           projects
         </a>
-        <a href="#skills" style={link}>
+        <a href={`${hashBase}#skills`} style={link}>
           skills
         </a>
         <Link href="/resume" style={link}>
           resume
         </Link>
         <a
-          href="#contact"
+          href={`${hashBase}#contact`}
           style={{
             ...link,
             display: 'inline-flex',

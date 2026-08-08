@@ -17,6 +17,9 @@ export const color = {
   fainter: '#a4a9b8',
   accent: '#2f3ad1',
   accentDeep: '#1c249e',
+  // The one warm note in the palette, for a status that went wrong. Muted
+  // rather than a signal red, so it reads as a log line and not an alarm.
+  negative: '#b03a4a',
   rule: '#dfe3ef',
   ruleSoft: '#edeff6',
   ruleStrong: '#d6dae8',

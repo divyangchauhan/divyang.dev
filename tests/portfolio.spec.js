@@ -436,3 +436,71 @@ test('résumé route renders, links back, and strips chrome for print', async ({
   await expect(page).toHaveURL(/\/$/)
   await expect(page.locator('#work')).toHaveCount(1)
 })
+
+test('a missing URL gets a real 404 that reports the path and offers a way out', async ({
+  page,
+}) => {
+  // The status matters as much as the page. The old SPA rewrote every unmatched
+  // URL to index.html and answered 200, which invites crawlers to index each
+  // typo as a duplicate of the home page.
+  expect((await page.request.get('/no-such-page')).status()).toBe(404)
+
+  await page.setViewportSize({ width: 1280, height: 900 })
+  await page.goto('/no-such-page', { waitUntil: 'domcontentloaded' })
+
+  await expect(page).toHaveTitle('Page not found — Divyang Chauhan')
+  // Next emits its own noindex here, and the root layout emits the site-wide
+  // rule — so what matters is not the tag count but that no tag among them
+  // tells a crawler to index this page.
+  const robots = await page
+    .locator('meta[name="robots"]')
+    .evaluateAll((tags) => tags.map((tag) => tag.content))
+  expect(robots.length).toBeGreaterThan(0)
+  expect(robots.every((rule) => rule.startsWith('noindex'))).toBe(true)
+  await expect(
+    page.getByRole('heading', { level: 1, name: /drawing set/ }),
+  ).toBeVisible()
+  await expect(page.getByText('SHEET NOT FOUND')).toBeVisible()
+
+  // One document is prerendered for every unmatched URL, so the path can only
+  // be filled in on the client — it starts as a placeholder.
+  const request = page.locator('.bp-404-req')
+  await expect(request).toHaveText('GET /no-such-page → 404▌')
+
+  // Every nav fragment belongs to a section of the home page, so from here they
+  // have to travel there first rather than point at nothing on this document.
+  for (const [name, hash] of [
+    ['projects', '#work'],
+    ['skills', '#skills'],
+  ]) {
+    await expect(page.getByRole('link', { name, exact: true })).toHaveAttribute(
+      'href',
+      `/${hash}`,
+    )
+  }
+
+  const suggestions = page.getByRole('navigation', { name: 'Suggested pages' })
+  await expect(suggestions.getByRole('link')).toHaveCount(3)
+  await suggestions.getByRole('link', { name: /Projects/ }).click()
+  await expect(page).toHaveURL(/\/#work$/)
+  await expect(page.locator('#work')).toHaveCount(1)
+})
+
+test('the 404 keeps the failed request legible at 320px', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 })
+  await page.goto('/no-such-page', { waitUntil: 'domcontentloaded' })
+
+  const overflow = await page.evaluate(() => ({
+    clientWidth: document.documentElement.clientWidth,
+    scrollWidth: document.documentElement.scrollWidth,
+  }))
+  expect(overflow.scrollWidth).toBeLessThanOrEqual(overflow.clientWidth)
+
+  // The "→ 404" verdict is the point of that line, so at this width it wraps
+  // rather than being clipped by the ellipsis that serves wider screens.
+  const clipped = await page.locator('.bp-404-req').evaluate((el) => ({
+    scrollWidth: el.scrollWidth,
+    clientWidth: el.clientWidth,
+  }))
+  expect(clipped.scrollWidth).toBeLessThanOrEqual(clipped.clientWidth)
+})
