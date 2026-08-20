@@ -409,6 +409,20 @@ test('résumé route renders, links back, and strips chrome for print', async ({
   await expect(page.getByText('PROFESSIONAL EXPERIENCE')).toBeVisible()
   await expect(page.getByText('Kleros, Remote')).toBeVisible()
 
+  // Keep the HTML résumé in sync with the maintained PDF. These are the
+  // details most likely to drift when the source document is revised.
+  const sheet = page.locator('.bp-sheet')
+  await expect(sheet).toContainText(
+    'Applied AI Engineer with 5+ years of building event-driven services and multi-tenant platforms.',
+  )
+  await expect(sheet).toContainText(
+    'Designed provider-neutral three agent system with context isolation and tool usage that produces executable PoC',
+  )
+  await expect(sheet).toContainText(
+    'Delivered Assure v1 concept to production in 3 months, authoring 80% of codebase and onboarding first 5 enterprise clients',
+  )
+  await expect(sheet).not.toContainText('viem')
+
   // "Download PDF" serves the maintained file, not a window.print() dialog.
   const download = page.getByRole('link', { name: '↓ Download PDF' })
   await expect(download).toHaveAttribute(

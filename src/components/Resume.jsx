@@ -66,16 +66,16 @@ const projects = [
   {
     title: 'Pramana: Multi-agent smart-contract vulnerability scanner',
     bullets: [
-      'Built provider-neutral finder, verifier and reporter agents with context isolation and executable PoC verification',
-      'Built an eval harness covering 14 labeled vulnerabilities in 11 classes plus a patched negative control, with baselines, cost/latency tracking, CI and 294 offline tests',
-      'Benchmarked the finder/verifier core across Claude, GPT, and Kimi; best runs found 13/14 labeled bugs with 0 confirmed false positives on the patched control',
+      'Designed provider-neutral three agent system with context isolation and tool usage that produces executable PoC',
+      'Built an eval harness covering 14 labeled vulnerabilities in 11 classes plus a patched negative control, with baselines, cost/latency tracking, CI and offline tests',
+      'Benchmarked the agents across Claude, GPT, and Kimi; best runs found 13/14 vulnerabilities with 0 confirmed false positive',
     ],
   },
   {
     title: 'ClinchCV: Full-stack AI resume analysis and job targeting',
     bullets: [
-      'Built a full-stack AI product that parses resume PDFs and uses structured, rubric-based LLM evaluation to generate scoring, ATS checks, job-fit analysis, and contextual rewrites',
-      'Enforced structured outputs with schema validation, retry-on-invalid, and model fallback; handles multi-column and table-based PDF layouts',
+      'Shipped a full-stack AI product that parses resume PDFs and gives structured output, rubric-based scoring, ATS checks, job-fit analysis, and contextual rewrites',
+      'Enforced structured outputs with schema validation, automatic retries for invalid output, and model fallback',
     ],
   },
 ]
@@ -91,7 +91,7 @@ const skills = [
   ],
   [
     'Frameworks:',
-    'Node.js, NestJS, Django REST Framework, Pydantic, GraphQL, React, Next.js, viem, Foundry, Slither',
+    'Node.js, NestJS, Django REST Framework, Pydantic, GraphQL, React, Next.js, Foundry, Slither',
   ],
   [
     'Infrastructure & Messaging:',
@@ -102,7 +102,7 @@ const skills = [
 const education = [
   ['Offensive Security Certified Professional, OffSec', '2017'],
   [
-    'IIT Bombay, coursework in B.Tech Metallurgical Engineering & Materials Science',
+    'IIT Bombay, B.Tech coursework, Metallurgical Engineering & Materials Science',
     '2016',
   ],
 ]
@@ -205,10 +205,9 @@ export default function Resume() {
             margin: 0,
           }}
         >
-          Backend &amp; Applied AI Engineer with 5+ years building event-driven
-          services, distributed systems and multi-tenant platforms. Built
-          provider-neutral, tool-using agent systems with context isolation,
-          executable verification, and reproducible evals. Led a 9-person team
+          Applied AI Engineer with 5+ years of building event-driven services
+          and multi-tenant platforms. Developed provider neutral, tool-using
+          agent systems with context isolation and evals. Led a 9-person team
           shipping security software for multinational banks. OSCP certified.
         </p>
 
@@ -254,7 +253,7 @@ export default function Resume() {
             items={[
               'Decomposed a monolithic NestJS backend into independently scalable API and automation services; established the monorepo and migrated 57K+ blockchain events across databases with ~1 minute of downtime',
               'Architected a NestJS EVM event-ingestion service processing events across Ethereum, Gnosis, and Arbitrum for 23+ downstream consumers, including notification workflows serving 700+ active jurors',
-              'Built multi-network automation for dispute progression and juror staking; used transaction simulation and batched calls to improve execution reliability and reduce gas usage',
+              'Automated dispute progression and juror staking across networks; used transaction simulation and batched calls to improve execution reliability and reduce gas usage by ~22%',
             ]}
           />
         </div>
@@ -311,6 +310,7 @@ export default function Resume() {
           </div>
           <Bullets
             items={[
+              'Delivered Assure v1 concept to production in 3 months, authoring 80% of codebase and onboarding first 5 enterprise clients; rapid adoption exceeded platform limits, driving decision to rebuild on scalable architecture',
               "Developed Tigress's Django REST Framework backend from scratch; designed a MySQL schema supporting 10M+ records and created a serializer abstraction that reduced new endpoint development time by 60%",
               "Eliminated distributed-task bottleneck in Tigress's scanning engine by architecting cross-instance Celery dispatch, reducing scan time by 75% and scaling the platform from 10 to 100 daily scans without infrastructure changes",
             ]}
