@@ -14,6 +14,7 @@ import {
   siteUrl,
   twitterCard,
 } from './site-metadata'
+import { Analytics } from '@vercel/analytics/next'
 
 // metadataBase resolves the relative URLs below, and the per-route
 // `alternates.canonical` and `openGraph.url` each page declares.
@@ -53,7 +54,10 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   )
 }
