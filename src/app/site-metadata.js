@@ -14,10 +14,10 @@ const imageAlt =
   'Divyang Chauhan, Applied AI Engineer and Agent Systems Developer'
 
 export const openGraphImages = [
-  { url: '/og-image.png', width: 1200, height: 630, alt: imageAlt },
+  { url: '/og-image-2026-09.png', width: 1200, height: 630, alt: imageAlt },
 ]
 
 export const twitterCard = {
   card: 'summary_large_image',
-  images: [{ url: '/og-image.png', alt: imageAlt }],
+  images: [{ url: '/og-image-2026-09.png', alt: imageAlt }],
 }
