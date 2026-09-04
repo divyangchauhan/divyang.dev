@@ -192,6 +192,7 @@ test('icons, manifest, and crawler files are served and consistent', async ({
     '/site.webmanifest',
     '/robots.txt',
     '/sitemap.xml',
+    '/indexnow-key.txt',
     '/og-image.png',
     '/assets/Divyang-Chauhan-Resume.pdf',
   ]
@@ -228,6 +229,9 @@ test('icons, manifest, and crawler files are served and consistent', async ({
 
   const robots = await (await page.request.get('/robots.txt')).text()
   expect(robots).toContain('Sitemap: https://www.divyang.dev/sitemap.xml')
+
+  const indexNowKey = await (await page.request.get('/indexnow-key.txt')).text()
+  expect(indexNowKey.trim()).toMatch(/^[a-zA-Z0-9-]{8,128}$/)
 })
 
 // Social scrapers and crawlers do not run JavaScript, so everything below is
