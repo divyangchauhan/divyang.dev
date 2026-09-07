@@ -208,7 +208,7 @@ test('icons, manifest, and crawler files are served and consistent', async ({
     '/site.webmanifest',
     '/robots.txt',
     '/sitemap.xml',
-    '/og-image.png',
+    '/og-image-2026-09.png',
     '/assets/Divyang-Chauhan-Resume.pdf',
   ]
 
@@ -291,14 +291,14 @@ test('each route serves its own metadata in the raw HTML', async ({
     ['resume', resume],
   ]) {
     expect(route.meta['og:image'], name).toBe(
-      'https://www.divyang.dev/og-image.png',
+      'https://www.divyang.dev/og-image-2026-09.png',
     )
     expect(route.meta['og:image:width'], name).toBe('1200')
     expect(route.meta['og:image:height'], name).toBe('630')
     expect(route.meta['og:site_name'], name).toBe('Divyang Chauhan')
     expect(route.meta['twitter:card'], name).toBe('summary_large_image')
     expect(route.meta['twitter:image'], name).toBe(
-      'https://www.divyang.dev/og-image.png',
+      'https://www.divyang.dev/og-image-2026-09.png',
     )
   }
 
@@ -351,7 +351,7 @@ test('the social card matches the dimensions its meta tags declare', async ({
 }) => {
   await loadPortfolio(page)
 
-  const response = await page.request.get('/og-image.png')
+  const response = await page.request.get('/og-image-2026-09.png')
   expect(response.headers()['content-type']).toBe('image/png')
 
   // Width and height live in the PNG's IHDR chunk, bytes 16-23.
