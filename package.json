@@ -10,6 +10,8 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "indexnow": "node scripts/submit-indexnow.mjs",
+    "test:indexnow": "node --test scripts/submit-indexnow.test.mjs",
     "icons": "node scripts/generate-icons.mjs",
     "og": "node scripts/generate-og.mjs",
     "test:e2e": "playwright test tests/portfolio.spec.js --workers=1"

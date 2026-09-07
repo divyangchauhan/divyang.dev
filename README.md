@@ -68,6 +68,12 @@ over auto-detection, so without it the build looks for a Vite `dist/`.
 
 No environment variables required.
 
+After Vercel reports a successful Production deployment, the
+`Notify IndexNow` GitHub workflow submits every URL in `public/sitemap.xml` to
+the global IndexNow endpoint. `public/indexnow-key.txt` is the required public
+ownership proof. The workflow can also be run manually from GitHub Actions;
+`pnpm indexnow` performs the same live submission locally.
+
 ## Project structure
 
 ```
