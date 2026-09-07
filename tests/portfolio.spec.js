@@ -120,7 +120,7 @@ test('copy, anchors, outbound links, and metadata are correct', async ({
   ).toBeVisible()
   await expect(
     page.getByText(
-      'Applied AI engineer building systems you can measure, verify, and ship.',
+      'Backend + Applied AI engineer building systems you can measure, verify, and ship.',
       { exact: true },
     ),
   ).toBeVisible()
@@ -139,6 +139,22 @@ test('copy, anchors, outbound links, and metadata are correct', async ({
   await expect(
     page.getByRole('link', { name: /clinchcv\.com/ }),
   ).toHaveAttribute('href', 'https://clinchcv.com/')
+
+  const experience = page.locator('#experience')
+  await expect(
+    experience.getByRole('heading', {
+      name: '5+ years building production systems',
+    }),
+  ).toBeVisible()
+  await expect(
+    experience.getByRole('heading', { name: 'Kleros' }),
+  ).toBeVisible()
+  await expect(
+    experience.getByRole('heading', { name: 'NST Cyber' }),
+  ).toBeVisible()
+  await expect(
+    experience.getByRole('link', { name: 'View résumé →' }),
+  ).toHaveAttribute('href', '/resume')
 
   await expect(
     page.getByRole('link', { name: 'divyang@divyang.dev →' }),
@@ -371,6 +387,7 @@ for (const viewport of [
 
     for (const [label, id] of [
       ['projects', 'work'],
+      ['experience', 'experience'],
       ['skills', 'skills'],
     ]) {
       await loadPortfolio(page)
@@ -485,6 +502,7 @@ test('a missing URL gets a real 404 that reports the path and offers a way out',
   // have to travel there first rather than point at nothing on this document.
   for (const [name, hash] of [
     ['projects', '#work'],
+    ['experience', '#experience'],
     ['skills', '#skills'],
   ]) {
     await expect(page.getByRole('link', { name, exact: true })).toHaveAttribute(

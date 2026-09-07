@@ -68,7 +68,7 @@ export const projects = [
     id: 'clinchcv',
     name: 'ClinchCV',
     tags: ['ai', 'shipped'],
-    meta: 'shipped · live',
+    meta: 'AI resume analysis & job targeting · Next.js · live',
     summary:
       'A deployed Next.js app that turns a resume PDF into structured feedback: rubric-based scoring, ATS checks, job-fit analysis against a pasted description, bullet rewrites and cover letters. Every LLM response is schema-validated with retry-on-invalid and model fallback, and the whole thing is covered by 649 tests in CI that run against real infrastructure rather than mocks.',
     caseStudy: {
@@ -114,7 +114,7 @@ export const projects = [
     id: 'tarpan',
     name: 'Tarpan',
     tags: ['ai', 'distributed'],
-    meta: 'distributed · TS + Python',
+    meta: 'estate notification letter generator · TypeScript + Python',
     summary:
       'Reads a death certificate and produces the notification letters an executor has to send — sixteen institution types, from Social Security and the IRS down to streaming subscriptions, each with its own required format and enclosures. Four services across an async queue boundary, with SSNs encrypted at the application layer before they ever reach storage.',
     caseStudy: {
@@ -159,7 +159,7 @@ export const projects = [
     id: 'shruti',
     name: 'Shruti',
     tags: ['ai', 'platform', 'shipped'],
-    meta: 'platform · C# / .NET 8',
+    meta: 'local Windows dictation app · C# / .NET 8',
     summary:
       'Windows-native dictation that runs entirely on the machine. A global hotkey captures microphone audio, a bundled whisper.cpp build transcribes it with no network call, and the text lands in whichever window was focused before recording started. That last step is the hard one: inserting text reliably into arbitrary third-party applications, each with its own idea of how input arrives.',
     caseStudy: {

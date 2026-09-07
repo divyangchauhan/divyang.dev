@@ -61,12 +61,13 @@ export default function Hero() {
           fontWeight: 600,
           color: color.accent,
           margin: '0 0 22px',
-          maxWidth: '39ch',
+          maxWidth: '42ch',
           letterSpacing: '-.02em',
           textWrap: 'balance',
         }}
       >
-        Applied AI engineer building systems you can measure, verify, and ship.
+        Backend + Applied AI engineer building systems you can measure, verify,
+        and ship.
       </div>
       <p
         style={{
@@ -77,9 +78,9 @@ export default function Hero() {
           margin: '0 0 36px',
         }}
       >
-        I design agent architectures, evaluation harnesses, and LLM-backed
-        products — bringing the backend, security, and infrastructure depth
-        needed to make AI systems reliable beyond the demo.
+        I build production backends, agent architectures, evaluation harnesses,
+        and LLM-backed products, bringing security and infrastructure depth to
+        AI systems that need to work beyond the demo.
       </p>
       <div
         style={{

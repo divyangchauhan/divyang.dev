@@ -2,6 +2,7 @@ import { color, sans } from '../theme'
 import Nav from '../components/Nav'
 import Hero from '../components/Hero'
 import Projects from '../components/Projects'
+import Experience from '../components/Experience'
 import Skills from '../components/Skills'
 import Contact from '../components/Contact'
 import HashScroll from './hash-scroll'
@@ -75,6 +76,7 @@ export default function Home() {
       <Hero />
       <main>
         <Projects />
+        <Experience />
         <Skills />
         <Contact />
       </main>
