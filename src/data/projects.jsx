@@ -2,7 +2,7 @@ import { mono } from '../theme'
 
 const code = { fontFamily: mono, fontSize: 13 }
 
-// Four featured projects, in the order the handoff presents them. `tags` drive
+// Featured projects, in the order the handoff presents them. `tags` drive
 // the filter chips; `caseStudy` is what the "Read case study" toggle reveals.
 export const projects = [
   {
@@ -61,52 +61,6 @@ export const projects = [
       link: {
         href: 'https://github.com/divyangchauhan/Pramana',
         label: '→ github.com/divyangchauhan/Pramana',
-      },
-    },
-  },
-  {
-    id: 'clinchcv',
-    name: 'ClinchCV',
-    tags: ['ai', 'shipped'],
-    meta: 'AI resume analysis & job targeting · Next.js · live',
-    summary:
-      'A deployed Next.js app that turns a resume PDF into structured feedback: rubric-based scoring, ATS checks, job-fit analysis against a pasted description, bullet rewrites and cover letters. Every LLM response is schema-validated with retry-on-invalid and model fallback, and the whole thing is covered by 649 tests in CI that run against real infrastructure rather than mocks.',
-    caseStudy: {
-      heading: 'THE ENGINEERING STORY',
-      body: (
-        <>
-          <p>
-            Resume parsing is where most of the difficulty lives. Real resumes
-            arrive as multi-column layouts, tables, and scans, so extraction
-            falls back through several strategies and the pipeline rejects what
-            it can&rsquo;t read — an image-only PDF or a .txt file — instead of
-            passing garbage to the model. Every LLM call is a forced schema with
-            validation, retry-on-invalid, and provider fallback, so a malformed
-            response never reaches the UI.
-          </p>
-          <p>
-            Paid quota is enforced in the database, not the application. A
-            single Postgres RPC locks the user and resume rows, treats an
-            already-unlocked resume as idempotent, and increments the counter in
-            one transaction — two simultaneous requests can&rsquo;t both
-            succeed, every AI feature on a resume draws from one slot, and no
-            caller can unlock a resume they don&rsquo;t own. CI runs lint,
-            typecheck, Vitest and Playwright on every push, with browser tests
-            hitting real Supabase and R2.
-          </p>
-        </>
-      ),
-      asideHeading: 'STACK & SCALE',
-      stack:
-        'Next.js 16 · React 19 · TypeScript · Supabase (Postgres, no ORM) · Cloudflare R2 · Anthropic · Razorpay · Sentry · Vercel',
-      metrics: [
-        ['Commits', '193 · Apr–Aug 2026'],
-        ['Tests', '649 · 62 files · CI'],
-      ],
-      // Closed source — the live product stands in for a repo link.
-      link: {
-        href: 'https://clinchcv.com/',
-        label: '→ clinchcv.com',
       },
     },
   },

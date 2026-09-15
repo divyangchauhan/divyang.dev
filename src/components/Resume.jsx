@@ -64,18 +64,17 @@ function Bullets({ items }) {
 
 const projects = [
   {
-    title: 'Pramana: Multi-agent smart-contract vulnerability scanner',
+    title:
+      'Pramana: Multi-agent smart-contract vulnerability scanner & evaluation harness',
     bullets: [
       'Designed provider-neutral three agent system with context isolation and tool usage that produces executable PoC',
-      'Built an eval harness covering 14 labeled vulnerabilities in 11 classes plus a patched negative control, with baselines, cost/latency tracking, CI and offline tests',
-      'Benchmarked the agents across Claude, GPT, and Kimi; best runs found 13/14 vulnerabilities with 0 confirmed false positive',
+      'Built an eval harness covering 14 labeled vulnerabilities in 11 classes with patched negative control, with baselines and cost/latency tracking. Benchmarked the agents; best runs found 13/14 vulnerabilities with 0 false positive',
     ],
   },
   {
-    title: 'ClinchCV: Full-stack AI resume analysis and job targeting',
+    title: 'DiffVouch: AI code-review agent skill & CLI',
     bullets: [
-      'Shipped a full-stack AI product that parses resume PDFs and gives structured output, rubric-based scoring, ATS checks, job-fit analysis, and contextual rewrites',
-      'Enforced structured outputs with schema validation, automatic retries for invalid output, and model fallback',
+      'Built a portable AI code-review Agent Skill and CLI that analyzes Git changes, produces actionable findings and weighted ratings, and can publish GitHub PR reviews',
     ],
   },
 ]
@@ -83,24 +82,23 @@ const projects = [
 const skills = [
   [
     'AI Systems:',
-    'OpenAI, Anthropic, agent orchestration, tool calling, structured outputs, context isolation, evals',
+    'agent orchestration, tool calling, structured outputs, context isolation, evaluation harnesses, regression testing',
   ],
   [
     'Languages & Databases:',
-    'Python, TypeScript, JavaScript, Solidity, SQL, PostgreSQL, MySQL, MongoDB',
+    'Python, TypeScript, JavaScript, SQL, PostgreSQL, MySQL, MongoDB',
   ],
   [
     'Frameworks:',
-    'Node.js, NestJS, Django REST Framework, Pydantic, GraphQL, React, Next.js, Foundry, Slither',
+    'Node.js, NestJS, Django REST Framework, Pydantic, GraphQL, React, Next.js',
   ],
   [
     'Infrastructure & Messaging:',
-    'AWS, Docker, Terraform, Celery, Kafka, RabbitMQ',
+    'AWS, Cognito, Lambda, Docker, Terraform, CI/CD, Celery, Kafka, RabbitMQ',
   ],
 ]
 
 const education = [
-  ['Offensive Security Certified Professional, OffSec', '2017'],
   [
     'IIT Bombay, B.Tech coursework, Metallurgical Engineering & Materials Science',
     '2016',
@@ -205,10 +203,12 @@ export default function Resume() {
             margin: 0,
           }}
         >
-          Applied AI Engineer with 5+ years of building event-driven services
-          and multi-tenant platforms. Developed provider neutral, tool-using
-          agent systems with context isolation and evals. Led a 9-person team
-          shipping security software for multinational banks. OSCP certified.
+          Senior Backend Engineer with 5+ years of experience building and
+          owning production backend systems, multi-tenant SaaS, cloud
+          infrastructure, and platform migrations, with hands-on Applied AI
+          experience across tool-using agent systems and evaluation harnesses.
+          Led a 9-person team shipping security software for multinational
+          banks. OSCP certified.
         </p>
 
         <SectionLabel gap={14}>PROJECTS</SectionLabel>
@@ -251,9 +251,10 @@ export default function Resume() {
           </div>
           <Bullets
             items={[
-              'Decomposed a monolithic NestJS backend into independently scalable API and automation services; established the monorepo and migrated 57K+ blockchain events across databases with ~1 minute of downtime',
-              'Architected a NestJS EVM event-ingestion service processing events across Ethereum, Gnosis, and Arbitrum for 23+ downstream consumers, including notification workflows serving 700+ active jurors',
-              'Automated dispute progression and juror staking across networks; used transaction simulation and batched calls to improve execution reliability and reduce gas usage by ~22%',
+              'Led splitting of monolithic NestJS backend into horizontally scalable API and single instance automation services: established the monorepo and migrated 57K+ production events across databases with ~1 minute of downtime',
+              'Built Atlas’s NestJS backend from scratch, designing runtime-configurable event ingestion across 3 production EVM chains, using Node.js EventEmitter for asynchronous downstream processing by 23+ consumers',
+              'Caught an unbounded RPC hot-path dependency during code review and rebuilt the path around synchronized database reads, removing the DoS risk before production',
+              'Automated dispute progression and juror staking across networks; used transaction simulation and batched calls to improve execution reliability and reduce cost by ~22%',
             ]}
           />
         </div>
@@ -287,6 +288,7 @@ export default function Resume() {
               'Led a cross-functional team of 9 building Assure v2, a multi-tenant vulnerability-triage and threat-surface management platform sold directly to multinational banks and white-labeled by cybersecurity resellers',
               'Built an AI-assisted APT attribution workflow using the OpenAI API to map threat-surface to threat actors',
               'Replatformed Assure from OutSystems, eliminating ~$200K/year in platform costs while enabling 3-level tenancy, data isolation modes, and white-labeling; authored ~70% of the backend and shipped in six months',
+              'Architected Assure v2’s authorization model using CASL.js: 5-role hierarchical RBAC plus ABAC (Attribute-Based Access Control), tenant isolation, and per-user project access',
               "Wrote Terraform for Assure v2's core AWS infrastructure, reducing deployment time from ~2 hours to 10–15 minutes; introduced Cypress E2E tests, reducing full regression from hours to under 30 minutes",
             ]}
           />
@@ -317,7 +319,7 @@ export default function Resume() {
           />
         </div>
 
-        <SectionLabel>CERTIFICATION &amp; EDUCATION</SectionLabel>
+        <SectionLabel>EDUCATION</SectionLabel>
         <div
           className="bp-avoid-break"
           style={{
