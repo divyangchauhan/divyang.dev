@@ -427,6 +427,18 @@ test('résumé route renders, links back, and strips chrome for print', async ({
   const sheetBounds = await sheet.boundingBox()
   expect(sheetBounds.width).toBeCloseTo((210 / 25.4) * 96, 0)
   expect(sheetBounds.height).toBeCloseTo((297 / 25.4) * 96, 0)
+  await page.evaluate(() => document.fonts.ready)
+  const lineCount = (locator) =>
+    locator.evaluate((element) => {
+      const range = document.createRange()
+      range.selectNodeContents(element)
+      return new Set(
+        [...range.getClientRects()].map((rect) => Math.round(rect.top)),
+      ).size
+    })
+  expect(await lineCount(sheet.locator(':scope > p'))).toBe(3)
+  expect(await lineCount(sheet.locator('li').first())).toBe(1)
+  expect(await lineCount(sheet.locator('.bp-resume-skills p').first())).toBe(1)
   await expect(sheet).toContainText(
     'Senior Backend Engineer with 5+ years of experience building and owning production backend systems, multi-tenant SaaS, cloud infrastructure, and platform migrations,',
   )
