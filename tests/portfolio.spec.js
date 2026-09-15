@@ -54,12 +54,7 @@ test('work filters narrow the card list by tag', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 })
   await loadPortfolio(page)
 
-  await expect(cardTitles(page)).toHaveText([
-    'Pramana',
-    'ClinchCV',
-    'Tarpan',
-    'Shruti',
-  ])
+  await expect(cardTitles(page)).toHaveText(['Pramana', 'Tarpan', 'Shruti'])
 
   await page.getByRole('button', { name: 'Security' }).click()
   await expect(cardTitles(page)).toHaveText(['Pramana'])
@@ -68,15 +63,15 @@ test('work filters narrow the card list by tag', async ({ page }) => {
   await expect(cardTitles(page)).toHaveText(['Tarpan'])
 
   await page.getByRole('button', { name: 'Shipped' }).click()
-  await expect(cardTitles(page)).toHaveText(['ClinchCV', 'Shruti'])
+  await expect(cardTitles(page)).toHaveText(['Shruti'])
 
   await page.getByRole('button', { name: 'Applied AI' }).click()
-  await expect(cardTitles(page)).toHaveCount(4)
+  await expect(cardTitles(page)).toHaveCount(3)
 
   const allButton = page.getByRole('button', { name: 'All', exact: true })
   await allButton.click()
   await expect(allButton).toHaveAttribute('aria-pressed', 'true')
-  await expect(cardTitles(page)).toHaveCount(4)
+  await expect(cardTitles(page)).toHaveCount(3)
 })
 
 test('case studies expand one at a time', async ({ page }) => {
@@ -84,7 +79,7 @@ test('case studies expand one at a time', async ({ page }) => {
   await loadPortfolio(page)
 
   const pramana = cards(page).first()
-  const tarpan = cards(page).nth(2)
+  const tarpan = cards(page).nth(1)
   const pramanaToggle = pramana.getByRole('button')
   const tarpanToggle = tarpan.getByRole('button')
 
@@ -134,11 +129,10 @@ test('copy, anchors, outbound links, and metadata are correct', async ({
     page.getByRole('link', { name: /github\.com\/divyangchauhan\/Pramana/ }),
   ).toHaveAttribute('href', 'https://github.com/divyangchauhan/Pramana')
 
-  // ClinchCV is closed source, so its case study links to the live product.
   await page.locator('#work article').nth(1).getByRole('button').click()
   await expect(
-    page.getByRole('link', { name: /clinchcv\.com/ }),
-  ).toHaveAttribute('href', 'https://clinchcv.com/')
+    page.getByRole('link', { name: /github\.com\/divyangchauhan\/Tarpan/ }),
+  ).toHaveAttribute('href', 'https://github.com/divyangchauhan/Tarpan')
 
   const experience = page.locator('#experience')
   await expect(
@@ -429,8 +423,24 @@ test('résumé route renders, links back, and strips chrome for print', async ({
   // Keep the HTML résumé in sync with the maintained PDF. These are the
   // details most likely to drift when the source document is revised.
   const sheet = page.locator('.bp-sheet')
+  // The screen sheet and browser print output must both stay on one custom-size page.
+  const sheetBounds = await sheet.boundingBox()
+  expect(sheetBounds.width).toBeCloseTo((230 / 25.4) * 96, 0)
+  expect(sheetBounds.height).toBeCloseTo((297 / 25.4) * 96, 0)
+  await page.evaluate(() => document.fonts.ready)
+  const lineCount = (locator) =>
+    locator.evaluate((element) => {
+      const range = document.createRange()
+      range.selectNodeContents(element)
+      return new Set(
+        [...range.getClientRects()].map((rect) => Math.round(rect.top)),
+      ).size
+    })
+  expect(await lineCount(sheet.locator(':scope > p'))).toBe(3)
+  expect(await lineCount(sheet.locator('li').first())).toBe(1)
+  expect(await lineCount(sheet.locator('.bp-resume-skills p').first())).toBe(1)
   await expect(sheet).toContainText(
-    'Applied AI Engineer with 5+ years of building event-driven services and multi-tenant platforms.',
+    'Senior Backend Engineer with 5+ years of experience building and owning production backend systems, multi-tenant SaaS, cloud infrastructure, and platform migrations,',
   )
   await expect(sheet).toContainText(
     'Designed provider-neutral three agent system with context isolation and tool usage that produces executable PoC',
@@ -455,6 +465,14 @@ test('résumé route renders, links back, and strips chrome for print', async ({
   await expect(toolbar).toBeVisible()
   await page.emulateMedia({ media: 'print' })
   await expect(toolbar).toBeHidden()
+  const printed = (await page.pdf({ preferCSSPageSize: true })).toString(
+    'latin1',
+  )
+  expect([...printed.matchAll(/\/Type \/Page\b/g)]).toHaveLength(1)
+  const mediaBox = printed.match(/\/MediaBox \[0 0 ([\d.]+) ([\d.]+)\]/)
+  expect(mediaBox).not.toBeNull()
+  expect(Number(mediaBox[1])).toBeCloseTo((230 / 25.4) * 72, 0)
+  expect(Number(mediaBox[2])).toBeCloseTo((297 / 25.4) * 72, 0)
   await page.emulateMedia({ media: 'screen' })
 
   const overflow = await page.evaluate(() => ({

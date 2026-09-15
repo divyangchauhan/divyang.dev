@@ -17,32 +17,6 @@ export default function Hero() {
       className="bp-shell bp-pad"
       style={{ padding: '88px 40px 64px' }}
     >
-      <div
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: 8,
-          fontFamily: mono,
-          fontSize: 12,
-          color: color.accent,
-          border: `1px solid ${color.ruleAccent}`,
-          background: color.tint,
-          padding: '6px 12px',
-          borderRadius: 20,
-          marginBottom: 30,
-        }}
-      >
-        <span
-          style={{
-            width: 7,
-            height: 7,
-            borderRadius: '50%',
-            background: color.accent,
-            display: 'inline-block',
-          }}
-        />
-        BACKEND · APPLIED AI · AGENTIC SYSTEMS
-      </div>
       <h1
         style={{
           fontSize: 'clamp(42px, 8.4vw, 76px)',

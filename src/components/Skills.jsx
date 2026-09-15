@@ -27,25 +27,6 @@ const groups = [
   },
 ]
 
-const depth = [
-  [
-    'Deepest:',
-    'backend system design, API design, database modeling & migrations, async processing, event-driven architectures.',
-  ],
-  [
-    'Working breadth:',
-    'React and Next.js frontends, AWS infrastructure, Docker, Terraform, the Web3 stack, Windows desktop development.',
-  ],
-  [
-    'Weakest:',
-    'CSS and pixel-level frontend — can read, debug, and ship clean UI changes; leans on AI for styling.',
-  ],
-  [
-    'Mindset:',
-    'stacks are tools. The architecture and the problem matter more than the medium.',
-  ],
-]
-
 export default function Skills() {
   return (
     <section
@@ -106,31 +87,6 @@ export default function Skills() {
             </p>
           </div>
         ))}
-      </div>
-
-      <div
-        style={{
-          border: `1px solid ${color.ruleAccent}`,
-          borderRadius: 8,
-          background: color.tint,
-          padding: '26px 28px',
-        }}
-      >
-        <div
-          style={{ ...kicker('.12em'), color: color.accent, marginBottom: 14 }}
-        >
-          DEPTH &amp; RANGE
-        </div>
-        <div
-          className="bp-grid-2"
-          style={{ fontSize: 15, lineHeight: 1.6, color: color.bodyAlt }}
-        >
-          {depth.map(([label, body]) => (
-            <p key={label} style={{ margin: 0 }}>
-              <strong style={{ color: color.ink }}>{label}</strong> {body}
-            </p>
-          ))}
-        </div>
       </div>
     </section>
   )

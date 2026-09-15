@@ -4,7 +4,7 @@ import { openGraphImages, twitterCard } from '../site-metadata'
 const title = 'Résumé — Divyang Chauhan'
 
 const description =
-  'Résumé of Divyang Chauhan — Applied AI Engineer with 5+ years of building event-driven services and multi-tenant platforms. OSCP certified.'
+  'Résumé of Divyang Chauhan — Senior Backend Engineer with 5+ years of experience building production backend systems, multi-tenant SaaS, and cloud infrastructure, with hands-on Applied AI experience. OSCP certified.'
 
 // The reason this migration happened. As an SPA every route served the same
 // index.html, so /resume claimed the homepage as its canonical while

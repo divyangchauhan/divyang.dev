@@ -206,13 +206,110 @@ button:focus-visible {
 }
 
 .bp-sheet {
-  width: 816px;
+  width: 230mm;
+  min-height: 297mm;
   max-width: 100%;
   margin: 0 auto;
   background: #fff;
-  padding: 48px;
+  color: #3a3f4d;
+  padding: 11mm 12mm;
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  font-size: 10pt;
+  line-height: 1.2;
   box-shadow: 0 20px 60px -30px rgba(20, 30, 80, 0.4);
   border-radius: 4px;
+}
+
+.bp-sheet p,
+.bp-sheet li,
+.bp-sheet h3,
+.bp-resume-row > span:first-child {
+  text-wrap: pretty;
+}
+
+.bp-sheet p {
+  margin: 0;
+}
+
+.bp-resume-header {
+  text-align: center;
+  border-bottom: 2px solid #15171f;
+  padding-bottom: 8px;
+}
+.bp-resume-header h1 {
+  margin: 0 0 3px;
+  font-size: 20pt;
+  color: #15171f;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.bp-resume-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3px 8px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 8pt;
+}
+.bp-resume-contacts a {
+  text-decoration: none;
+}
+.bp-resume-contacts a + a::before {
+  content: '•';
+  display: inline-block;
+  margin-right: 8px;
+  color: #c3c9e6;
+}
+.bp-resume-section {
+  margin: 10px 0 5px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #dfe3ef;
+  color: #2f3ad1;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 8.625pt;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  line-height: 1.15;
+  break-after: avoid;
+}
+.bp-resume-entry + .bp-resume-entry {
+  margin-top: 7px;
+}
+.bp-sheet h3,
+.bp-sheet h4 {
+  margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+}
+.bp-sheet h3,
+.bp-sheet strong {
+  color: #15171f;
+}
+.bp-sheet h4 {
+  color: #2f3ad1;
+  font-weight: 600;
+}
+.bp-sheet ul {
+  margin: 3px 0 0;
+  padding-left: 24px;
+}
+.bp-sheet li {
+  padding-left: 3px;
+}
+.bp-sheet li + li {
+  margin-top: 2px;
+}
+.bp-resume-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.bp-resume-date {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 8pt;
+  color: #8b90a0;
+  white-space: nowrap;
 }
 
 @media (max-width: 900px) {
@@ -245,6 +342,14 @@ button:focus-visible {
   }
   .bp-sheet {
     padding: 28px 22px;
+    min-height: 0;
+  }
+  .bp-resume-contacts a + a::before {
+    display: none;
+  }
+  .bp-resume-row {
+    flex-wrap: wrap;
+    gap: 2px 12px;
   }
   .bp-404-card {
     padding: 34px 22px 30px;
@@ -276,8 +381,8 @@ button:focus-visible {
 
 @media print {
   @page {
-    size: letter;
-    margin: 0.5in;
+    size: 230mm 297mm;
+    margin: 11mm 12mm;
   }
   body,
   body:has(.bp-resume-page) {
@@ -286,7 +391,11 @@ button:focus-visible {
   .bp-no-print {
     display: none !important;
   }
+  .bp-resume-page {
+    padding: 0 !important;
+  }
   .bp-sheet {
+    min-height: 0;
     box-shadow: none !important;
     margin: 0 !important;
     width: 100% !important;
