@@ -14,49 +14,15 @@ const contactLinks = [
   },
 ]
 
-const listStyle = {
-  margin: '7px 0 0',
-  paddingLeft: 18,
-  fontSize: 14,
-  lineHeight: 1.55,
-  color: color.bodyAlt,
-}
-
-const dateStyle = {
-  fontFamily: mono,
-  fontSize: 12,
-  color: color.faint,
-  whiteSpace: 'nowrap',
-}
-
-function SectionLabel({ children, gap = 12 }) {
-  return (
-    <div
-      style={{
-        fontFamily: mono,
-        fontSize: 11.5,
-        letterSpacing: '.14em',
-        color: color.accent,
-        borderBottom: `1px solid ${color.rule}`,
-        paddingBottom: 6,
-        margin: `24px 0 ${gap}px`,
-      }}
-    >
-      {children}
-    </div>
-  )
+function SectionLabel({ children }) {
+  return <h2 className="bp-resume-section">{children}</h2>
 }
 
 function Bullets({ items }) {
   return (
-    <ul style={listStyle}>
-      {items.map((item, index) => (
-        <li
-          key={item}
-          style={{ marginBottom: index === items.length - 1 ? 0 : 5 }}
-        >
-          {item}
-        </li>
+    <ul>
+      {items.map((item) => (
+        <li key={item}>{item}</li>
       ))}
     </ul>
   )
@@ -105,6 +71,42 @@ const education = [
   ],
 ]
 
+const experience = [
+  {
+    company: 'Kleros, Remote',
+    role: 'Backend Engineer',
+    dates: 'Feb 2024 – May 2026',
+    bullets: [
+      'Led splitting of monolithic NestJS backend into horizontally scalable API and single instance automation services: established the monorepo and migrated 57K+ production events across databases with ~1 minute of downtime',
+      'Built Atlas’s NestJS backend from scratch, designing runtime-configurable event ingestion across 3 production EVM chains, using Node.js EventEmitter for asynchronous downstream processing by 23+ consumers',
+      'Caught an unbounded RPC hot-path dependency during code review and rebuilt the path around synchronized database reads, removing the DoS risk before production',
+      'Automated dispute progression and juror staking across networks; used transaction simulation and batched calls to improve execution reliability and reduce cost by ~22%',
+    ],
+  },
+  {
+    company: 'NST Cyber, Remote',
+    role: 'Software Engineer Team Lead',
+    dates: 'Jan 2023 – Feb 2024',
+    bullets: [
+      'Led a cross-functional team of 9 building Assure v2, a multi-tenant vulnerability-triage and threat-surface management platform sold directly to multinational banks and white-labeled by cybersecurity resellers',
+      'Built an AI-assisted APT attribution workflow using the OpenAI API to map threat-surface to threat actors',
+      'Replatformed Assure from OutSystems, eliminating ~$200K/year in platform costs while enabling 3-level tenancy, data isolation modes, and white-labeling; authored ~70% of the backend and shipped in six months',
+      'Architected Assure v2’s authorization model using CASL.js: 5-role hierarchical RBAC plus ABAC (Attribute-Based Access Control), tenant isolation, and per-user project access',
+      "Wrote Terraform for Assure v2's core AWS infrastructure, reducing deployment time from ~2 hours to 10–15 minutes; introduced Cypress E2E tests, reducing full regression from hours to under 30 minutes",
+    ],
+  },
+  {
+    company: '',
+    role: 'Software Engineer',
+    dates: 'Mar 2021 – Jan 2023',
+    bullets: [
+      'Delivered Assure v1 concept to production in 3 months, authoring 80% of codebase and onboarding first 5 enterprise clients; rapid adoption exceeded platform limits, driving decision to rebuild on scalable architecture',
+      "Developed Tigress's Django REST Framework backend from scratch; designed a MySQL schema supporting 10M+ records and created a serializer abstraction that reduced new endpoint development time by 60%",
+      "Eliminated distributed-task bottleneck in Tigress's scanning engine by architecting cross-instance Celery dispatch, reducing scan time by 75% and scaling the platform from 10 to 100 daily scans without infrastructure changes",
+    ],
+  },
+]
+
 export default function Resume() {
   return (
     <div
@@ -114,7 +116,7 @@ export default function Resume() {
       <div
         className="bp-no-print"
         style={{
-          width: 816,
+          width: '210mm',
           maxWidth: '100%',
           margin: '0 auto 20px',
           display: 'flex',
@@ -152,57 +154,19 @@ export default function Resume() {
       </div>
 
       <article className="bp-sheet">
-        <header
-          style={{
-            textAlign: 'center',
-            borderBottom: `2px solid ${color.ink}`,
-            paddingBottom: 16,
-          }}
-        >
-          <h1
-            style={{
-              fontSize: 34,
-              fontWeight: 700,
-              margin: '0 0 8px',
-              letterSpacing: '-.02em',
-            }}
-          >
-            Divyang Chauhan
-          </h1>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-              gap: '6px 10px',
-              fontFamily: mono,
-              fontSize: 12,
-              color: color.body,
-            }}
-          >
-            {contactLinks.map(({ label, href }, index) => (
-              <span
-                key={label}
-                style={{ display: 'inline-flex', gap: '6px 10px' }}
-              >
-                <a href={href}>{label}</a>
-                {index < contactLinks.length - 1 ? (
-                  <span style={{ color: color.ruleAccent }}>•</span>
-                ) : null}
-              </span>
+        <header className="bp-resume-header">
+          <h1>Divyang Chauhan</h1>
+          <div className="bp-resume-contacts">
+            {contactLinks.map(({ label, href }) => (
+              <a key={label} href={href}>
+                {label}
+              </a>
             ))}
           </div>
         </header>
 
         <SectionLabel>SUMMARY</SectionLabel>
-        <p
-          style={{
-            fontSize: 14,
-            lineHeight: 1.6,
-            color: color.bodyAlt,
-            margin: 0,
-          }}
-        >
+        <p>
           Senior Backend Engineer with 5+ years of experience building and
           owning production backend systems, multi-tenant SaaS, cloud
           infrastructure, and platform migrations, with hands-on Applied AI
@@ -211,155 +175,40 @@ export default function Resume() {
           banks. OSCP certified.
         </p>
 
-        <SectionLabel gap={14}>PROJECTS</SectionLabel>
-        {projects.map(({ title, bullets }, index) => (
-          <div
-            className="bp-avoid-break"
-            key={title}
-            style={{ marginBottom: index === projects.length - 1 ? 0 : 16 }}
-          >
-            <div style={{ fontSize: 15.5, fontWeight: 700 }}>{title}</div>
+        <SectionLabel>PROJECTS</SectionLabel>
+        {projects.map(({ title, bullets }) => (
+          <div className="bp-resume-entry bp-avoid-break" key={title}>
+            <h3>{title}</h3>
             <Bullets items={bullets} />
           </div>
         ))}
 
-        <SectionLabel gap={14}>PROFESSIONAL EXPERIENCE</SectionLabel>
-
-        <div className="bp-avoid-break" style={{ marginBottom: 18 }}>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'baseline',
-              gap: 16,
-            }}
-          >
-            <span style={{ fontSize: 16, fontWeight: 700 }}>
-              Kleros, Remote
-            </span>
-            <span style={dateStyle}>Feb 2024 – May 2026</span>
+        <SectionLabel>PROFESSIONAL EXPERIENCE</SectionLabel>
+        {experience.map(({ company, role, dates, bullets }) => (
+          <div className="bp-resume-entry bp-avoid-break" key={role}>
+            {company && <h3>{company}</h3>}
+            <div className="bp-resume-row">
+              <h4>{role}</h4>
+              <span className="bp-resume-date">{dates}</span>
+            </div>
+            <Bullets items={bullets} />
           </div>
-          <div
-            style={{
-              fontSize: 14,
-              fontWeight: 600,
-              color: color.accent,
-              marginTop: 2,
-            }}
-          >
-            Backend Engineer
-          </div>
-          <Bullets
-            items={[
-              'Led splitting of monolithic NestJS backend into horizontally scalable API and single instance automation services: established the monorepo and migrated 57K+ production events across databases with ~1 minute of downtime',
-              'Built Atlas’s NestJS backend from scratch, designing runtime-configurable event ingestion across 3 production EVM chains, using Node.js EventEmitter for asynchronous downstream processing by 23+ consumers',
-              'Caught an unbounded RPC hot-path dependency during code review and rebuilt the path around synchronized database reads, removing the DoS risk before production',
-              'Automated dispute progression and juror staking across networks; used transaction simulation and batched calls to improve execution reliability and reduce cost by ~22%',
-            ]}
-          />
-        </div>
-
-        <div className="bp-avoid-break" style={{ marginBottom: 16 }}>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'baseline',
-              gap: 16,
-            }}
-          >
-            <span style={{ fontSize: 16, fontWeight: 700 }}>
-              NST Cyber, Remote
-            </span>
-            <span style={dateStyle}>Jan 2023 – Feb 2024</span>
-          </div>
-          <div
-            style={{
-              fontSize: 14,
-              fontWeight: 600,
-              color: color.accent,
-              marginTop: 2,
-            }}
-          >
-            Software Engineer Team Lead
-          </div>
-          <Bullets
-            items={[
-              'Led a cross-functional team of 9 building Assure v2, a multi-tenant vulnerability-triage and threat-surface management platform sold directly to multinational banks and white-labeled by cybersecurity resellers',
-              'Built an AI-assisted APT attribution workflow using the OpenAI API to map threat-surface to threat actors',
-              'Replatformed Assure from OutSystems, eliminating ~$200K/year in platform costs while enabling 3-level tenancy, data isolation modes, and white-labeling; authored ~70% of the backend and shipped in six months',
-              'Architected Assure v2’s authorization model using CASL.js: 5-role hierarchical RBAC plus ABAC (Attribute-Based Access Control), tenant isolation, and per-user project access',
-              "Wrote Terraform for Assure v2's core AWS infrastructure, reducing deployment time from ~2 hours to 10–15 minutes; introduced Cypress E2E tests, reducing full regression from hours to under 30 minutes",
-            ]}
-          />
-        </div>
-
-        <div className="bp-avoid-break">
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'baseline',
-              gap: 16,
-            }}
-          >
-            <span
-              style={{ fontSize: 14, fontWeight: 600, color: color.accent }}
-            >
-              Software Engineer
-            </span>
-            <span style={dateStyle}>Mar 2021 – Jan 2023</span>
-          </div>
-          <Bullets
-            items={[
-              'Delivered Assure v1 concept to production in 3 months, authoring 80% of codebase and onboarding first 5 enterprise clients; rapid adoption exceeded platform limits, driving decision to rebuild on scalable architecture',
-              "Developed Tigress's Django REST Framework backend from scratch; designed a MySQL schema supporting 10M+ records and created a serializer abstraction that reduced new endpoint development time by 60%",
-              "Eliminated distributed-task bottleneck in Tigress's scanning engine by architecting cross-instance Celery dispatch, reducing scan time by 75% and scaling the platform from 10 to 100 daily scans without infrastructure changes",
-            ]}
-          />
-        </div>
+        ))}
 
         <SectionLabel>EDUCATION</SectionLabel>
-        <div
-          className="bp-avoid-break"
-          style={{
-            display: 'grid',
-            gap: 6,
-            fontSize: 14,
-            lineHeight: 1.5,
-            color: color.bodyAlt,
-          }}
-        >
-          {education.map(([label, year]) => (
-            <div
-              key={label}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                gap: 16,
-              }}
-            >
-              <span>{label}</span>
-              <span style={dateStyle}>{year}</span>
-            </div>
-          ))}
-        </div>
+        {education.map(([label, year]) => (
+          <div className="bp-resume-row bp-avoid-break" key={label}>
+            <span>{label}</span>
+            <span className="bp-resume-date">{year}</span>
+          </div>
+        ))}
 
         <SectionLabel>SKILLS</SectionLabel>
-        <div
-          className="bp-avoid-break"
-          style={{
-            display: 'grid',
-            gap: 6,
-            fontSize: 14,
-            lineHeight: 1.55,
-            color: color.bodyAlt,
-          }}
-        >
+        <div className="bp-resume-skills bp-avoid-break">
           {skills.map(([label, body]) => (
-            <div key={label}>
-              <strong style={{ color: color.ink }}>{label}</strong> {body}
-            </div>
+            <p key={label}>
+              <strong>{label}</strong> {body}
+            </p>
           ))}
         </div>
       </article>

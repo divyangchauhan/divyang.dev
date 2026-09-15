@@ -423,6 +423,10 @@ test('résumé route renders, links back, and strips chrome for print', async ({
   // Keep the HTML résumé in sync with the maintained PDF. These are the
   // details most likely to drift when the source document is revised.
   const sheet = page.locator('.bp-sheet')
+  // The screen sheet and browser print output must both stay on one A4 page.
+  const sheetBounds = await sheet.boundingBox()
+  expect(sheetBounds.width).toBeCloseTo((210 / 25.4) * 96, 0)
+  expect(sheetBounds.height).toBeCloseTo((297 / 25.4) * 96, 0)
   await expect(sheet).toContainText(
     'Senior Backend Engineer with 5+ years of experience building and owning production backend systems, multi-tenant SaaS, cloud infrastructure, and platform migrations,',
   )
@@ -449,6 +453,14 @@ test('résumé route renders, links back, and strips chrome for print', async ({
   await expect(toolbar).toBeVisible()
   await page.emulateMedia({ media: 'print' })
   await expect(toolbar).toBeHidden()
+  const printed = (await page.pdf({ preferCSSPageSize: true })).toString(
+    'latin1',
+  )
+  expect([...printed.matchAll(/\/Type \/Page\b/g)]).toHaveLength(1)
+  const mediaBox = printed.match(/\/MediaBox \[0 0 ([\d.]+) ([\d.]+)\]/)
+  expect(mediaBox).not.toBeNull()
+  expect(Number(mediaBox[1])).toBeCloseTo((210 / 25.4) * 72, 0)
+  expect(Number(mediaBox[2])).toBeCloseTo((297 / 25.4) * 72, 0)
   await page.emulateMedia({ media: 'screen' })
 
   const overflow = await page.evaluate(() => ({
