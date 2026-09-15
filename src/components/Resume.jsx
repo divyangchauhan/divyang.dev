@@ -116,7 +116,7 @@ export default function Resume() {
       <div
         className="bp-no-print"
         style={{
-          width: '210mm',
+          width: '230mm',
           maxWidth: '100%',
           margin: '0 auto 20px',
           display: 'flex',

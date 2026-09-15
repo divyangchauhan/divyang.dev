@@ -206,16 +206,15 @@ button:focus-visible {
 }
 
 .bp-sheet {
-  width: 210mm;
+  width: 230mm;
   min-height: 297mm;
   max-width: 100%;
   margin: 0 auto;
   background: #fff;
   color: #3a3f4d;
-  padding: 11mm 9mm;
+  padding: 11mm 12mm;
   font-family: 'IBM Plex Sans', system-ui, sans-serif;
-  font-size: 13px;
-  letter-spacing: -0.015em;
+  font-size: 10pt;
   line-height: 1.2;
   box-shadow: 0 20px 60px -30px rgba(20, 30, 80, 0.4);
   border-radius: 4px;
@@ -251,7 +250,6 @@ button:focus-visible {
   gap: 3px 8px;
   font-family: 'IBM Plex Mono', monospace;
   font-size: 8pt;
-  letter-spacing: normal;
 }
 .bp-resume-contacts a {
   text-decoration: none;
@@ -310,7 +308,6 @@ button:focus-visible {
 .bp-resume-date {
   font-family: 'IBM Plex Mono', monospace;
   font-size: 8pt;
-  letter-spacing: normal;
   color: #8b90a0;
   white-space: nowrap;
 }
@@ -384,8 +381,8 @@ button:focus-visible {
 
 @media print {
   @page {
-    size: A4;
-    margin: 11mm 9mm;
+    size: 230mm 297mm;
+    margin: 11mm 12mm;
   }
   body,
   body:has(.bp-resume-page) {
