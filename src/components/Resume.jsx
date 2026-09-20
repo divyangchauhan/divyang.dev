@@ -75,7 +75,7 @@ const experience = [
   {
     company: 'Kleros, Remote',
     role: 'Backend Engineer',
-    dates: 'Feb 2024 – May 2026',
+    dates: 'Feb 2024 – Present',
     bullets: [
       'Led splitting of monolithic NestJS backend into horizontally scalable API and single instance automation services: established the monorepo and migrated 57K+ production events across databases with ~1 minute of downtime',
       'Built Atlas’s NestJS backend from scratch, designing runtime-configurable event ingestion across 3 production EVM chains, using Node.js EventEmitter for asynchronous downstream processing by 23+ consumers',
