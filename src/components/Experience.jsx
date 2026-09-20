@@ -4,7 +4,7 @@ import { color, kicker, mono } from '../theme'
 const jobs = [
   {
     company: 'Kleros',
-    dates: 'FEB 2024 – MAY 2026 · REMOTE',
+    dates: 'FEB 2024 – PRESENT · REMOTE',
     role: 'Backend Engineer',
     stack: 'TypeScript · NestJS · PostgreSQL · EVM',
     body: 'Built and re-architected production backend systems for Kleros. Led the split of API and automation workloads into separate services and migrated 57K+ production events across databases with about one minute of downtime. Built a runtime-configurable event-ingestion service across 3 production chains feeding 23+ consumers, including a notification system serving 700+ active jurors.',
