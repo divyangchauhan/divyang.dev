@@ -308,11 +308,7 @@ export default function Projects() {
         }}
       >
         Also: Jobsieve (job aggregator, NestJS) · Verdikt (alt. Kleros Court UI)
-        · Mushak (Rust, available on{' '}
-        <a href="https://apps.microsoft.com/detail/9N40MGPD7DGV">
-          Microsoft Store
-        </a>{' '}
-        and winget) · DiffLoom.
+        · DiffLoom.
       </p>
     </section>
   )
