@@ -114,6 +114,7 @@ export const projects = [
     name: 'Shruti',
     tags: ['ai', 'platform', 'shipped'],
     meta: 'local Windows dictation app · C# / .NET 8',
+    storeUrl: 'https://apps.microsoft.com/detail/9N39R62TTCPS',
     summary:
       'Windows-native dictation that runs entirely on the machine. A global hotkey captures microphone audio, a bundled whisper.cpp build transcribes it with no network call, and the text lands in whichever window was focused before recording started. That last step is the hard one: inserting text reliably into arbitrary third-party applications, each with its own idea of how input arrives.',
     caseStudy: {

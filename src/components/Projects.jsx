@@ -194,6 +194,12 @@ function ProjectCard({ project, open, onToggle }) {
         {project.summary}
       </p>
 
+      {project.storeUrl ? (
+        <p style={{ fontFamily: mono, fontSize: 13, margin: '14px 0 0' }}>
+          <a href={project.storeUrl}>Available on Microsoft Store →</a>
+        </p>
+      ) : null}
+
       {project.chips ? (
         <div
           style={{
@@ -302,7 +308,11 @@ export default function Projects() {
         }}
       >
         Also: Jobsieve (job aggregator, NestJS) · Verdikt (alt. Kleros Court UI)
-        · Mushak (Rust, in winget) · DiffLoom.
+        · Mushak (Rust, available on{' '}
+        <a href="https://apps.microsoft.com/detail/9N40MGPD7DGV">
+          Microsoft Store
+        </a>{' '}
+        and winget) · DiffLoom.
       </p>
     </section>
   )
