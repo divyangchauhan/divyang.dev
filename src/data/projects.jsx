@@ -114,6 +114,7 @@ export const projects = [
     name: 'Shruti',
     tags: ['ai', 'platform', 'shipped'],
     meta: 'local Windows dictation app · C# / .NET 8',
+    storeUrl: 'https://apps.microsoft.com/detail/9N39R62TTCPS',
     summary:
       'Windows-native dictation that runs entirely on the machine. A global hotkey captures microphone audio, a bundled whisper.cpp build transcribes it with no network call, and the text lands in whichever window was focused before recording started. That last step is the hard one: inserting text reliably into arbitrary third-party applications, each with its own idea of how input arrives.',
     caseStudy: {
@@ -145,6 +146,49 @@ export const projects = [
       link: {
         href: 'https://github.com/divyangchauhan/Shruti',
         label: '→ github.com/divyangchauhan/Shruti',
+      },
+    },
+  },
+  {
+    id: 'mushak',
+    name: 'Mushak',
+    tags: ['platform', 'shipped'],
+    meta: 'Windows mouse utility for the MX Master 2S · Rust',
+    storeUrl: 'https://apps.microsoft.com/detail/9N40MGPD7DGV',
+    summary:
+      'A lightweight Windows replacement for Logitech Options+ for the MX Master 2S. Remaps buttons, controls SmartShift and DPI, and switches profiles with the active application. Written in Rust, with a system-tray process that keeps running and a native settings window that opens only when needed. Available on Microsoft Store and winget.',
+    caseStudy: {
+      heading: 'RESIDENT PROCESS & DEVICE CONTROL',
+      body: (
+        <>
+          <p>
+            The always-on process runs a Win32 message pump with separate
+            workers for mouse hooks, keystroke injection, and HID++ device
+            control. The settings window runs in a separate process, so its GUI
+            and GPU resources are released when the window closes. Settings are
+            shared through a TOML file, and the resident process publishes
+            device status for the window to read.
+          </p>
+          <p>
+            Mushak discovers the mouse over Bluetooth or a Unifying receiver and
+            reapplies settings after reconnection. Thumb-button gestures use
+            diverted raw mouse motion to distinguish taps from directional
+            swipes. On connection, unused button diverts are restored to native
+            reporting so settings left behind by other software do not disable
+            those buttons.
+          </p>
+        </>
+      ),
+      asideHeading: 'STACK & DEVICE',
+      stack: 'Rust · Win32 · HID++ 2.0 · Ply / OpenGL · TOML',
+      metrics: [
+        ['Device', 'Logitech MX Master 2S'],
+        ['Connections', 'Bluetooth · Unifying receiver'],
+        ['Platform', 'Windows 10 / 11 · x64'],
+      ],
+      link: {
+        href: 'https://github.com/divyangchauhan/Mushak',
+        label: '→ github.com/divyangchauhan/Mushak',
       },
     },
   },

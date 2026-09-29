@@ -54,7 +54,12 @@ test('work filters narrow the card list by tag', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 })
   await loadPortfolio(page)
 
-  await expect(cardTitles(page)).toHaveText(['Pramana', 'Tarpan', 'Shruti'])
+  await expect(cardTitles(page)).toHaveText([
+    'Pramana',
+    'Tarpan',
+    'Shruti',
+    'Mushak',
+  ])
 
   await page.getByRole('button', { name: 'Security' }).click()
   await expect(cardTitles(page)).toHaveText(['Pramana'])
@@ -63,7 +68,10 @@ test('work filters narrow the card list by tag', async ({ page }) => {
   await expect(cardTitles(page)).toHaveText(['Tarpan'])
 
   await page.getByRole('button', { name: 'Shipped' }).click()
-  await expect(cardTitles(page)).toHaveText(['Shruti'])
+  await expect(cardTitles(page)).toHaveText(['Shruti', 'Mushak'])
+
+  await page.getByRole('button', { name: 'Platform', exact: true }).click()
+  await expect(cardTitles(page)).toHaveText(['Shruti', 'Mushak'])
 
   await page.getByRole('button', { name: 'Applied AI' }).click()
   await expect(cardTitles(page)).toHaveCount(3)
@@ -71,7 +79,7 @@ test('work filters narrow the card list by tag', async ({ page }) => {
   const allButton = page.getByRole('button', { name: 'All', exact: true })
   await allButton.click()
   await expect(allButton).toHaveAttribute('aria-pressed', 'true')
-  await expect(cardTitles(page)).toHaveCount(3)
+  await expect(cardTitles(page)).toHaveCount(4)
 })
 
 test('case studies expand one at a time', async ({ page }) => {
