@@ -124,10 +124,9 @@ test('copy, anchors, outbound links, and metadata are correct', async ({
     page.getByRole('heading', { level: 1, name: 'Divyang Chauhan' }),
   ).toBeVisible()
   await expect(
-    page.getByText(
-      'Backend + Applied AI engineer building systems you can measure, verify, and ship.',
-      { exact: true },
-    ),
+    page.getByText('Principal Software Engineer · Backend & Applied AI', {
+      exact: true,
+    }),
   ).toBeVisible()
 
   await page.getByRole('link', { name: 'View the work →' }).click()
