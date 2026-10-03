@@ -40,8 +40,7 @@ export default function Hero() {
           textWrap: 'balance',
         }}
       >
-        Backend + Applied AI engineer building systems you can measure, verify,
-        and ship.
+        Principal Software Engineer · Backend &amp; Applied AI
       </div>
       <p
         style={{
@@ -52,9 +51,9 @@ export default function Hero() {
           margin: '0 0 36px',
         }}
       >
-        I build production backends, agent architectures, evaluation harnesses,
-        and LLM-backed products, bringing security and infrastructure depth to
-        AI systems that need to work beyond the demo.
+        Currently at NST Cyber. I build production backends, AI agents, and
+        evaluation systems, drawing on experience in security and cloud
+        infrastructure.
       </p>
       <div
         style={{

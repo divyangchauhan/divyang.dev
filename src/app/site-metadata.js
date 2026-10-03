@@ -8,7 +8,7 @@
 export const siteUrl = 'https://www.divyang.dev'
 
 export const siteDescription =
-  'Divyang Chauhan — applied AI engineer building tool-using agent systems with executable verification, reproducible evals, and production backend infrastructure.'
+  'Divyang Chauhan, Principal Software Engineer at NST Cyber, building production backends and applied AI systems with executable verification and reproducible evals.'
 
 const imageAlt =
   'Divyang Chauhan, Applied AI Engineer and Agent Systems Developer'

@@ -73,9 +73,17 @@ const education = [
 
 const experience = [
   {
+    company: 'NST Cyber',
+    role: 'Principal Software Engineer',
+    dates: 'Sep 2026 – Present',
+    bullets: [
+      "Work across NST Cyber's products and engineering teams, with responsibility for architecture, technical direction, engineering standards, and cross-team technical initiatives",
+    ],
+  },
+  {
     company: 'Kleros, Remote',
     role: 'Backend Engineer',
-    dates: 'Feb 2024 – Present',
+    dates: 'Feb 2024 – Sep 2026',
     bullets: [
       'Led splitting of monolithic NestJS backend into horizontally scalable API and single instance automation services: established the monorepo and migrated 57K+ production events across databases with ~1 minute of downtime',
       'Built Atlas’s NestJS backend from scratch, designing runtime-configurable event ingestion across 3 production EVM chains, using Node.js EventEmitter for asynchronous downstream processing by 23+ consumers',
@@ -167,12 +175,12 @@ export default function Resume() {
 
         <SectionLabel>SUMMARY</SectionLabel>
         <p>
-          Senior Backend Engineer with 5+ years of experience building and
-          owning production backend systems, multi-tenant SaaS, cloud
-          infrastructure, and platform migrations, with hands-on Applied AI
-          experience across tool-using agent systems and evaluation harnesses.
-          Led a 9-person team shipping security software for multinational
-          banks. OSCP certified.
+          Principal Software Engineer at NST Cyber with 5+ years of experience
+          building and owning production backend systems, multi-tenant SaaS,
+          cloud infrastructure, and platform migrations, with hands-on Applied
+          AI experience across tool-using agent systems and evaluation
+          harnesses. Led a 9-person team shipping security software for
+          multinational banks. OSCP certified.
         </p>
 
         <SectionLabel>PROJECTS</SectionLabel>
@@ -191,7 +199,7 @@ export default function Resume() {
               <h4>{role}</h4>
               <span className="bp-resume-date">{dates}</span>
             </div>
-            <Bullets items={bullets} />
+            {bullets.length > 0 && <Bullets items={bullets} />}
           </div>
         ))}
 

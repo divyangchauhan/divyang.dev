@@ -308,7 +308,7 @@ export default function Projects() {
         }}
       >
         Also: Jobsieve (job aggregator, NestJS) · Verdikt (alt. Kleros Court UI)
-        · DiffLoom.
+        · DiffVouch.
       </p>
     </section>
   )
