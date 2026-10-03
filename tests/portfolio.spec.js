@@ -1,5 +1,14 @@
 import { expect, test } from '@playwright/test'
 
+test.beforeEach(async ({ page }) => {
+  // Vercel serves this script in deployments; the local production server
+  // used by this suite does not. Stub only that endpoint so other resource
+  // failures still reach the console-error assertions.
+  await page.route('/_vercel/insights/script.js', (route) =>
+    route.fulfill({ contentType: 'application/javascript', body: '' }),
+  )
+})
+
 const viewports = [
   { name: 'desktop', width: 1440, height: 1000 },
   { name: 'laptop', width: 1280, height: 720 },
