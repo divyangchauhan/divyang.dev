@@ -36,6 +36,9 @@ export default function Nav({ hashBase = '' }) {
         <a href={`${hashBase}#work`} style={link}>
           projects
         </a>
+        <a href={`${hashBase}#experience`} style={link}>
+          experience
+        </a>
         <a href={`${hashBase}#skills`} style={link}>
           skills
         </a>

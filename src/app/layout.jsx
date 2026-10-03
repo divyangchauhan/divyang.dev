@@ -20,7 +20,7 @@ import {
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Divyang Chauhan — Applied AI Engineer',
+    default: 'Divyang Chauhan — Principal Software Engineer',
     template: '%s — Divyang Chauhan',
   },
   description: siteDescription,

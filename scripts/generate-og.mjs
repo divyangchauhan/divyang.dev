@@ -1,4 +1,4 @@
-// Regenerates public/og-image.png, the 1200x630 card that Discord, X, Slack and
+// Regenerates public/og-image-2026-09.png, the 1200x630 card that Discord, X, Slack and
 // LinkedIn render when the site is shared — run `pnpm og` after changing the
 // hero copy or the design tokens.
 //
@@ -103,6 +103,6 @@ const page = await browser.newPage({
 await page.setContent(html)
 await page.evaluate(() => document.fonts.ready)
 
-writeFileSync('public/og-image.png', await page.screenshot())
+writeFileSync('public/og-image-2026-09.png', await page.screenshot())
 await browser.close()
-console.log('wrote public/og-image.png')
+console.log('wrote public/og-image-2026-09.png')

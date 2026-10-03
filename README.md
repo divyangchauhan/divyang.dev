@@ -51,6 +51,11 @@ pnpm icons              # favicon + PWA icon set
 pnpm og                 # the 1200x630 social card
 ```
 
+When the social card changes, give the generated file a new name and update
+`src/app/site-metadata.js`, the generator, and its tests together. Social
+networks cache previews by URL, so overwriting an existing image path can leave
+old artwork visible after deployment.
+
 Both render in Playwright — `pnpm og` draws the card from the same design
 tokens the site uses — so they need the browser installed as above. The résumé
 PDF at

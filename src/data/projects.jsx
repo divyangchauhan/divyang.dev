@@ -2,7 +2,7 @@ import { mono } from '../theme'
 
 const code = { fontFamily: mono, fontSize: 13 }
 
-// Four featured projects, in the order the handoff presents them. `tags` drive
+// Featured projects, in the order the handoff presents them. `tags` drive
 // the filter chips; `caseStudy` is what the "Read case study" toggle reveals.
 export const projects = [
   {
@@ -65,56 +65,10 @@ export const projects = [
     },
   },
   {
-    id: 'clinchcv',
-    name: 'ClinchCV',
-    tags: ['ai', 'shipped'],
-    meta: 'shipped · live',
-    summary:
-      'A deployed Next.js app that turns a resume PDF into structured feedback: rubric-based scoring, ATS checks, job-fit analysis against a pasted description, bullet rewrites and cover letters. Every LLM response is schema-validated with retry-on-invalid and model fallback, and the whole thing is covered by 649 tests in CI that run against real infrastructure rather than mocks.',
-    caseStudy: {
-      heading: 'THE ENGINEERING STORY',
-      body: (
-        <>
-          <p>
-            Resume parsing is where most of the difficulty lives. Real resumes
-            arrive as multi-column layouts, tables, and scans, so extraction
-            falls back through several strategies and the pipeline rejects what
-            it can&rsquo;t read — an image-only PDF or a .txt file — instead of
-            passing garbage to the model. Every LLM call is a forced schema with
-            validation, retry-on-invalid, and provider fallback, so a malformed
-            response never reaches the UI.
-          </p>
-          <p>
-            Paid quota is enforced in the database, not the application. A
-            single Postgres RPC locks the user and resume rows, treats an
-            already-unlocked resume as idempotent, and increments the counter in
-            one transaction — two simultaneous requests can&rsquo;t both
-            succeed, every AI feature on a resume draws from one slot, and no
-            caller can unlock a resume they don&rsquo;t own. CI runs lint,
-            typecheck, Vitest and Playwright on every push, with browser tests
-            hitting real Supabase and R2.
-          </p>
-        </>
-      ),
-      asideHeading: 'STACK & SCALE',
-      stack:
-        'Next.js 16 · React 19 · TypeScript · Supabase (Postgres, no ORM) · Cloudflare R2 · Anthropic · Razorpay · Sentry · Vercel',
-      metrics: [
-        ['Commits', '193 · Apr–Aug 2026'],
-        ['Tests', '649 · 62 files · CI'],
-      ],
-      // Closed source — the live product stands in for a repo link.
-      link: {
-        href: 'https://clinchcv.com/',
-        label: '→ clinchcv.com',
-      },
-    },
-  },
-  {
     id: 'tarpan',
     name: 'Tarpan',
     tags: ['ai', 'distributed'],
-    meta: 'distributed · TS + Python',
+    meta: 'estate notification letter generator · TypeScript + Python',
     summary:
       'Reads a death certificate and produces the notification letters an executor has to send — sixteen institution types, from Social Security and the IRS down to streaming subscriptions, each with its own required format and enclosures. Four services across an async queue boundary, with SSNs encrypted at the application layer before they ever reach storage.',
     caseStudy: {
@@ -159,7 +113,8 @@ export const projects = [
     id: 'shruti',
     name: 'Shruti',
     tags: ['ai', 'platform', 'shipped'],
-    meta: 'platform · C# / .NET 8',
+    meta: 'local Windows dictation app · C# / .NET 8',
+    storeUrl: 'https://apps.microsoft.com/detail/9N39R62TTCPS',
     summary:
       'Windows-native dictation that runs entirely on the machine. A global hotkey captures microphone audio, a bundled whisper.cpp build transcribes it with no network call, and the text lands in whichever window was focused before recording started. That last step is the hard one: inserting text reliably into arbitrary third-party applications, each with its own idea of how input arrives.',
     caseStudy: {
@@ -191,6 +146,49 @@ export const projects = [
       link: {
         href: 'https://github.com/divyangchauhan/Shruti',
         label: '→ github.com/divyangchauhan/Shruti',
+      },
+    },
+  },
+  {
+    id: 'mushak',
+    name: 'Mushak',
+    tags: ['platform', 'shipped'],
+    meta: 'Windows mouse utility for the MX Master 2S · Rust',
+    storeUrl: 'https://apps.microsoft.com/detail/9N40MGPD7DGV',
+    summary:
+      'A lightweight Windows replacement for Logitech Options+ for the MX Master 2S. Remaps buttons, controls SmartShift and DPI, and switches profiles with the active application. Written in Rust, with a system-tray process that keeps running and a native settings window that opens only when needed. Available on Microsoft Store and winget.',
+    caseStudy: {
+      heading: 'RESIDENT PROCESS & DEVICE CONTROL',
+      body: (
+        <>
+          <p>
+            The always-on process runs a Win32 message pump with separate
+            workers for mouse hooks, keystroke injection, and HID++ device
+            control. The settings window runs in a separate process, so its GUI
+            and GPU resources are released when the window closes. Settings are
+            shared through a TOML file, and the resident process publishes
+            device status for the window to read.
+          </p>
+          <p>
+            Mushak discovers the mouse over Bluetooth or a Unifying receiver and
+            reapplies settings after reconnection. Thumb-button gestures use
+            diverted raw mouse motion to distinguish taps from directional
+            swipes. On connection, unused button diverts are restored to native
+            reporting so settings left behind by other software do not disable
+            those buttons.
+          </p>
+        </>
+      ),
+      asideHeading: 'STACK & DEVICE',
+      stack: 'Rust · Win32 · HID++ 2.0 · Ply / OpenGL · TOML',
+      metrics: [
+        ['Device', 'Logitech MX Master 2S'],
+        ['Connections', 'Bluetooth · Unifying receiver'],
+        ['Platform', 'Windows 10 / 11 · x64'],
+      ],
+      link: {
+        href: 'https://github.com/divyangchauhan/Mushak',
+        label: '→ github.com/divyangchauhan/Mushak',
       },
     },
   },

@@ -56,9 +56,9 @@ test('work filters narrow the card list by tag', async ({ page }) => {
 
   await expect(cardTitles(page)).toHaveText([
     'Pramana',
-    'ClinchCV',
     'Tarpan',
     'Shruti',
+    'Mushak',
   ])
 
   await page.getByRole('button', { name: 'Security' }).click()
@@ -68,10 +68,13 @@ test('work filters narrow the card list by tag', async ({ page }) => {
   await expect(cardTitles(page)).toHaveText(['Tarpan'])
 
   await page.getByRole('button', { name: 'Shipped' }).click()
-  await expect(cardTitles(page)).toHaveText(['ClinchCV', 'Shruti'])
+  await expect(cardTitles(page)).toHaveText(['Shruti', 'Mushak'])
+
+  await page.getByRole('button', { name: 'Platform', exact: true }).click()
+  await expect(cardTitles(page)).toHaveText(['Shruti', 'Mushak'])
 
   await page.getByRole('button', { name: 'Applied AI' }).click()
-  await expect(cardTitles(page)).toHaveCount(4)
+  await expect(cardTitles(page)).toHaveCount(3)
 
   const allButton = page.getByRole('button', { name: 'All', exact: true })
   await allButton.click()
@@ -84,7 +87,7 @@ test('case studies expand one at a time', async ({ page }) => {
   await loadPortfolio(page)
 
   const pramana = cards(page).first()
-  const tarpan = cards(page).nth(2)
+  const tarpan = cards(page).nth(1)
   const pramanaToggle = pramana.getByRole('button')
   const tarpanToggle = tarpan.getByRole('button')
 
@@ -114,15 +117,16 @@ test('copy, anchors, outbound links, and metadata are correct', async ({
   await page.setViewportSize({ width: 390, height: 844 })
   await loadPortfolio(page)
 
-  await expect(page).toHaveTitle('Divyang Chauhan — Applied AI Engineer')
+  await expect(page).toHaveTitle(
+    'Divyang Chauhan — Principal Software Engineer',
+  )
   await expect(
     page.getByRole('heading', { level: 1, name: 'Divyang Chauhan' }),
   ).toBeVisible()
   await expect(
-    page.getByText(
-      'Applied AI engineer building systems you can measure, verify, and ship.',
-      { exact: true },
-    ),
+    page.getByText('Principal Software Engineer · Backend & Applied AI', {
+      exact: true,
+    }),
   ).toBeVisible()
 
   await page.getByRole('link', { name: 'View the work →' }).click()
@@ -134,11 +138,26 @@ test('copy, anchors, outbound links, and metadata are correct', async ({
     page.getByRole('link', { name: /github\.com\/divyangchauhan\/Pramana/ }),
   ).toHaveAttribute('href', 'https://github.com/divyangchauhan/Pramana')
 
-  // ClinchCV is closed source, so its case study links to the live product.
   await page.locator('#work article').nth(1).getByRole('button').click()
   await expect(
-    page.getByRole('link', { name: /clinchcv\.com/ }),
-  ).toHaveAttribute('href', 'https://clinchcv.com/')
+    page.getByRole('link', { name: /github\.com\/divyangchauhan\/Tarpan/ }),
+  ).toHaveAttribute('href', 'https://github.com/divyangchauhan/Tarpan')
+
+  const experience = page.locator('#experience')
+  await expect(
+    experience.getByRole('heading', {
+      name: '5+ years building production systems',
+    }),
+  ).toBeVisible()
+  await expect(
+    experience.getByRole('heading', { name: 'Kleros' }),
+  ).toBeVisible()
+  await expect(
+    experience.getByRole('heading', { name: 'NST Cyber' }),
+  ).toHaveCount(2)
+  await expect(
+    experience.getByRole('link', { name: 'View résumé →' }),
+  ).toHaveAttribute('href', '/resume')
 
   await expect(
     page.getByRole('link', { name: 'divyang@divyang.dev →' }),
@@ -161,7 +180,7 @@ test('copy, anchors, outbound links, and metadata are correct', async ({
 
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     'content',
-    'Divyang Chauhan — applied AI engineer building tool-using agent systems with executable verification, reproducible evals, and production backend infrastructure.',
+    'Divyang Chauhan, Principal Software Engineer at NST Cyber, building production backends and applied AI systems with executable verification and reproducible evals.',
   )
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
@@ -193,7 +212,7 @@ test('icons, manifest, and crawler files are served and consistent', async ({
     '/robots.txt',
     '/sitemap.xml',
     '/indexnow-key.txt',
-    '/og-image.png',
+    '/og-image-2026-09.png',
     '/assets/Divyang-Chauhan-Resume.pdf',
   ]
 
@@ -258,7 +277,7 @@ test('each route serves its own metadata in the raw HTML', async ({
   const home = await head('/')
   const resume = await head('/resume')
 
-  expect(home.title).toBe('Divyang Chauhan — Applied AI Engineer')
+  expect(home.title).toBe('Divyang Chauhan — Principal Software Engineer')
   expect(home.canonical).toBe('https://www.divyang.dev')
   expect(home.meta['og:url']).toBe('https://www.divyang.dev')
 
@@ -279,14 +298,14 @@ test('each route serves its own metadata in the raw HTML', async ({
     ['resume', resume],
   ]) {
     expect(route.meta['og:image'], name).toBe(
-      'https://www.divyang.dev/og-image.png',
+      'https://www.divyang.dev/og-image-2026-09.png',
     )
     expect(route.meta['og:image:width'], name).toBe('1200')
     expect(route.meta['og:image:height'], name).toBe('630')
     expect(route.meta['og:site_name'], name).toBe('Divyang Chauhan')
     expect(route.meta['twitter:card'], name).toBe('summary_large_image')
     expect(route.meta['twitter:image'], name).toBe(
-      'https://www.divyang.dev/og-image.png',
+      'https://www.divyang.dev/og-image-2026-09.png',
     )
   }
 
@@ -339,7 +358,7 @@ test('the social card matches the dimensions its meta tags declare', async ({
 }) => {
   await loadPortfolio(page)
 
-  const response = await page.request.get('/og-image.png')
+  const response = await page.request.get('/og-image-2026-09.png')
   expect(response.headers()['content-type']).toBe('image/png')
 
   // Width and height live in the PNG's IHDR chunk, bytes 16-23.
@@ -375,6 +394,7 @@ for (const viewport of [
 
     for (const [label, id] of [
       ['projects', 'work'],
+      ['experience', 'experience'],
       ['skills', 'skills'],
     ]) {
       await loadPortfolio(page)
@@ -413,11 +433,26 @@ test('résumé route renders, links back, and strips chrome for print', async ({
   await expect(page.getByText('PROFESSIONAL EXPERIENCE')).toBeVisible()
   await expect(page.getByText('Kleros, Remote')).toBeVisible()
 
-  // Keep the HTML résumé in sync with the maintained PDF. These are the
-  // details most likely to drift when the source document is revised.
+  // Check the HTML résumé content independently of the maintained PDF.
   const sheet = page.locator('.bp-sheet')
+  // The screen sheet and browser print output must both stay on one custom-size page.
+  const sheetBounds = await sheet.boundingBox()
+  expect(sheetBounds.width).toBeCloseTo((230 / 25.4) * 96, 0)
+  expect(sheetBounds.height).toBeCloseTo((297 / 25.4) * 96, 0)
+  await page.evaluate(() => document.fonts.ready)
+  const lineCount = (locator) =>
+    locator.evaluate((element) => {
+      const range = document.createRange()
+      range.selectNodeContents(element)
+      return new Set(
+        [...range.getClientRects()].map((rect) => Math.round(rect.top)),
+      ).size
+    })
+  expect(await lineCount(sheet.locator(':scope > p'))).toBe(3)
+  expect(await lineCount(sheet.locator('li').first())).toBe(1)
+  expect(await lineCount(sheet.locator('.bp-resume-skills p').first())).toBe(1)
   await expect(sheet).toContainText(
-    'Applied AI Engineer with 5+ years of building event-driven services and multi-tenant platforms.',
+    'Principal Software Engineer at NST Cyber with 5+ years of experience building and owning production backend systems, multi-tenant SaaS, cloud infrastructure, and platform migrations,',
   )
   await expect(sheet).toContainText(
     'Designed provider-neutral three agent system with context isolation and tool usage that produces executable PoC',
@@ -442,6 +477,14 @@ test('résumé route renders, links back, and strips chrome for print', async ({
   await expect(toolbar).toBeVisible()
   await page.emulateMedia({ media: 'print' })
   await expect(toolbar).toBeHidden()
+  const printed = (await page.pdf({ preferCSSPageSize: true })).toString(
+    'latin1',
+  )
+  expect([...printed.matchAll(/\/Type \/Page\b/g)]).toHaveLength(1)
+  const mediaBox = printed.match(/\/MediaBox \[0 0 ([\d.]+) ([\d.]+)\]/)
+  expect(mediaBox).not.toBeNull()
+  expect(Number(mediaBox[1])).toBeCloseTo((230 / 25.4) * 72, 0)
+  expect(Number(mediaBox[2])).toBeCloseTo((297 / 25.4) * 72, 0)
   await page.emulateMedia({ media: 'screen' })
 
   const overflow = await page.evaluate(() => ({
@@ -489,6 +532,7 @@ test('a missing URL gets a real 404 that reports the path and offers a way out',
   // have to travel there first rather than point at nothing on this document.
   for (const [name, hash] of [
     ['projects', '#work'],
+    ['experience', '#experience'],
     ['skills', '#skills'],
   ]) {
     await expect(page.getByRole('link', { name, exact: true })).toHaveAttribute(

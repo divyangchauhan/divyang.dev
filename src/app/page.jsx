@@ -2,6 +2,7 @@ import { color, sans } from '../theme'
 import Nav from '../components/Nav'
 import Hero from '../components/Hero'
 import Projects from '../components/Projects'
+import Experience from '../components/Experience'
 import Skills from '../components/Skills'
 import Contact from '../components/Contact'
 import HashScroll from './hash-scroll'
@@ -12,7 +13,7 @@ import {
   twitterCard,
 } from './site-metadata'
 
-const title = 'Divyang Chauhan — Applied AI Engineer'
+const title = 'Divyang Chauhan — Principal Software Engineer'
 
 export const metadata = {
   alternates: { canonical: '/' },
@@ -34,9 +35,9 @@ const personSchema = {
   name: 'Divyang Chauhan',
   url: siteUrl,
   email: 'mailto:divyang@divyang.dev',
-  jobTitle: 'Applied AI Engineer and Agent Systems Developer',
-  description:
-    'Divyang Chauhan — applied AI engineer building tool-using agent systems with executable verification, reproducible evals, and production backend infrastructure.',
+  jobTitle: 'Principal Software Engineer',
+  worksFor: { '@type': 'Organization', name: 'NST Cyber' },
+  description: siteDescription,
   sameAs: [
     'https://github.com/divyangchauhan',
     'https://www.linkedin.com/in/divyangchauhan',
@@ -75,6 +76,7 @@ export default function Home() {
       <Hero />
       <main>
         <Projects />
+        <Experience />
         <Skills />
         <Contact />
       </main>

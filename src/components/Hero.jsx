@@ -17,32 +17,6 @@ export default function Hero() {
       className="bp-shell bp-pad"
       style={{ padding: '88px 40px 64px' }}
     >
-      <div
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: 8,
-          fontFamily: mono,
-          fontSize: 12,
-          color: color.accent,
-          border: `1px solid ${color.ruleAccent}`,
-          background: color.tint,
-          padding: '6px 12px',
-          borderRadius: 20,
-          marginBottom: 30,
-        }}
-      >
-        <span
-          style={{
-            width: 7,
-            height: 7,
-            borderRadius: '50%',
-            background: color.accent,
-            display: 'inline-block',
-          }}
-        />
-        BACKEND · APPLIED AI · AGENTIC SYSTEMS
-      </div>
       <h1
         style={{
           fontSize: 'clamp(42px, 8.4vw, 76px)',
@@ -61,12 +35,12 @@ export default function Hero() {
           fontWeight: 600,
           color: color.accent,
           margin: '0 0 22px',
-          maxWidth: '39ch',
+          maxWidth: '42ch',
           letterSpacing: '-.02em',
           textWrap: 'balance',
         }}
       >
-        Applied AI engineer building systems you can measure, verify, and ship.
+        Principal Software Engineer · Backend &amp; Applied AI
       </div>
       <p
         style={{
@@ -77,9 +51,9 @@ export default function Hero() {
           margin: '0 0 36px',
         }}
       >
-        I design agent architectures, evaluation harnesses, and LLM-backed
-        products — bringing the backend, security, and infrastructure depth
-        needed to make AI systems reliable beyond the demo.
+        Currently at NST Cyber. I build production backends, AI agents, and
+        evaluation systems, drawing on experience in security and cloud
+        infrastructure.
       </p>
       <div
         style={{
