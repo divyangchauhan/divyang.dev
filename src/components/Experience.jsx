@@ -3,8 +3,15 @@ import { color, kicker, mono } from '../theme'
 
 const jobs = [
   {
+    company: 'NST Cyber',
+    dates: 'SEP 2026 – PRESENT',
+    role: 'Principal Software Engineer',
+    body: 'Returned to NST Cyber as Principal Software Engineer in September 2026, following my earlier tenure as Software Engineer and Team Lead.',
+    chips: [],
+  },
+  {
     company: 'Kleros',
-    dates: 'FEB 2024 – PRESENT · REMOTE',
+    dates: 'FEB 2024 – SEP 2026 · REMOTE',
     role: 'Backend Engineer',
     stack: 'TypeScript · NestJS · PostgreSQL · EVM',
     body: 'Built and re-architected production backend systems for Kleros. Led the split of API and automation workloads into separate services and migrated 57K+ production events across databases with about one minute of downtime. Built a runtime-configurable event-ingestion service across 3 production chains feeding 23+ consumers, including a notification system serving 700+ active jurors.',
@@ -77,7 +84,7 @@ export default function Experience() {
       >
         {jobs.map((job) => (
           <article
-            key={job.company}
+            key={`${job.company}-${job.dates}`}
             style={{
               border: `1px solid ${color.rule}`,
               borderRadius: 8,
@@ -121,16 +128,18 @@ export default function Experience() {
             >
               {job.role}
             </div>
-            <div
-              style={{
-                fontFamily: mono,
-                fontSize: 12,
-                color: color.muted,
-                marginBottom: 14,
-              }}
-            >
-              {job.stack}
-            </div>
+            {job.stack && (
+              <div
+                style={{
+                  fontFamily: mono,
+                  fontSize: 12,
+                  color: color.muted,
+                  marginBottom: 14,
+                }}
+              >
+                {job.stack}
+              </div>
+            )}
             <p
               style={{
                 fontSize: 15,

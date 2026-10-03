@@ -52,9 +52,10 @@ export default function Hero() {
           margin: '0 0 36px',
         }}
       >
-        I build production backends, agent architectures, evaluation harnesses,
-        and LLM-backed products, bringing security and infrastructure depth to
-        AI systems that need to work beyond the demo.
+        Currently Principal Software Engineer at NST Cyber. I build production
+        backends, agent architectures, evaluation harnesses, and LLM-backed
+        products, bringing security and infrastructure depth to AI systems that
+        need to work beyond the demo.
       </p>
       <div
         style={{

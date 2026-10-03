@@ -117,7 +117,9 @@ test('copy, anchors, outbound links, and metadata are correct', async ({
   await page.setViewportSize({ width: 390, height: 844 })
   await loadPortfolio(page)
 
-  await expect(page).toHaveTitle('Divyang Chauhan — Applied AI Engineer')
+  await expect(page).toHaveTitle(
+    'Divyang Chauhan — Principal Software Engineer',
+  )
   await expect(
     page.getByRole('heading', { level: 1, name: 'Divyang Chauhan' }),
   ).toBeVisible()
@@ -153,7 +155,7 @@ test('copy, anchors, outbound links, and metadata are correct', async ({
   ).toBeVisible()
   await expect(
     experience.getByRole('heading', { name: 'NST Cyber' }),
-  ).toBeVisible()
+  ).toHaveCount(2)
   await expect(
     experience.getByRole('link', { name: 'View résumé →' }),
   ).toHaveAttribute('href', '/resume')
@@ -179,7 +181,7 @@ test('copy, anchors, outbound links, and metadata are correct', async ({
 
   await expect(page.locator('meta[name="description"]')).toHaveAttribute(
     'content',
-    'Divyang Chauhan — applied AI engineer building tool-using agent systems with executable verification, reproducible evals, and production backend infrastructure.',
+    'Divyang Chauhan, Principal Software Engineer at NST Cyber, building production backends and applied AI systems with executable verification and reproducible evals.',
   )
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
@@ -272,7 +274,7 @@ test('each route serves its own metadata in the raw HTML', async ({
   const home = await head('/')
   const resume = await head('/resume')
 
-  expect(home.title).toBe('Divyang Chauhan — Applied AI Engineer')
+  expect(home.title).toBe('Divyang Chauhan — Principal Software Engineer')
   expect(home.canonical).toBe('https://www.divyang.dev')
   expect(home.meta['og:url']).toBe('https://www.divyang.dev')
 
@@ -428,8 +430,7 @@ test('résumé route renders, links back, and strips chrome for print', async ({
   await expect(page.getByText('PROFESSIONAL EXPERIENCE')).toBeVisible()
   await expect(page.getByText('Kleros, Remote')).toBeVisible()
 
-  // Keep the HTML résumé in sync with the maintained PDF. These are the
-  // details most likely to drift when the source document is revised.
+  // Check the HTML résumé content independently of the maintained PDF.
   const sheet = page.locator('.bp-sheet')
   // The screen sheet and browser print output must both stay on one custom-size page.
   const sheetBounds = await sheet.boundingBox()
@@ -448,7 +449,7 @@ test('résumé route renders, links back, and strips chrome for print', async ({
   expect(await lineCount(sheet.locator('li').first())).toBe(1)
   expect(await lineCount(sheet.locator('.bp-resume-skills p').first())).toBe(1)
   await expect(sheet).toContainText(
-    'Senior Backend Engineer with 5+ years of experience building and owning production backend systems, multi-tenant SaaS, cloud infrastructure, and platform migrations,',
+    'Principal Software Engineer at NST Cyber with 5+ years of experience building and owning production backend systems, multi-tenant SaaS, cloud infrastructure, and platform migrations,',
   )
   await expect(sheet).toContainText(
     'Designed provider-neutral three agent system with context isolation and tool usage that produces executable PoC',
