@@ -76,7 +76,9 @@ const experience = [
     company: 'NST Cyber',
     role: 'Principal Software Engineer',
     dates: 'Sep 2026 – Present',
-    bullets: [],
+    bullets: [
+      "Work across NST Cyber's products and engineering teams, with responsibility for architecture, technical direction, engineering standards, and cross-team technical initiatives",
+    ],
   },
   {
     company: 'Kleros, Remote',
